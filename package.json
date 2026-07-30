@@ -1,0 +1,26 @@
+{
+  "name": "gyam",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @gyam/api & npm run dev -w @gyam/web",
+    "dev:api": "npm run dev -w @gyam/api",
+    "dev:web": "npm run dev -w @gyam/web",
+    "build": "npm run build -w @gyam/shared && npm run build -w @gyam/api && npm run build -w @gyam/web",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
+    "db:migrate": "npm run db:migrate -w @gyam/api",
+    "db:seed-check": "npm run db:seed-check -w @gyam/api",
+    "test:e2e": "playwright test",
+    "test:e2e:report": "playwright show-report"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.0"
+  }
+}

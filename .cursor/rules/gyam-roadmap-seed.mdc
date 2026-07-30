@@ -1,0 +1,14 @@
+---
+description: Roadmap seeding and remapping rules for GYAM
+globs: "{**/roadmap/**,**/seed/**,**/*roadmap*,Project_Management_Daily_Roadmap*.md}"
+alwaysApply: false
+---
+
+# GYAM Roadmap Seed
+
+- Seed from `Project_Management_Daily_Roadmap_Starting_2026-07-27.md`, then store editable DB copies.
+- Start date = first day the user begins using GYAM (not fixed July 27, 2026).
+- Remap original Week 1 tasks onto the user’s actual first 7 calendar days.
+- Weeks 2–52 use the standard weekday routine pattern; monthly milestones stay first-class.
+- Suggested study minutes come from an editable subject→minutes table.
+- Sunday = guided retrospective form, not free-form only.

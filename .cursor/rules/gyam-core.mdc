@@ -1,0 +1,38 @@
+---
+description: GYAM product core — source of truth, V1 priorities, non-negotiables
+alwaysApply: true
+---
+
+# GYAM Core
+
+- Read `GYAM_SOURCE_OF_TRUTH.md` before product or architecture changes.
+- Conflict order: source of truth → latest explicit user decision → roadmap seed → resume.
+- V1 primary language: TypeScript (React + Vite PWA + Node API). Sidecars (Python/C#) only after core.
+- Primary UX: today’s tasks + progress. Dark mode. Strict/professional, blunt catch-up copy.
+- Auth V1: `users` table with userID (name) + hashed PIN. No email required yet.
+- Notify + archive: **local notifications** + **job correspondence archive (manual)** — email/SMTP is not a V1 must-have.
+- GYAM is multi-purpose: career OS + sample software project + PM practice lab + portfolio-export staging (see SoT §1). Portfolio *website* is separate.
+- GYAM is the roadmap **sample software project**; PM artifacts live in `docs/pm/`; Cursor subagents are the supervised delivery team (Jira not required for solo).
+- Portfolio website is separate; stage grabs in `docs/pm/portfolio-export/`.
+- Data stays on homelab (Docker, Postgres, nginx, Cloudflare). No public SaaS as system of record.
+- No fake demo/job data. Portfolio uses real architecture and real usage.
+- When a build fork appears, present options to the user; do not invent hard constraints.
+- Keep activity events Cursor-readable (`logs/activity/` and/or `activity_events`).
+- Do not commit secrets (`.env`, PIN plaintext, SMTP passwords, VAPID private keys).
+---
+
+## V1 ship order (do not reshuffle without asking)
+
+1. Today + timer/pause/hourly auto-pause
+2. Rollover blocking
+3. Notes
+4. Streaks/heatmaps
+5. Job pipeline + quotas
+6. Job correspondence archive (manual paste + optional attach)
+7. Guided Sunday review
+8. Editable roadmap
+9. Local notifications (OS / in-app; Web Push optional)
+10. Multi-device sync
+11. Export/import
+
+Email/SMTP notifications are **not** in the must-ship list (locked 2026-07-27).

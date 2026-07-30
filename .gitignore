@@ -1,0 +1,35 @@
+# Dependencies / secrets
+node_modules/
+.env
+.env.*
+!.env.mcp.example
+!.env.example
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+*.log
+
+# Build
+dist/
+build/
+coverage/
+.next/
+.turbo/
+apps/web/dev-dist/
+
+# Playwright
+playwright-report/
+test-results/
+.playwright-mcp/
+
+# Local MCP / runtime
+.env.mcp
+logs/activity/*.jsonl
+logs/activity/*.json
+logs/activity/*.md
+logs/activity/*.log
+!logs/activity/.gitkeep
+
+# Local uploads (job email attachments)
+data/uploads/

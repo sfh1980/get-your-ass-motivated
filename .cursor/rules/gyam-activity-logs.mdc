@@ -1,0 +1,13 @@
+---
+description: Activity log contract for GYAM Cursor feedback loop
+globs: "logs/**/*"
+alwaysApply: false
+---
+
+# GYAM Activity Logs
+
+- Prefer JSON Lines under `logs/activity/` and/or mirrored DB `activity_events`.
+- Each event needs: `timestamp`, `userId`, `eventType`, `entityType`, `entityId`, `payload`, `client`.
+- Core event types: `task_started`, `task_paused`, `task_auto_paused`, `task_completed`, `day_blocked`, `job_status_changed`, `quota_missed`, `review_submitted`, `export_ran`, `notification_sent`, `notification_acked`.
+- Never write secrets into payloads (PIN, tokens, raw email passwords).
+- When proposing next versions, read recent logs first, then ask targeted questions.

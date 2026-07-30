@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: gyam-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: gyam
+      POSTGRES_PASSWORD: gyam
+      POSTGRES_DB: gyam
+    ports:
+      - "5434:5432"
+    volumes:
+      - gyam_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gyam -d gyam"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  gyam_pgdata:

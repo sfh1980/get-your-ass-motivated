@@ -1,0 +1,143 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  pinHash      String
+  startDate    DateTime @db.Date
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  sessions     Session[]
+  taskDays     TaskDay[]
+  tasks        Task[]
+  milestones   Milestone[]
+  subjects     SubjectDuration[]
+  activities   ActivityEvent[]
+  jobs         Job[]
+  reviews      WeeklyReview[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model TaskDay {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date        DateTime @db.Date
+  blocked     Boolean  @default(false)
+  completedAt DateTime?
+  createdAt   DateTime @default(now())
+  tasks       Task[]
+
+  @@unique([userId, date])
+}
+
+model Task {
+  id               String    @id @default(cuid())
+  userId           String
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  taskDayId        String
+  taskDay          TaskDay   @relation(fields: [taskDayId], references: [id], onDelete: Cascade)
+  title            String
+  notes            String    @default("")
+  status           String    @default("pending")
+  subject          String?
+  suggestedMinutes Int?
+  elapsedMs        Int       @default(0)
+  activeStartedAt  DateTime?
+  sortOrder        Int       @default(0)
+  sourceWeek       Int?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  @@index([userId, status])
+}
+
+model SubjectDuration {
+  id              String @id @default(cuid())
+  userId          String
+  user            User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject         String
+  suggestedMinutes Int
+
+  @@unique([userId, subject])
+}
+
+model Milestone {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  monthIndex  Int
+  title       String
+  completed   Boolean   @default(false)
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+}
+
+model ActivityEvent {
+  id         String   @id @default(cuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  timestamp  DateTime @default(now())
+  eventType  String
+  entityType String?
+  entityId   String?
+  payload    Json?
+  client     String   @default("web")
+}
+
+model Job {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  company       String
+  title         String
+  url           String?
+  status        String    @default("Wishlist")
+  salary        String?
+  contact       String?
+  followUpDate  DateTime? @db.Date
+  resumeVersion String?
+  notes         String    @default("")
+  emailSubject  String?
+  emailBody     String?
+  emailAttachmentName String?
+  emailAttachmentPath String?
+  emailAttachmentMime String?
+  emailAttachmentSize Int?
+  appliedAt     DateTime? @db.Date
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([userId, status])
+  @@index([userId, appliedAt])
+}
+
+model WeeklyReview {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  weekStart    DateTime @db.Date
+  wins         String   @default("")
+  blockers     String   @default("")
+  focus        String   @default("")
+  planNextWeek String   @default("")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([userId, weekStart])
+}

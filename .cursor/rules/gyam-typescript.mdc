@@ -1,0 +1,18 @@
+---
+description: TypeScript/React conventions for GYAM app code
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# GYAM TypeScript
+
+- Prefer explicit types at API boundaries; avoid `any`.
+- Validate all external input (PIN, task IDs, job fields, upload metadata).
+- Hash PINs; never log PINs, session tokens, or SMTP credentials.
+- Timer truth: elapsed time excludes paused gaps; auto-pause after 60s unanswered keep-alive.
+- Rollover: unfinished prior day blocks today until cleared.
+- Job board columns only: `Wishlist | Applied | Interview | Accepted | Rejected`.
+- Email V1: copy/paste primary; optional file attach; do not rely on PDF OCR.
+- Prefer small pure helpers for duration math, quota math, and roadmap day mapping.
+- Colocate UI with feature folders; keep API routes thin; put domain logic in services.
+- Dark theme via CSS variables; avoid purple-glow / generic AI aesthetic defaults.

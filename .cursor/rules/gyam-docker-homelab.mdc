@@ -1,0 +1,14 @@
+---
+description: Homelab Docker/nginx/Postgres conventions for GYAM deploy
+globs: "{docker-compose*.yml,Dockerfile*,**/nginx/**,**/deploy/**}"
+alwaysApply: false
+---
+
+# GYAM Homelab Deploy
+
+- Target: Docker Compose + PostgreSQL + nginx reverse proxy + Cloudflare.
+- One API serves web, mobile-friendly PWA, and future desktop wrapper.
+- Keep secrets in env files / Compose secrets; document required vars without real values.
+- Prefer healthchecks and named volumes; NAS/TrueNAS for backup/export dumps.
+- Do not require Tailscale/Nextcloud; Cloudflare path is the remote-access plan.
+- Sidecars (notifier, keep-alive, job-watch) are optional services — do not block core Compose.
