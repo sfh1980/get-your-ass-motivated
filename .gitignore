@@ -33,3 +33,6 @@ logs/activity/*.log
 
 # Local uploads (job email attachments)
 data/uploads/
+
+*.tsbuildinfo
+

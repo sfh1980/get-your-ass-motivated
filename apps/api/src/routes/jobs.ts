@@ -11,10 +11,10 @@ import {
   saveJobAttachment,
   updateJob,
 } from "../services/jobs.js";
+import { parseEntityId } from "../param.js";
 import {
   ATTACHMENT_MAX_BYTES,
   emailBodySchema,
-  entityIdSchema,
   isoDateSchema,
   isAllowedAttachment,
   jobStatusSchema,
@@ -55,15 +55,6 @@ const jobBody = z.object({
 
 const jobPatch = jobBody.partial();
 
-function parseId(raw: string, res: import("express").Response): string | null {
-  const parsed = entityIdSchema.safeParse(raw);
-  if (!parsed.success) {
-    res.status(400).json({ error: "Invalid id" });
-    return null;
-  }
-  return parsed.data;
-}
-
 jobsRouter.get("/", async (req: AuthedRequest, res) => {
   const board = await getJobsBoard(req.user!.id);
   res.json(board);
@@ -80,7 +71,7 @@ jobsRouter.post("/", async (req: AuthedRequest, res) => {
 });
 
 jobsRouter.patch("/:id", async (req: AuthedRequest, res) => {
-  const id = parseId(req.params.id, res);
+  const id = parseEntityId(req.params.id, res);
   if (!id) return;
   const parsed = jobPatch.safeParse(req.body);
   if (!parsed.success) {
@@ -108,7 +99,7 @@ jobsRouter.post("/:id/attachment", (req: AuthedRequest, res, next) => {
     next();
   });
 }, async (req: AuthedRequest, res) => {
-  const id = parseId(req.params.id, res);
+  const id = parseEntityId(req.params.id, res);
   if (!id) return;
   if (!req.file) {
     res.status(400).json({ error: "file required" });
@@ -132,7 +123,7 @@ jobsRouter.post("/:id/attachment", (req: AuthedRequest, res, next) => {
 });
 
 jobsRouter.get("/:id/attachment", async (req: AuthedRequest, res) => {
-  const id = parseId(req.params.id, res);
+  const id = parseEntityId(req.params.id, res);
   if (!id) return;
   const file = await getJobAttachment(req.user!.id, id);
   if (!file) {
@@ -149,7 +140,7 @@ jobsRouter.get("/:id/attachment", async (req: AuthedRequest, res) => {
 });
 
 jobsRouter.delete("/:id/attachment", async (req: AuthedRequest, res) => {
-  const id = parseId(req.params.id, res);
+  const id = parseEntityId(req.params.id, res);
   if (!id) return;
   const job = await clearJobAttachment(req.user!.id, id);
   if (!job) {
@@ -160,7 +151,7 @@ jobsRouter.delete("/:id/attachment", async (req: AuthedRequest, res) => {
 });
 
 jobsRouter.delete("/:id", async (req: AuthedRequest, res) => {
-  const id = parseId(req.params.id, res);
+  const id = parseEntityId(req.params.id, res);
   if (!id) return;
   const ok = await deleteJob(req.user!.id, id);
   if (!ok) {

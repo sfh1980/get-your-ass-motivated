@@ -1,0 +1,56 @@
+# TrueNAS SCALE Custom App YAML — Phase A (LAN).
+# Copy into Apps → Custom App. Replace REPLACE_* values.
+# Datasets: /mnt/appPool/gyam/postgres-data (chown 999:999, chmod 700).
+# Private GHCR: configure registry credentials with a PAT (read:packages).
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: gyam-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: gyam
+      POSTGRES_PASSWORD: "REPLACE_STRONG"
+      POSTGRES_DB: gyam
+    volumes:
+      - /mnt/appPool/gyam/postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gyam -d gyam"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: ghcr.io/sfh1980/gyam-app:homelab
+    container_name: gyam-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "4070:4070"
+    environment:
+      NODE_ENV: production
+      HOST: "0.0.0.0"
+      API_PORT: "4070"
+      SERVE_WEB: "true"
+      DATABASE_URL: postgresql://gyam:REPLACE_STRONG@db:5432/gyam
+      WEB_ORIGIN: "http://REPLACE_TRUENAS_LAN_IP:4070"
+      SESSION_DAYS: "30"
+      COOKIE_SECURE: "false"
+    volumes:
+      - /mnt/appPool/gyam/uploads:/app/data/uploads
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:4070/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 45s

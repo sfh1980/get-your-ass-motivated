@@ -9,3 +9,4 @@
 | 2026-07-28 | Cursor subagents formally treated as supervised delivery team in RACI | Solo PM practice | Sean |
 | 2026-07-28 | Documented multi-purpose roles (P1–P7); progress history beginning→now | Clarity for PM + portfolio narrative | Sean |
 | 2026-07-28 | Portfolio screenshots captured (Playwright ×8) | Evidence staging | Sean |
+| 2026-08-01 | Homelab docs: TrueNAS Phase A LAN primary; Cloudflare/nginx Phase B; vault Home + deploy note | Mirror Yum4Less working pattern | Sean |

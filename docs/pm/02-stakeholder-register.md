@@ -8,7 +8,7 @@
 | S4 | Cursor Agent (primary) | Delivery lead | High | Medium | Manage closely | Implements features under scope guard |
 | S5 | gyam-v1-scope-guard | Scope / governance | High | Medium | Consult | Blocks gold-plating vs SoT |
 | S6 | gyam-roadmap-seeder | Planning specialist | Medium | Low | Consult | Seed/remap roadmap |
-| S7 | gyam-homelab-deploy | Infra specialist | Medium | Medium | Consult | Compose, nginx, Cloudflare notes |
+| S7 | gyam-homelab-deploy | Infra specialist | Medium | Medium | Consult | TrueNAS Custom App, Compose, Cloudflare Phase B |
 | S8 | gyam-activity-analyst | Insights / CI improvement | Medium | Low | Consult | Next-version options from logs |
 | S9 | senior-auditor / security-review / testing-cicd / web-* / database standards | Specialist contributors | Medium | Low | Consult as needed | Quality, security, FE/BE/DB standards |
 | S10 | verifier | Independent check | Medium | Low | Inform | Config/workflow trust |

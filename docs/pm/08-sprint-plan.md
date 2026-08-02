@@ -48,6 +48,6 @@
 
 ## Next sprint (draft)
 
-- Homelab HTTPS notes + COOKIE_SECURE when ready  
+- Homelab Phase A (TrueNAS LAN) notes; HTTPS + COOKIE_SECURE when Phase B ready  
 - Optional: dormant-label SMTP settings (I2)  
 - Continue dogfood; first Month-2 weekly status cadence

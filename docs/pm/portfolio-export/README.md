@@ -20,7 +20,7 @@ GYAM itself is also the career OS, sample software project, and PM practice lab 
 - [ ] Charter + one status report + RAID excerpt (sanitized)  
 - [ ] Backlog screenshot or markdown excerpt showing Epic/5 Stories/10 Tasks  
 - [ ] Metrics: streaks, applications count, sprint outcomes (real numbers only)  
-- [ ] Architecture one-pager note (stack: React/Vite, Express, Prisma/Postgres, homelab)  
+- [ ] Architecture one-pager note (stack: React/Vite, Express, Prisma/Postgres, TrueNAS SCALE Phase A)  
 - [ ] Explicit “what I did as PM” bullet list (supervised agent team, scope control, RAID)
 
 ## Suggested case-study sections (for the future site)

@@ -14,7 +14,7 @@ alwaysApply: true
 - GYAM is multi-purpose: career OS + sample software project + PM practice lab + portfolio-export staging (see SoT §1). Portfolio *website* is separate.
 - GYAM is the roadmap **sample software project**; PM artifacts live in `docs/pm/`; Cursor subagents are the supervised delivery team (Jira not required for solo).
 - Portfolio website is separate; stage grabs in `docs/pm/portfolio-export/`.
-- Data stays on homelab (Docker, Postgres, nginx, Cloudflare). No public SaaS as system of record.
+- Data stays on homelab (TrueNAS SCALE + Docker/Postgres; LAN Phase A; Cloudflare Tunnel Phase B). No public SaaS as system of record.
 - No fake demo/job data. Portfolio uses real architecture and real usage.
 - When a build fork appears, present options to the user; do not invent hard constraints.
 - Keep activity events Cursor-readable (`logs/activity/` and/or `activity_events`).

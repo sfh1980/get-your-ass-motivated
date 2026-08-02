@@ -21,7 +21,7 @@ GYAM is simultaneously: career OS, roadmap engine, sample software project, PM p
 | `gyam-core.mdc` | Always — product non-negotiables + V1 order |
 | `gyam-typescript.mdc` | `**/*.{ts,tsx}` |
 | `gyam-activity-logs.mdc` | `logs/**/*` |
-| `gyam-docker-homelab.mdc` | Compose / Docker / nginx / deploy |
+| `gyam-docker-homelab.mdc` | Compose / TrueNAS Custom App / deploy |
 | `gyam-roadmap-seed.mdc` | Roadmap seed + remap |
 
 ## Hooks (`.cursor/hooks.json`)
@@ -40,7 +40,7 @@ GYAM is simultaneously: career OS, roadmap engine, sample software project, PM p
 | `gyam-activity-analyst` | Next-version planning from activity logs |
 | `gyam-v1-scope-guard` | Before gold-plating or early integrations |
 | `gyam-roadmap-seeder` | Seeding / remapping roadmap days |
-| `gyam-homelab-deploy` | Docker, nginx, Cloudflare, backups |
+| `gyam-homelab-deploy` | TrueNAS Phase A LAN, Compose, Cloudflare later, backups |
 
 User-level agents (backend/frontend/database/testing/auditor/verifier) still apply globally.
 

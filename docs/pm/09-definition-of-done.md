@@ -29,4 +29,5 @@ A **story** is Done only when all applicable boxes are checked.
 
 - [ ] `npx playwright test` green against running stack  
 - [ ] Export/import smoke OK  
+- [ ] Homelab Phase A runbook matches TrueNAS plan (`docs/homelab.md`)
 - [ ] Homelab backup note current (`docs/homelab.md`)

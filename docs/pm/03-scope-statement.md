@@ -9,7 +9,7 @@ A homelab-local **multi-purpose** system: Sean’s PM-career OS, the roadmap’s
 - V1 application per `GYAM_SOURCE_OF_TRUTH.md` §5 and §9.  
 - Local notifications + job correspondence archive (manual).  
 - Activity logging for Cursor-assisted planning.  
-- Homelab Postgres + documented deploy path.  
+- Homelab Postgres + documented deploy path (`docs/homelab.md`: TrueNAS Phase A LAN; Cloudflare Phase B later).  
 - `docs/pm` governance pack and `portfolio-export/` staging.  
 - Explicit multi-purpose documentation (SoT §1; `docs/pm/00-…`).
 

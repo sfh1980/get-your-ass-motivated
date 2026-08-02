@@ -49,7 +49,8 @@ Tasks:
 - [x] T5.2 Export/import JSON  
 - [x] T5.3 Input validation hardening  
 - [x] T5.4 Playwright edge suite (22/22)  
-- [ ] T5.5 Homelab HTTPS / COOKIE_SECURE (ops)  
+- [ ] T5.5a TrueNAS Phase A LAN Custom App (Dockerfile/GHCR/migrate + Install)
+- [ ] T5.5b Homelab HTTPS / COOKIE_SECURE (Phase B / Tunnel)  
 - [x] T5.6a Portfolio screenshots (8 captured 2026-07-28)  
 - [ ] T5.6b Case-study metrics + PII review  
 

@@ -8,20 +8,12 @@ import {
   startTask,
   updateTaskNotes,
 } from "../services/tasks.js";
-import { entityIdSchema, notesSchema } from "../validation.js";
+import { parseEntityId } from "../param.js";
+import { notesSchema } from "../validation.js";
 
 export const tasksRouter = Router();
 
 tasksRouter.use(requireAuth);
-
-function parseId(raw: string, res: import("express").Response): string | null {
-  const parsed = entityIdSchema.safeParse(raw);
-  if (!parsed.success) {
-    res.status(400).json({ error: "Invalid id" });
-    return null;
-  }
-  return parsed.data;
-}
 
 tasksRouter.get("/today", async (req: AuthedRequest, res) => {
   const today = await getTodayForUser(req.user!.id);
@@ -29,7 +21,7 @@ tasksRouter.get("/today", async (req: AuthedRequest, res) => {
 });
 
 tasksRouter.post("/:id/start", async (req: AuthedRequest, res) => {
-  const id = parseId(req.params.id, res);
+  const id = parseEntityId(req.params.id, res);
   if (!id) return;
   const result = await startTask(req.user!.id, id);
   if ("error" in result) {
@@ -41,7 +33,7 @@ tasksRouter.post("/:id/start", async (req: AuthedRequest, res) => {
 });
 
 tasksRouter.post("/:id/pause", async (req: AuthedRequest, res) => {
-  const id = parseId(req.params.id, res);
+  const id = parseEntityId(req.params.id, res);
   if (!id) return;
   const body = z.object({ reason: z.enum(["auto", "manual"]).optional() }).safeParse(req.body ?? {});
   if (!body.success) {
@@ -58,7 +50,7 @@ tasksRouter.post("/:id/pause", async (req: AuthedRequest, res) => {
 });
 
 tasksRouter.post("/:id/complete", async (req: AuthedRequest, res) => {
-  const id = parseId(req.params.id, res);
+  const id = parseEntityId(req.params.id, res);
   if (!id) return;
   const body = z.object({ notes: notesSchema.optional() }).safeParse(req.body ?? {});
   if (!body.success) {
@@ -74,7 +66,7 @@ tasksRouter.post("/:id/complete", async (req: AuthedRequest, res) => {
 });
 
 tasksRouter.patch("/:id/notes", async (req: AuthedRequest, res) => {
-  const id = parseId(req.params.id, res);
+  const id = parseEntityId(req.params.id, res);
   if (!id) return;
   const body = z.object({ notes: notesSchema }).safeParse(req.body);
   if (!body.success) {

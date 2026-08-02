@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { JOB_STATUSES } from "@gyam/shared";
+import { JOB_STATUSES, type JobStatus } from "@gyam/shared";
 import { formatDateOnly, parseDateOnly } from "./dates.js";
 
 export const usernameSchema = z
@@ -44,7 +44,7 @@ export const optionalHttpUrl = z
 
 export const notesSchema = z.string().max(10_000);
 export const emailBodySchema = z.string().max(50_000);
-export const jobStatusSchema = z.enum(JOB_STATUSES as [string, ...string[]]);
+export const jobStatusSchema = z.enum(JOB_STATUSES as [JobStatus, ...JobStatus[]]);
 
 export const ATTACHMENT_MAX_BYTES = 5 * 1024 * 1024;
 export const ATTACHMENT_ALLOWED_EXT = new Set([

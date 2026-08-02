@@ -1,14 +1,18 @@
 ---
-description: Homelab Docker/nginx/Postgres conventions for GYAM deploy
-globs: "{docker-compose*.yml,Dockerfile*,**/nginx/**,**/deploy/**}"
+description: Homelab Docker/TrueNAS/Postgres conventions for GYAM deploy
+globs: "{docker-compose*.yml,Dockerfile*,**/nginx/**,**/deploy/**,docs/homelab.md}"
 alwaysApply: false
 ---
 
 # GYAM Homelab Deploy
 
-- Target: Docker Compose + PostgreSQL + nginx reverse proxy + Cloudflare.
-- One API serves web, mobile-friendly PWA, and future desktop wrapper.
-- Keep secrets in env files / Compose secrets; document required vars without real values.
-- Prefer healthchecks and named volumes; NAS/TrueNAS for backup/export dumps.
-- Do not require Tailscale/Nextcloud; Cloudflare path is the remote-access plan.
-- Sidecars (notifier, keep-alive, job-watch) are optional services — do not block core Compose.
+- Authoritative runbook: `docs/homelab.md`.
+- **Phase A:** TrueNAS SCALE Custom App — Postgres unpublished + single app container LAN `:4070`.
+- **Phase B (later):** Cloudflare Tunnel → one HTTPS origin; optional nginx; `COOKIE_SECURE=true`.
+- Local Compose Postgres (`5434`) is **dev only**; do not publish DB on TrueNAS.
+- One API origin serves web / PWA / future desktop wrapper (SPA from Express in prod image).
+- Keep secrets in env; document required vars without real values.
+- Prefer healthchecks (Node `fetch` for app) and ZFS datasets under `appPool/gyam`.
+- Do not require Tailscale/Nextcloud; do not treat WAN as done until Tunnel is live.
+- Sidecars are optional — do not block core bring-up.
+- Private GHCR pulls need a PAT; commit Prisma migrations before `migrate deploy` on homelab.

@@ -29,7 +29,7 @@ GYAM is **one repo that serves several deliberate purposes at once**. Do not col
 | **P3** | Sample software project | Replaces throwaway Jira sandbox; Epic/Stories/Tasks + sprints live in `docs/pm` and the product itself |
 | **P4** | PM practice lab | Hybrid Agile + predictive artifacts; Sean supervises Cursor agents as the delivery team (RACI) |
 | **P5** | Portfolio evidence source | Real usage + screenshots/notes in `docs/pm/portfolio-export/` for a **separate** future portfolio website |
-| **P6** | Homelab reference | Docker Postgres, nginx/Cloudflare notes — demonstrates ops fluency |
+| **P6** | Homelab reference | TrueNAS SCALE Custom App (LAN Phase A) + Cloudflare Tunnel later (Phase B) — demonstrates ops fluency |
 | **P7** | Template seed (later) | Schema/UX allows other users eventually; V1 remains Sean-first |
 
 ### Product behaviors (P1–P2)
@@ -61,8 +61,9 @@ GYAM is **one repo that serves several deliberate purposes at once**. Do not col
 | 2026-07-27 | Locked: local notifications + **manual** correspondence archive (no email-must-have) |
 | 2026-07-28 | GYAM = sample software project; `docs/pm` pack; agents = supervised team |
 | 2026-07-28 | DB roadmap remapped (`db:remap-sample`); 8 portfolio screenshots captured |
+| 2026-08-01 | Homelab docs retargeted: TrueNAS Phase A (LAN Custom App) first; Cloudflare/nginx = Phase B (mirror Yum4Less) |
 
-**Current state (2026-07-28):** V1 local product ~complete; governance pack live; export screenshots staged; dogfood / multi-week metrics still open; portfolio *site* not started (by design).
+**Current state (2026-08-01):** V1 local product ~complete; governance pack live; export screenshots staged; **TrueNAS Phase A runbook documented** (Dockerfile/GHCR/Prisma migrate still to build); dogfood / multi-week metrics still open; portfolio *site* not started (by design).
 
 Detailed narrative: `docs/pm/00-multi-purpose-and-progress.md`.
 
@@ -88,11 +89,14 @@ PIN is stored hashed (never plaintext). Session after successful PIN unlock.
 | Clients | Responsive web + PWA (mobile-friendly); desktop wrapper later, same API |
 | Sync | Homelab server is source of truth; devices sync to it |
 | “100% local” | Data stays on Sean’s infrastructure (not public SaaS) |
-| Remote access | Cloudflare → nginx → app |
-| Runtime | Docker / Docker Compose |
-| Database | PostgreSQL |
-| Also available | NAS / TrueNAS for backups/exports |
+| **Phase A (now)** | TrueNAS SCALE **Custom App**: Postgres + single app container; **LAN only** (`http://<nas-ip>:4070`) |
+| **Phase B (later)** | Cloudflare Tunnel → one HTTPS origin; optional nginx front door; `COOKIE_SECURE=true` |
+| Runtime | Docker / Docker Compose locally; TrueNAS Apps YAML for production-like host |
+| Database | PostgreSQL (unpublished on TrueNAS host) |
+| Backups | `pg_dump` / dumps on `appPool` datasets |
 | Theme | Dark mode |
+
+Detail: `docs/homelab.md`. Pattern sibling: Yum4Less TrueNAS Custom App (LAN live; WAN not started).
 
 ---
 
@@ -281,7 +285,7 @@ GYAM should log user/system activity in a durable, readable form so Cursor can:
 | Day 2–3 | Timer + pause + hourly keep-alive + notes + rollover + blunt nudge |
 | Day 3–4 | Streaks/heatmap; job pipeline + quotas; correspondence archive (paste/attach) |
 | Day 4–5 | Sunday guided review; editable roadmap; export/import |
-| Day 5–7 | Local notify polish (optional Web Push); PWA polish; activity logging; nginx/Cloudflare notes; portfolio README |
+| Day 5–7 | Local notify polish (optional Web Push); PWA polish; activity logging; homelab notes (TrueNAS Phase A); portfolio README |
 
 ---
 
@@ -292,7 +296,7 @@ Sean Holmes — Mechanicsville, VA — `sfh1980@yahoo.com` — LinkedIn / GitHub
 Narrative GYAM supports:
 
 - Long ops/help-desk foundation (Wells Fargo) → full-stack (Coding Dojo, Maxx Potential, RAA) → **PM career operating system**.
-- Homelab fluency (Docker, nginx, TrueNAS) matches GYAM hosting story.
+- Homelab fluency (TrueNAS SCALE Custom Apps, Docker, Cloudflare Tunnel later) matches GYAM hosting story.
 - Target path from roadmap: Aspiring Technical Project Coordinator + Google PM Certificate track.
 - Include GYAM in PM portfolio with charter/risk-style docs as the app itself encourages.
 
@@ -316,7 +320,8 @@ Per user preference: when a development fork appears, present options then; do n
 Known upcoming discussions:
 
 - Correspondence archive UX: multiple entries per job + types (Rejection / Interview / Offer / Other) vs single paste fields  
-- Web Push VAPID + Cloudflare quirks (optional local-notify upgrade)  
+- Web Push VAPID + HTTPS quirks (optional; after Phase B origin exists)
+- Phase A ship blockers: Dockerfile + GHCR publish + Prisma baseline migrate + TrueNAS pull PAT  
 - hiringcafe feed/API shape for job-watch sidecar  
 - Whether first launch creates the single user interactively or via seed env  
 - Revisit SMTP only if Sean explicitly re-scopes notify-via-email  
@@ -351,3 +356,4 @@ Known upcoming discussions:
 | 2026-07-28 | GYAM = sample software project; docs/pm pack + portfolio-export; agent team RACI; Jira not required for solo |
 | 2026-07-28 | DB remap sample-project language; Playwright portfolio screenshots (8) |
 | 2026-07-28 | Documented multi-purpose roles (P1–P7) + progress history in SoT and docs/pm |
+| 2026-08-01 | Homelab: TrueNAS Phase A (LAN Custom App) primary; Cloudflare/nginx Phase B deferred; docs + vault aligned with Yum4Less pattern |

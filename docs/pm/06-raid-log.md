@@ -8,7 +8,8 @@ Living log. Update at least weekly. **P**robability / **I**mpact: 1–5.
 |----|------|---|---|-------|------------|-------|--------|
 | R1 | Scope creep (sidecars, email, portfolio site inside app) | 4 | 4 | 16 | SoT + scope-guard agent; change log | Sean | Open |
 | R2 | Stop dogfooding; docs become theater | 3 | 5 | 15 | Daily Today habit; blunt rollover | Sean | Open |
-| R3 | Homelab downtime loses trust in sync | 2 | 4 | 8 | Postgres volume backups; export JSON | Sean | Open |
+| R3 | Homelab downtime loses trust in sync | 2 | 4 | 8 | Postgres volume backups; export JSON; TrueNAS datasets | Sean | Open |
+| R8 | TrueNAS Apps lifecycle desync if Watchtower recreates containers | 2 | 3 | 6 | SHA pin rollback; label only app; validate on SCALE version | Homelab Deploy | Open |
 | R4 | Secrets leak into portfolio screenshots | 2 | 5 | 10 | Sanitize checklist in portfolio-export | Sean | Open |
 | R5 | Agent output drifts from DoD / validation | 3 | 3 | 9 | Playwright gate; senior-auditor on big diffs | Sean | Open |
 | R6 | Windows/port/Prisma friction slows delivery | 3 | 2 | 6 | Documented ports; kill/restart runbook | Sean | Watching |

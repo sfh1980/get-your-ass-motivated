@@ -9,19 +9,11 @@ import {
   updateRoadmapTask,
   updateSubjectDuration,
 } from "../services/roadmap.js";
-import { entityIdSchema, isoDateSchema, notesSchema } from "../validation.js";
+import { paramString, parseEntityId } from "../param.js";
+import { isoDateSchema, notesSchema } from "../validation.js";
 
 export const roadmapRouter = Router();
 roadmapRouter.use(requireAuth);
-
-function parseId(raw: string, res: import("express").Response): string | null {
-  const parsed = entityIdSchema.safeParse(raw);
-  if (!parsed.success) {
-    res.status(400).json({ error: "Invalid id" });
-    return null;
-  }
-  return parsed.data;
-}
 
 roadmapRouter.get("/", async (req: AuthedRequest, res) => {
   const fromRaw = typeof req.query.from === "string" ? req.query.from : undefined;
@@ -45,7 +37,7 @@ roadmapRouter.get("/", async (req: AuthedRequest, res) => {
 });
 
 roadmapRouter.patch("/tasks/:id", async (req: AuthedRequest, res) => {
-  const id = parseId(req.params.id, res);
+  const id = parseEntityId(req.params.id, res);
   if (!id) return;
   const parsed = z
     .object({
@@ -86,7 +78,7 @@ roadmapRouter.post("/tasks", async (req: AuthedRequest, res) => {
 });
 
 roadmapRouter.delete("/tasks/:id", async (req: AuthedRequest, res) => {
-  const id = parseId(req.params.id, res);
+  const id = parseEntityId(req.params.id, res);
   if (!id) return;
   const ok = await deleteRoadmapTask(req.user!.id, id);
   if (!ok) {
@@ -97,7 +89,7 @@ roadmapRouter.delete("/tasks/:id", async (req: AuthedRequest, res) => {
 });
 
 roadmapRouter.patch("/milestones/:id", async (req: AuthedRequest, res) => {
-  const id = parseId(req.params.id, res);
+  const id = parseEntityId(req.params.id, res);
   if (!id) return;
   const parsed = z.object({ completed: z.boolean() }).safeParse(req.body);
   if (!parsed.success) {
@@ -123,7 +115,7 @@ roadmapRouter.put("/subjects/:subject", async (req: AuthedRequest, res) => {
     .trim()
     .min(1)
     .max(100)
-    .safeParse(decodeURIComponent(req.params.subject));
+    .safeParse(decodeURIComponent(paramString(req.params.subject) ?? ""));
   if (!subject.success) {
     res.status(400).json({ error: "Invalid subject" });
     return;

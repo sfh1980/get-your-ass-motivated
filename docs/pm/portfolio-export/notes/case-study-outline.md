@@ -34,5 +34,5 @@ GYAM: A Multi-Purpose PM Career OS and Sample Software Project
 ## Artifacts to attach on portfolio site
 - Screenshots: login, today, today-mobile, progress, jobs, review, roadmap, settings  
 - Charter, RAID excerpt, sprint plan, status report, multi-purpose progress doc  
-- Architecture / homelab note (`docs/homelab.md`)  
+- Architecture / homelab note (`docs/homelab.md` — TrueNAS Phase A)  
 - “What I did as PM” bullets: scope decisions, agent supervision, RAID, DoD/Playwright gate
