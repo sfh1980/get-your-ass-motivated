@@ -1,7 +1,7 @@
 # GYAM — PM documentation pack
 
 **Project:** GYAM (Get Your Ass Motivated)  
-**Updated:** 2026-07-28  
+**Updated:** 2026-08-02  
 
 ## What this folder is
 
@@ -26,7 +26,7 @@ You are the **sponsor, product owner, and project manager**. Cursor **subagents 
 
 | # | Doc | Purpose |
 |---|-----|---------|
-| 00 | [Multi-purpose + progress](./00-multi-purpose-and-progress.md) | Roles P1–P7; beginning → now |
+| 00 | [Multi-purpose + progress](./00-multi-purpose-and-progress.md) | Roles P1–P8; beginning → now |
 | 01 | [Project charter](./01-project-charter.md) | Authorize GYAM; objectives; success criteria |
 | 02 | [Stakeholder register](./02-stakeholder-register.md) | Who cares; influence/interest |
 | 03 | [Scope statement](./03-scope-statement.md) | In / out of scope; constraints |
@@ -40,6 +40,7 @@ You are the **sponsor, product owner, and project manager**. Cursor **subagents 
 | 11 | [Change log](./11-change-log.md) | Scope / decision changes |
 | 12 | [Milestone plan](./12-milestone-plan.md) | Roadmap months ↔ GYAM outcomes |
 | 13 | [Lessons learned](./13-lessons-learned.md) | Continuous capture |
+| 14 | [Python CS epic](./14-python-cs-epic.md) | Dual-track Monday/Saturday curriculum ↔ roadmap |
 | — | [Portfolio export](./portfolio-export/README.md) | Screenshots, notes, grab checklist |
 
 ## Weekly operating loop
@@ -53,3 +54,5 @@ You are the **sponsor, product owner, and project manager**. Cursor **subagents 
 ## Remap note
 
 Live DB language was remapped 2026-07-28 via `npm run db:remap-sample -w @gyam/api` (RAID I1 resolved). New installs use updated seed automatically.
+
+Python CS Monday/Saturday titles: seed via `pythonCsCurriculum.ts`; live remap with `npm run db:remap-python-cs -w @gyam/api` (see [14-python-cs-epic.md](./14-python-cs-epic.md)).

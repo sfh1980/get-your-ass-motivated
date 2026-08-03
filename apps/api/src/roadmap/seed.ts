@@ -1,4 +1,10 @@
 import { addDays, weekdayIndexMon0 } from "../dates.js";
+import {
+  GENERIC_MONDAY_SOFTWARE,
+  GENERIC_SATURDAY_DEEP_WORK,
+  mondaySoftwareTitle,
+  saturdayDeepWorkTitle,
+} from "./pythonCsCurriculum.js";
 
 export type SeedTask = {
   dayOffset: number;
@@ -123,7 +129,16 @@ function inferSubject(title: string): { subject: string | null; suggestedMinutes
   if (t.includes("pmbok") || t.includes("agile") || t.includes("pm study") || t.includes("pm chapter")) {
     return { subject: "PM study", suggestedMinutes: 60 };
   }
-  if (t.includes("python") || t.includes("c#") || t.includes("software")) {
+  // Deep work before python — Saturday portfolio titles include "Python portfolio"
+  if (t.includes("deep work") || (t.includes("portfolio") && !t.includes("python cs"))) {
+    return { subject: "Deep work", suggestedMinutes: 180 };
+  }
+  if (
+    t.includes("python cs") ||
+    t.includes("python/c#") ||
+    t.includes("c#") ||
+    (t.includes("software") && !t.includes("deep work"))
+  ) {
     return { subject: "Software practice", suggestedMinutes: t.includes("2 hrs") ? 120 : 60 };
   }
   if (
@@ -153,7 +168,7 @@ function inferSubject(title: string): { subject: string | null; suggestedMinutes
   if (t.includes("interview")) {
     return { subject: "Interview prep", suggestedMinutes: 30 };
   }
-  if (t.includes("deep work") || t.includes("portfolio") || t.includes("volunteer")) {
+  if (t.includes("volunteer")) {
     return { subject: "Deep work", suggestedMinutes: 180 };
   }
   if (t.includes("review") || t.includes("retrospective") || t.includes("plan next")) {
@@ -195,7 +210,15 @@ export function buildSeedPlan(startDate: Date): {
       const dayOffset = 7 + (week - 2) * 7 + dow;
       const date = addDays(startDate, dayOffset);
       const patternDow = weekdayIndexMon0(date);
-      const titles = ROUTINE[patternDow] ?? [];
+      const titles = (ROUTINE[patternDow] ?? []).map((title) => {
+        if (patternDow === 0 && title === GENERIC_MONDAY_SOFTWARE) {
+          return mondaySoftwareTitle(week);
+        }
+        if (patternDow === 5 && title === GENERIC_SATURDAY_DEEP_WORK) {
+          return saturdayDeepWorkTitle(week);
+        }
+        return title;
+      });
       titles.forEach((title, idx) => {
         const inferred = inferSubject(title);
         tasks.push({

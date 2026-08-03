@@ -10,7 +10,8 @@
     "db:migrate": "prisma migrate deploy && prisma generate",
     "db:push": "prisma db push && prisma generate",
     "db:seed-check": "tsx src/scripts/seed-check.ts",
-    "db:remap-sample": "tsx src/scripts/remap-roadmap-sample-project.ts"
+    "db:remap-sample": "tsx src/scripts/remap-roadmap-sample-project.ts",
+    "db:remap-python-cs": "tsx src/scripts/remap-python-cs-titles.ts"
   },
   "dependencies": {
     "@gyam/shared": "*",

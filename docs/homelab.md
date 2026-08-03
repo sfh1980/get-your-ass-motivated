@@ -4,8 +4,8 @@
 
 | Phase | Goal | Status |
 |-------|------|--------|
-| **A — LAN** | TrueNAS Custom App: Postgres + single app container; household devices on LAN | **In progress** (image path in repo; Install after GHCR publish) |
-| **B — WAN** | Cloudflare Tunnel → one HTTPS origin; `COOKIE_SECURE=true` | **Deferred** (same open loop as Yum4Less) |
+| **A — LAN** | TrueNAS Custom App: Postgres + single app container; household LAN | **Done** 2026-08-02 (`http://192.168.1.246:4070`) |
+| **B — WAN** | Cloudflare Tunnel → HTTPS; `COOKIE_SECURE=true` | **Deferred** — blocked until Yum4Less Cloudflare is done; then add GYAM |
 
 Data stays on Sean’s infrastructure. No Tailscale/Nextcloud required. No public SaaS as system of record.
 
@@ -47,7 +47,7 @@ Phone / PC (LAN)
 | GHCR workflow | `.github/workflows/publish-image.yml` → `ghcr.io/sfh1980/gyam-app:<sha7\|latest\|homelab>` |
 | Baseline migration | `apps/api/prisma/migrations/20260802000000_init` |
 
-**Still needed before TrueNAS Install:** push to `main` so GHCR has an image; create a GitHub PAT (`read:packages`) and add it as a TrueNAS registry credential; create optional `uploads` dataset (YAML mounts `/mnt/appPool/gyam/uploads`).
+**Phase A live (2026-08-02):** Custom App `gyam` on TrueNAS; image `ghcr.io/sfh1980/gyam-app:homelab`; LAN smoke green. Optional later: `uploads` dataset, Watchtower.
 
 Local Windows Compose (Postgres-only + host Node) remains the **dev** path.
 
@@ -232,12 +232,15 @@ server {
 
 ## Postgres backup
 
-**TrueNAS Phase A** (from app stack):
+**TrueNAS Phase A** (SCALE `docker` may not support `exec -T` — omit it):
 
 ```bash
-sudo docker exec -T gyam-postgres pg_dump -U gyam -d gyam -Fc > "gyam-$(date +%Y%m%d).dump"
+# Remove any prior 0-byte failed dump first, then:
+rm -f /mnt/appPool/GYAM/gyam-*.dump   # only if empty/failed; keep good dumps
+sudo docker exec gyam-postgres pg_dump -U gyam -d gyam -Fc > /mnt/appPool/GYAM/gyam-$(date +%Y%m%d).dump
+ls -lh /mnt/appPool/GYAM/gyam-*.dump   # must be non-zero size
 # restore:
-# sudo docker exec -i gyam-postgres pg_restore -U gyam -d gyam --clean < gyam-YYYYMMDD.dump
+# sudo docker exec -i gyam-postgres pg_restore -U gyam -d gyam --clean < /mnt/appPool/GYAM/gyam-YYYYMMDD.dump
 ```
 
 **Local Compose:**

@@ -31,6 +31,7 @@ GYAM is **one repo that serves several deliberate purposes at once**. Do not col
 | **P5** | Portfolio evidence source | Real usage + screenshots/notes in `docs/pm/portfolio-export/` for a **separate** future portfolio website |
 | **P6** | Homelab reference | TrueNAS SCALE Custom App (LAN Phase A) + Cloudflare Tunnel later (Phase B) — demonstrates ops fluency |
 | **P7** | Template seed (later) | Schema/UX allows other users eventually; V1 remains Sean-first |
+| **P8** | Dual-track Python CS | 24-week curriculum paced onto Monday software + alternating Saturday deep-work slots via seed/remap titles — **planning layer only**; app stays TypeScript (`docs/pm/14-python-cs-epic.md`) |
 
 ### Product behaviors (P1–P2)
 
@@ -40,11 +41,12 @@ GYAM is **one repo that serves several deliberate purposes at once**. Do not col
 4. Tracks job applications, study, networking, portfolio artifacts, and weekly retrospectives.  
 5. Remains **homelab-local**, syncs across Sean’s devices.
 
-### Project / career behaviors (P3–P7)
+### Project / career behaviors (P3–P8)
 
 6. Is managed as a real software project under `docs/pm/` (charter, RAID, backlog, status).  
 7. Stages portfolio grabs without building the public site inside this repo.  
-8. Uses agent-team supervision as transferable Technical Project Coordinator practice.
+8. Uses agent-team supervision as transferable Technical Project Coordinator practice.  
+9. Tracks Python CS study as dual-track roadmap tasks (titles only; no Python runtime in-app).
 
 **Explicit non-goals for this repo:** public portfolio website implementation; SMTP/email as a must-have notify channel; fake demo job data.
 
@@ -62,8 +64,9 @@ GYAM is **one repo that serves several deliberate purposes at once**. Do not col
 | 2026-07-28 | GYAM = sample software project; `docs/pm` pack; agents = supervised team |
 | 2026-07-28 | DB roadmap remapped (`db:remap-sample`); 8 portfolio screenshots captured |
 | 2026-08-01 | Homelab docs retargeted: TrueNAS Phase A (LAN Custom App) first; Cloudflare/nginx = Phase B (mirror Yum4Less) |
+| 2026-08-02 | TrueNAS Phase A live; Python CS epic folded into `docs/pm/14-python-cs-epic.md` + seed/remap titles |
 
-**Current state (2026-08-01):** V1 local product ~complete; governance pack live; export screenshots staged; **TrueNAS Phase A runbook documented** (Dockerfile/GHCR/Prisma migrate still to build); dogfood / multi-week metrics still open; portfolio *site* not started (by design).
+**Current state (2026-08-02):** V1 local product ~complete; **TrueNAS Phase A live** (LAN `:4070`); governance pack live; export screenshots staged; Phase B Cloudflare blocked on Yum4Less; Python CS dual-track (P8) in seed/docs; dogfood / multi-week metrics still open; portfolio *site* not started (by design).
 
 Detailed narrative: `docs/pm/00-multi-purpose-and-progress.md`.
 
@@ -89,8 +92,8 @@ PIN is stored hashed (never plaintext). Session after successful PIN unlock.
 | Clients | Responsive web + PWA (mobile-friendly); desktop wrapper later, same API |
 | Sync | Homelab server is source of truth; devices sync to it |
 | “100% local” | Data stays on Sean’s infrastructure (not public SaaS) |
-| **Phase A (now)** | TrueNAS SCALE **Custom App**: Postgres + single app container; **LAN only** (`http://<nas-ip>:4070`) |
-| **Phase B (later)** | Cloudflare Tunnel → one HTTPS origin; optional nginx front door; `COOKIE_SECURE=true` |
+| **Phase A** | TrueNAS SCALE **Custom App**: Postgres + single app container; **LAN live** (`http://192.168.1.246:4070`, 2026-08-02) |
+| **Phase B (later)** | Cloudflare Tunnel → HTTPS; `COOKIE_SECURE=true` — **blocked until Yum4Less Cloudflare is done**, then add GYAM |
 | Runtime | Docker / Docker Compose locally; TrueNAS Apps YAML for production-like host |
 | Database | PostgreSQL (unpublished on TrueNAS host) |
 | Backups | `pg_dump` / dumps on `appPool` datasets |
@@ -357,3 +360,5 @@ Known upcoming discussions:
 | 2026-07-28 | DB remap sample-project language; Playwright portfolio screenshots (8) |
 | 2026-07-28 | Documented multi-purpose roles (P1–P7) + progress history in SoT and docs/pm |
 | 2026-08-01 | Homelab: TrueNAS Phase A (LAN Custom App) primary; Cloudflare/nginx Phase B deferred; docs + vault aligned with Yum4Less pattern |
+| 2026-08-02 | Phase A Done on TrueNAS LAN; Phase B Cloudflare deferred behind Yum4Less |
+| 2026-08-02 | P8 Python CS dual-track: `docs/pm/14-python-cs-epic.md` + seed/remap Monday–Saturday titles |

@@ -1,6 +1,6 @@
 # 00 — Multi-purpose project + progress (beginning → now)
 
-**Updated:** 2026-07-28  
+**Updated:** 2026-08-02  
 **Audience:** Sean (PM) + future portfolio readers (sanitized)
 
 ## Why this document exists
@@ -26,6 +26,7 @@ This file is the narrative bridge between those roles and the factual progress f
 | PM practice lab | Charter, RAID, RACI, status, DoD | Weekly RAID/status; agent assignments |
 | Portfolio evidence | `portfolio-export/` | Screenshots + case study ready to copy |
 | Homelab reference | `docs/homelab.md`, TrueNAS Phase A | LAN Custom App runbook; WAN Phase B deferred |
+| Dual-track Python CS (P8) | `14-python-cs-epic.md`, seed + `db:remap-python-cs` | Specific Monday/Saturday titles by `sourceWeek` |
 | Future template | Shared schema / multi-user-ready auth | Later — not V1 success criteria |
 
 ---
@@ -54,7 +55,7 @@ Shipped in sequence (SoT ship order):
 | Editable roadmap / milestones / subjects | Done |
 | Local OS notifications + Settings | Done |
 | Export / import JSON | Done |
-| Homelab notes | Done (Phase A runbook 2026-08-01; images/CI still open) |
+| Homelab notes | **Done** — Phase A live on TrueNAS 2026-08-02 |
 | Input validation hardening | Done |
 | Playwright edge suite | Done — **22/22** |
 
@@ -77,7 +78,9 @@ Optional SMTP code may remain dormant in Settings — product truth is “not re
 | Portfolio export | Screenshots in; case-study outline draft; metrics TBD |
 | Dogfood streak | Started — needs sustained daily use |
 | Portfolio website | Explicitly **out of this repo** until export pack is “grab-ready” |
-| Homelab HTTPS / COOKIE_SECURE | Phase B — after Cloudflare Tunnel; LAN Phase A uses HTTP + `COOKIE_SECURE=false` |
+| Homelab HTTPS / COOKIE_SECURE | Phase B — **blocked** until Yum4Less Cloudflare is done; then add GYAM |
+| Homelab Phase A (LAN) | **Done** 2026-08-02 — `http://192.168.1.246:4070` |
+| Python CS dual-track (P8) | Epic in `14-python-cs-epic.md`; seed + remap titles (no Python in app) |
 
 ---
 
@@ -97,8 +100,9 @@ Optional SMTP code may remain dormant in Settings — product truth is “not re
 1. Sustain dogfood (≥2 weeks) so metrics are real.  
 2. Review screenshots for PII; fill case-study metrics.  
 3. Optional: dormant-label SMTP UI (I2).  
-4. Homelab Phase A (TrueNAS LAN) then Phase B HTTPS (RM4a / RM4b).  
-5. Start separate portfolio site only after export pack is grab-ready.
+4. Homelab Phase B HTTPS only after Yum4Less Cloudflare (RM4b). Phase A **Done**.  
+5. Start separate portfolio site only after export pack is grab-ready.  
+6. Fill Python portfolio names for curr weeks 11/13/17; run `db:remap-python-cs` on TrueNAS after image bump.
 
 ---
 
@@ -108,4 +112,5 @@ Optional SMTP code may remain dormant in Settings — product truth is “not re
 - Backlog: `07-wbs-backlog.md`  
 - Current sprint: `08-sprint-plan.md`  
 - Status: `10-status-report.md`  
+- Python CS epic: `14-python-cs-epic.md`  
 - SoT multi-purpose table: `GYAM_SOURCE_OF_TRUTH.md` §1

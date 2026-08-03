@@ -47,8 +47,8 @@ SMTP/email as must-have notify channel; LinkedIn automation; PDF OCR as primary;
 | M1 V1 feature complete | SoT ship order local | **Done** (soft) 2026-07-27 |
 | M2 PM pack live | Living docs + sample-project lock | **Done** init 2026-07-28 |
 | M3 Portfolio-ready | Export grab-ready for separate site | **In progress** (screenshots yes) |
-| M4a Homelab LAN | TrueNAS Custom App Phase A (db+app, LAN `:4070`) | Open |
-| M4b Homelab HTTPS | Cloudflare Tunnel, cookie secure, backup drill | Open |
+| M4a Homelab LAN | TrueNAS Custom App Phase A (db+app, LAN `:4070`) | **Done** 2026-08-02 |
+| M4b Homelab HTTPS | Cloudflare Tunnel + cookie secure (after Yum4Less CF) | Open (blocked) |
 
 ## 6. Success criteria
 

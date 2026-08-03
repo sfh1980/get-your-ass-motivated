@@ -10,3 +10,5 @@
 | 2026-07-28 | Documented multi-purpose roles (P1–P7); progress history beginning→now | Clarity for PM + portfolio narrative | Sean |
 | 2026-07-28 | Portfolio screenshots captured (Playwright ×8) | Evidence staging | Sean |
 | 2026-08-01 | Homelab docs: TrueNAS Phase A LAN primary; Cloudflare/nginx Phase B; vault Home + deploy note | Mirror Yum4Less working pattern | Sean |
+| 2026-08-02 | Phase A closed: TrueNAS LAN live; RM4a/M4a/T5.5a Done; Phase B blocked on Yum4Less Cloudflare | Homelab close-out | Sean |
+| 2026-08-02 | Python CS dual-track: docs/pm epic + seed/remap Monday–Saturday titles by sourceWeek (no Python in app) | Fold Obsidian curriculum into roadmap planning layer | Sean |
