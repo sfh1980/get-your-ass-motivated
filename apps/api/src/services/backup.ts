@@ -5,21 +5,29 @@ import { parseDateOnly } from "../dates.js";
 
 export async function exportUserData(userId: string) {
   const user = await prisma.user.findUniqueOrThrow({ where: { id: userId } });
-  const [taskDays, tasks, jobs, milestones, subjects, reviews, activities] = await Promise.all([
-    prisma.taskDay.findMany({ where: { userId }, orderBy: { date: "asc" } }),
-    prisma.task.findMany({ where: { userId }, orderBy: [{ createdAt: "asc" }] }),
-    prisma.job.findMany({ where: { userId }, orderBy: { createdAt: "asc" } }),
-    prisma.milestone.findMany({ where: { userId }, orderBy: { monthIndex: "asc" } }),
-    prisma.subjectDuration.findMany({ where: { userId }, orderBy: { subject: "asc" } }),
-    prisma.weeklyReview.findMany({ where: { userId }, orderBy: { weekStart: "asc" } }),
-    prisma.activityEvent.findMany({
-      where: { userId },
-      orderBy: { timestamp: "desc" },
-      take: 2000,
-    }),
-  ]);
+  const [taskDays, tasks, jobs, milestones, subjects, reviews, activities, taskAttachments] =
+    await Promise.all([
+      prisma.taskDay.findMany({ where: { userId }, orderBy: { date: "asc" } }),
+      prisma.task.findMany({ where: { userId }, orderBy: [{ createdAt: "asc" }] }),
+      prisma.job.findMany({ where: { userId }, orderBy: { createdAt: "asc" } }),
+      prisma.milestone.findMany({ where: { userId }, orderBy: { monthIndex: "asc" } }),
+      prisma.subjectDuration.findMany({ where: { userId }, orderBy: { subject: "asc" } }),
+      prisma.weeklyReview.findMany({ where: { userId }, orderBy: { weekStart: "asc" } }),
+      prisma.activityEvent.findMany({
+        where: { userId },
+        orderBy: { timestamp: "desc" },
+        take: 2000,
+      }),
+      prisma.taskAttachment.findMany({ where: { userId }, orderBy: { createdAt: "asc" } }),
+    ]);
 
   const dayById = new Map(taskDays.map((d) => [d.id, d]));
+  const attachmentsByTask = new Map<string, typeof taskAttachments>();
+  for (const a of taskAttachments) {
+    const list = attachmentsByTask.get(a.taskId) ?? [];
+    list.push(a);
+    attachmentsByTask.set(a.taskId, list);
+  }
 
   return {
     version: 1,
@@ -64,16 +72,26 @@ export async function exportUserData(userId: string) {
     })),
     tasks: tasks.map((t) => {
       const day = dayById.get(t.taskDayId);
+      const atts = attachmentsByTask.get(t.id) ?? [];
       return {
         date: day ? formatDateOnly(day.date) : null,
         title: t.title,
         notes: t.notes,
+        instructions: t.instructions,
         status: t.status,
         subject: t.subject,
         suggestedMinutes: t.suggestedMinutes,
         elapsedMs: t.elapsedMs,
         sortOrder: t.sortOrder,
         sourceWeek: t.sourceWeek,
+        // Metadata only — binaries live on data/uploads; restore needs that volume.
+        attachments: atts.map((a) => ({
+          fileName: a.fileName,
+          mimeType: a.mimeType,
+          sizeBytes: a.sizeBytes,
+          storedPath: a.storedPath,
+          createdAt: a.createdAt.toISOString(),
+        })),
       };
     }),
     activitySample: activities.map((a) => ({
@@ -116,6 +134,7 @@ type ImportPayload = {
     date: string | null;
     title: string;
     notes?: string;
+    instructions?: string;
     status?: string;
     subject?: string | null;
     suggestedMinutes?: number | null;
@@ -221,6 +240,7 @@ export async function importUserData(userId: string, payload: ImportPayload) {
         where: { id: existing.id },
         data: {
           notes: t.notes ?? existing.notes,
+          instructions: t.instructions ?? existing.instructions,
           status: t.status ?? existing.status,
           subject: t.subject === undefined ? existing.subject : t.subject,
           suggestedMinutes:
@@ -235,6 +255,7 @@ export async function importUserData(userId: string, payload: ImportPayload) {
           taskDayId: day.id,
           title: t.title,
           notes: t.notes ?? "",
+          instructions: t.instructions ?? "",
           status: t.status ?? "pending",
           subject: t.subject ?? null,
           suggestedMinutes: t.suggestedMinutes ?? null,

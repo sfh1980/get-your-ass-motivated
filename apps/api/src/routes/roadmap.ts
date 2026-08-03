@@ -43,6 +43,7 @@ roadmapRouter.patch("/tasks/:id", async (req: AuthedRequest, res) => {
     .object({
       title: z.string().trim().min(1).max(500).optional(),
       notes: notesSchema.optional(),
+      instructions: notesSchema.optional(),
       subject: z.string().trim().max(100).nullable().optional(),
       suggestedMinutes: z.number().int().min(0).max(24 * 60).nullable().optional(),
       sortOrder: z.number().int().min(0).optional(),

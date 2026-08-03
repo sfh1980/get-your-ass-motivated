@@ -66,7 +66,9 @@ Weeks **50–52:** Monday = spaced-repetition review (algorithms + glossary). Sa
 | Piece | Location |
 |-------|----------|
 | Seed titles (new installs) | `apps/api/src/roadmap/seed.ts` + `pythonCsCurriculum.ts` |
-| Live DB remap | `npm run db:remap-python-cs -w @gyam/api` |
+| Coach briefs (Why / Do this / Done when) | `apps/api/src/roadmap/coachBriefs.ts`; column `Task.instructions` |
+| Live DB remap (titles) | `npm run db:remap-python-cs -w @gyam/api` |
+| Live DB remap (briefs) | `npm run db:remap-coach-briefs -w @gyam/api` |
 | Subject | Titles infer to **Software practice** (60m) or **Deep work** (180m) |
 
 ## Open items

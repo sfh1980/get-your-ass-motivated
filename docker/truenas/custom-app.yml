@@ -1,6 +1,7 @@
 # TrueNAS SCALE Custom App YAML — Phase A (LAN).
 # Copy into Apps → Custom App. Replace REPLACE_* values.
-# Datasets: /mnt/appPool/gyam/postgres-data (chown 999:999, chmod 700).
+# Datasets: /mnt/appPool/gyam/postgres-data (chown 999:999, chmod 700),
+#           /mnt/appPool/gyam/uploads (job + task attachments; persist with backups).
 # Private GHCR: configure registry credentials with a PAT (read:packages).
 
 services:

@@ -1,6 +1,7 @@
 import { prisma } from "../db.js";
 import { addDays, toDateOnly } from "../dates.js";
 import { buildSeedPlan } from "./seed.js";
+import { instructionsForTitle } from "./coachBriefs.js";
 import { logActivity } from "../activity.js";
 
 export async function seedUserRoadmap(userId: string, startDate: Date) {
@@ -56,6 +57,7 @@ export async function seedUserRoadmap(userId: string, startDate: Date) {
         sourceWeek: t.sourceWeek,
         status: "pending",
         notes: "",
+        instructions: instructionsForTitle(t.title),
         elapsedMs: 0,
       })),
     });

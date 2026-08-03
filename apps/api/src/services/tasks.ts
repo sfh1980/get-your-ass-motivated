@@ -2,12 +2,47 @@ import { CATCH_UP_PROMPT, type TodayResponse, type TodayTaskDto } from "@gyam/sh
 import { prisma } from "../db.js";
 import { formatDateOnly, todayUtc } from "../dates.js";
 import { logActivity } from "../activity.js";
+import { toAttachmentDto } from "./taskAttachments.js";
 
 function liveElapsedMs(task: { elapsedMs: number; activeStartedAt: Date | null; status: string }): number {
   if (task.status === "in_progress" && task.activeStartedAt) {
     return task.elapsedMs + Math.max(0, Date.now() - task.activeStartedAt.getTime());
   }
   return task.elapsedMs;
+}
+
+function toTodayTaskDto(t: {
+  id: string;
+  title: string;
+  notes: string;
+  instructions: string;
+  status: string;
+  subject: string | null;
+  suggestedMinutes: number | null;
+  elapsedMs: number;
+  sortOrder: number;
+  activeStartedAt: Date | null;
+  attachments?: Array<{
+    id: string;
+    fileName: string;
+    mimeType: string;
+    sizeBytes: number;
+    createdAt: Date;
+  }>;
+}): TodayTaskDto {
+  return {
+    id: t.id,
+    title: t.title,
+    notes: t.notes,
+    instructions: t.instructions,
+    status: t.status as TodayTaskDto["status"],
+    subject: t.subject,
+    suggestedMinutes: t.suggestedMinutes,
+    elapsedMs: liveElapsedMs(t),
+    sortOrder: t.sortOrder,
+    activeStartedAt: t.activeStartedAt ? t.activeStartedAt.toISOString() : null,
+    attachments: (t.attachments ?? []).map(toAttachmentDto),
+  };
 }
 
 export async function getIncompletePriorDates(userId: string, beforeDate: Date): Promise<Date[]> {
@@ -30,7 +65,12 @@ export async function getTodayForUser(userId: string): Promise<TodayResponse> {
 
   let taskDay = await prisma.taskDay.findUnique({
     where: { userId_date: { userId, date } },
-    include: { tasks: { orderBy: { sortOrder: "asc" } } },
+    include: {
+      tasks: {
+        orderBy: { sortOrder: "asc" },
+        include: { attachments: { orderBy: { createdAt: "asc" } } },
+      },
+    },
   });
 
   const backlogRows = blocked
@@ -41,20 +81,11 @@ export async function getTodayForUser(userId: string): Promise<TodayResponse> {
           taskDay: { date: { lt: date } },
         },
         orderBy: [{ taskDay: { date: "asc" } }, { sortOrder: "asc" }],
+        include: { attachments: { orderBy: { createdAt: "asc" } } },
       })
     : [];
 
-  const backlogTasks: TodayTaskDto[] = backlogRows.map((t) => ({
-    id: t.id,
-    title: t.title,
-    notes: t.notes,
-    status: t.status as TodayTaskDto["status"],
-    subject: t.subject,
-    suggestedMinutes: t.suggestedMinutes,
-    elapsedMs: liveElapsedMs(t),
-    sortOrder: t.sortOrder,
-    activeStartedAt: t.activeStartedAt ? t.activeStartedAt.toISOString() : null,
-  }));
+  const backlogTasks: TodayTaskDto[] = backlogRows.map(toTodayTaskDto);
 
   if (!taskDay) {
     // No seeded day (beyond plan or gap) - return empty unblocked/blocked shell
@@ -73,21 +104,16 @@ export async function getTodayForUser(userId: string): Promise<TodayResponse> {
     taskDay = await prisma.taskDay.update({
       where: { id: taskDay.id },
       data: { blocked },
-      include: { tasks: { orderBy: { sortOrder: "asc" } } },
+      include: {
+        tasks: {
+          orderBy: { sortOrder: "asc" },
+          include: { attachments: { orderBy: { createdAt: "asc" } } },
+        },
+      },
     });
   }
 
-  const tasks: TodayTaskDto[] = taskDay.tasks.map((t) => ({
-    id: t.id,
-    title: t.title,
-    notes: t.notes,
-    status: t.status as TodayTaskDto["status"],
-    subject: t.subject,
-    suggestedMinutes: t.suggestedMinutes,
-    elapsedMs: liveElapsedMs(t),
-    sortOrder: t.sortOrder,
-    activeStartedAt: t.activeStartedAt ? t.activeStartedAt.toISOString() : null,
-  }));
+  const tasks: TodayTaskDto[] = taskDay.tasks.map(toTodayTaskDto);
 
   const completed = tasks.filter((t) => t.status === "completed").length;
   const progressPercent = tasks.length === 0 ? 0 : Math.round((completed / tasks.length) * 100);

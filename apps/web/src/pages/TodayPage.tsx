@@ -162,6 +162,7 @@ export function TodayPage({
                   disabled={false}
                   displayElapsed={displayElapsed}
                   run={run}
+                  onAttachmentsChanged={refresh}
                 />
               ))}
             </section>
@@ -182,6 +183,7 @@ export function TodayPage({
                   disabled={today.blocked && task.status !== "completed"}
                   displayElapsed={displayElapsed}
                   run={run}
+                  onAttachmentsChanged={refresh}
                 />
               ))
             )}
@@ -200,6 +202,7 @@ function TaskCard({
   disabled,
   displayElapsed,
   run,
+  onAttachmentsChanged,
 }: {
   task: TodayTaskDto;
   draftNotes: Record<string, string>;
@@ -208,7 +211,11 @@ function TaskCard({
   disabled: boolean;
   displayElapsed: (task: TodayTaskDto) => number;
   run: (taskId: string, fn: () => Promise<unknown>) => Promise<void>;
+  onAttachmentsChanged: () => Promise<void>;
 }) {
+  const accept =
+    ".pdf,.txt,.doc,.docx,.png,.jpg,.jpeg,.webp,.gif,.xlsx,.xls,.csv,.svg,.drawio";
+
   return (
     <article className="card stack">
       <div className="row" style={{ justifyContent: "space-between" }}>
@@ -222,6 +229,12 @@ function TaskCard({
         ) : null}
         <span className="pill">elapsed {formatDuration(displayElapsed(task))}</span>
       </div>
+      {task.instructions ? (
+        <details className="coach-brief">
+          <summary className="muted">How to do this</summary>
+          <pre className="coach-brief-body">{task.instructions}</pre>
+        </details>
+      ) : null}
       <label>
         Notes (learned / questions)
         <textarea
@@ -237,6 +250,51 @@ function TaskCard({
           }}
         />
       </label>
+      <div className="stack task-attachments">
+        <span className="muted">Attachments (spreadsheets, diagrams, docs — max 5MB each)</span>
+        {(task.attachments ?? []).length > 0 ? (
+          <ul className="attachment-list">
+            {(task.attachments ?? []).map((a) => (
+              <li key={a.id} className="row" style={{ justifyContent: "space-between" }}>
+                <a href={api.taskAttachmentUrl(task.id, a.id)} target="_blank" rel="noreferrer">
+                  {a.fileName}
+                  {a.sizeBytes ? ` (${Math.round(a.sizeBytes / 1024)} KB)` : ""}
+                </a>
+                <button
+                  type="button"
+                  disabled={busyId === task.id || task.status === "completed"}
+                  onClick={() =>
+                    run(task.id, async () => {
+                      await api.deleteTaskAttachment(task.id, a.id);
+                      await onAttachmentsChanged();
+                    })
+                  }
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="muted" style={{ margin: 0, fontSize: "0.85rem" }}>
+            No files yet.
+          </p>
+        )}
+        <input
+          type="file"
+          accept={accept}
+          disabled={busyId === task.id || task.status === "completed"}
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            e.target.value = "";
+            if (!file) return;
+            void run(task.id, async () => {
+              await api.uploadTaskAttachment(task.id, file);
+              await onAttachmentsChanged();
+            });
+          }}
+        />
+      </div>
       <div className="row">
         <button
           type="button"
@@ -266,3 +324,4 @@ function TaskCard({
     </article>
   );
 }
+

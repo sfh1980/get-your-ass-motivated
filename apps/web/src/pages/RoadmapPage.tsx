@@ -54,6 +54,7 @@ export function RoadmapPage({
       await api.updateRoadmapTask(task.id, {
         title: patch.title,
         notes: patch.notes,
+        instructions: patch.instructions,
         subject: patch.subject,
         suggestedMinutes: patch.suggestedMinutes,
       });
@@ -246,6 +247,12 @@ export function RoadmapPage({
                         }}
                       />
                     </label>
+                    {task.instructions ? (
+                      <details className="coach-brief">
+                        <summary className="muted">How to do this</summary>
+                        <pre className="coach-brief-body">{task.instructions}</pre>
+                      </details>
+                    ) : null}
                     <div className="row">
                       <label>
                         Subject
@@ -276,6 +283,19 @@ export function RoadmapPage({
                       </label>
                     </div>
                     <label>
+                      Instructions (coach brief)
+                      <textarea
+                        rows={4}
+                        defaultValue={task.instructions}
+                        disabled={busy}
+                        onBlur={(e) => {
+                          if (e.target.value !== task.instructions) {
+                            saveTask(task, { instructions: e.target.value });
+                          }
+                        }}
+                      />
+                    </label>
+                    <label>
                       Notes
                       <textarea
                         rows={2}
@@ -286,6 +306,66 @@ export function RoadmapPage({
                         }}
                       />
                     </label>
+                    <div className="stack task-attachments">
+                      <span className="muted">Attachments (max 5MB each)</span>
+                      {(task.attachments ?? []).length > 0 ? (
+                        <ul className="attachment-list">
+                          {(task.attachments ?? []).map((a) => (
+                            <li key={a.id} className="row" style={{ justifyContent: "space-between" }}>
+                              <a
+                                href={api.taskAttachmentUrl(task.id, a.id)}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                {a.fileName}
+                                {a.sizeBytes ? ` (${Math.round(a.sizeBytes / 1024)} KB)` : ""}
+                              </a>
+                              <button
+                                type="button"
+                                disabled={busy}
+                                onClick={async () => {
+                                  setBusy(true);
+                                  try {
+                                    await api.deleteTaskAttachment(task.id, a.id);
+                                    await refresh();
+                                  } catch (err) {
+                                    setError(err instanceof Error ? err.message : "Delete failed");
+                                  } finally {
+                                    setBusy(false);
+                                  }
+                                }}
+                              >
+                                Remove
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="muted" style={{ margin: 0, fontSize: "0.85rem" }}>
+                          No files yet.
+                        </p>
+                      )}
+                      <input
+                        type="file"
+                        accept=".pdf,.txt,.doc,.docx,.png,.jpg,.jpeg,.webp,.gif,.xlsx,.xls,.csv,.svg,.drawio"
+                        disabled={busy}
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0];
+                          e.target.value = "";
+                          if (!file) return;
+                          setBusy(true);
+                          setError(null);
+                          try {
+                            await api.uploadTaskAttachment(task.id, file);
+                            await refresh();
+                          } catch (err) {
+                            setError(err instanceof Error ? err.message : "Upload failed");
+                          } finally {
+                            setBusy(false);
+                          }
+                        }}
+                      />
+                    </div>
                   </article>
                 ))}
               </section>

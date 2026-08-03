@@ -129,6 +129,8 @@ async function main() {
             sortOrder: (maxSort._max.sortOrder ?? 0) + 1,
             sourceWeek: sample.sourceWeek ?? 1,
             status: "pending",
+            notes: "",
+            instructions: "",
           },
         });
         raciAdded += 1;

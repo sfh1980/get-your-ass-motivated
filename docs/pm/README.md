@@ -56,3 +56,5 @@ You are the **sponsor, product owner, and project manager**. Cursor **subagents 
 Live DB language was remapped 2026-07-28 via `npm run db:remap-sample -w @gyam/api` (RAID I1 resolved). New installs use updated seed automatically.
 
 Python CS Monday/Saturday titles: seed via `pythonCsCurriculum.ts`; live remap with `npm run db:remap-python-cs -w @gyam/api` (see [14-python-cs-epic.md](./14-python-cs-epic.md)).
+
+Coach briefs (`Task.instructions`): seed via `coachBriefs.ts`; live fill with `npm run db:remap-coach-briefs -w @gyam/api`.

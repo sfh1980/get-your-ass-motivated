@@ -199,6 +199,55 @@ test.describe("job validation edge cases", () => {
   });
 });
 
+test.describe("task attachments", () => {
+  test("rejects disallowed task attachment type", async ({ request }) => {
+    await apiLogin(request);
+    const today = await (await request.get(`${API}/api/tasks/today`)).json();
+    const task = today.tasks[0] ?? today.backlogTasks[0];
+    expect(task).toBeTruthy();
+    const res = await request.post(`${API}/api/tasks/${task.id}/attachments`, {
+      multipart: {
+        file: {
+          name: "evil.exe",
+          mimeType: "application/octet-stream",
+          buffer: Buffer.from("MZ"),
+        },
+      },
+    });
+    expect(res.status()).toBe(400);
+  });
+
+  test("accepts xlsx-named csv then downloads and deletes", async ({ request }) => {
+    await apiLogin(request);
+    const today = await (await request.get(`${API}/api/tasks/today`)).json();
+    const task = today.tasks[0] ?? today.backlogTasks[0];
+    expect(task).toBeTruthy();
+
+    const up = await request.post(`${API}/api/tasks/${task.id}/attachments`, {
+      multipart: {
+        file: {
+          name: "raid-log.csv",
+          mimeType: "text/csv",
+          buffer: Buffer.from("risk,status\nPhase B,open\n"),
+        },
+      },
+    });
+    expect(up.status()).toBe(201);
+    const { attachment } = await up.json();
+    expect(attachment.fileName).toBe("raid-log.csv");
+
+    const dl = await request.get(`${API}/api/tasks/${task.id}/attachments/${attachment.id}`);
+    expect(dl.status()).toBe(200);
+    expect(await dl.text()).toContain("Phase B");
+
+    const del = await request.delete(`${API}/api/tasks/${task.id}/attachments/${attachment.id}`);
+    expect(del.ok()).toBeTruthy();
+
+    const gone = await request.get(`${API}/api/tasks/${task.id}/attachments/${attachment.id}`);
+    expect(gone.status()).toBe(404);
+  });
+});
+
 test.describe("tasks / notes / roadmap / import edges", () => {
   test("notes max length enforced", async ({ request }) => {
     await apiLogin(request);

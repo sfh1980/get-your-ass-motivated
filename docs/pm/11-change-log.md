@@ -12,3 +12,5 @@
 | 2026-08-01 | Homelab docs: TrueNAS Phase A LAN primary; Cloudflare/nginx Phase B; vault Home + deploy note | Mirror Yum4Less working pattern | Sean |
 | 2026-08-02 | Phase A closed: TrueNAS LAN live; RM4a/M4a/T5.5a Done; Phase B blocked on Yum4Less Cloudflare | Homelab close-out | Sean |
 | 2026-08-02 | Python CS dual-track: docs/pm epic + seed/remap Monday–Saturday titles by sourceWeek (no Python in app) | Fold Obsidian curriculum into roadmap planning layer | Sean |
+| 2026-08-03 | Task coach briefs: `instructions` column + Today/Roadmap collapsible + `db:remap-coach-briefs` | Titles alone were unclear; PM practice needs Why/Do/Done | Sean |
+| 2026-08-03 | Task file attachments (multi) + PM allowlist xlsx/csv/svg/drawio; uploads volume documented | PM artifacts under task Notes | Sean |

@@ -27,7 +27,7 @@ Phone / PC (LAN)
 | Piece | Choice |
 |-------|--------|
 | Host | TrueNAS SCALE Apps → **Custom App** YAML |
-| Datasets | `/mnt/appPool/gyam/{repo,postgres-data}` |
+| Datasets | `/mnt/appPool/gyam/{repo,postgres-data,uploads}` |
 | `db` | `postgres:16-alpine`, **no host ports**, volume → `postgres-data` |
 | `app` | `ghcr.io/sfh1980/gyam-app:homelab` (or `:<sha7>` pin) on **`4070:4070`** |
 | Ingest / cron sidecar | **None** (unlike Yum4Less) |
@@ -47,7 +47,9 @@ Phone / PC (LAN)
 | GHCR workflow | `.github/workflows/publish-image.yml` → `ghcr.io/sfh1980/gyam-app:<sha7\|latest\|homelab>` |
 | Baseline migration | `apps/api/prisma/migrations/20260802000000_init` |
 
-**Phase A live (2026-08-02):** Custom App `gyam` on TrueNAS; image `ghcr.io/sfh1980/gyam-app:homelab`; LAN smoke green. Optional later: `uploads` dataset, Watchtower.
+**Phase A live (2026-08-02):** Custom App `gyam` on TrueNAS; image `ghcr.io/sfh1980/gyam-app:homelab`; LAN smoke green. Optional later: Watchtower.
+
+**Uploads volume (required for job + task file attachments):** mount `/mnt/appPool/gyam/uploads` → `/app/data/uploads` (see `docker/truenas/custom-app.yml`). JSON export stores attachment **metadata only**; binaries live on this volume — keep it on backups with Postgres.
 
 Local Windows Compose (Postgres-only + host Node) remains the **dev** path.
 

@@ -22,16 +22,27 @@ export const DAILY_APPLY_QUOTA: Record<number, number> = {
   4: 3, // Friday
 };
 
+export interface TaskAttachmentDto {
+  id: string;
+  fileName: string;
+  mimeType: string;
+  sizeBytes: number;
+  createdAt: string;
+}
+
 export interface TodayTaskDto {
   id: string;
   title: string;
   notes: string;
+  /** Coach brief (Why / Do this / Done when); separate from user notes. */
+  instructions: string;
   status: TaskStatus;
   subject: string | null;
   suggestedMinutes: number | null;
   elapsedMs: number;
   sortOrder: number;
   activeStartedAt: string | null;
+  attachments: TaskAttachmentDto[];
 }
 
 export interface TodayResponse {
@@ -118,11 +129,13 @@ export interface RoadmapTaskDto {
   date: string;
   title: string;
   notes: string;
+  instructions: string;
   status: TaskStatus;
   subject: string | null;
   suggestedMinutes: number | null;
   sortOrder: number;
   sourceWeek: number | null;
+  attachments: TaskAttachmentDto[];
 }
 
 export interface RoadmapDayDto {

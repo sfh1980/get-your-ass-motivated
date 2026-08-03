@@ -9,28 +9,40 @@ import type {
 import { prisma } from "../db.js";
 import { addDays, formatDateOnly, parseDateOnly, todayUtc } from "../dates.js";
 import { logActivity } from "../activity.js";
+import { instructionsForTitle } from "../roadmap/coachBriefs.js";
+import { removeAllTaskAttachmentFiles, toAttachmentDto } from "./taskAttachments.js";
 
 function toTaskDto(task: {
   id: string;
   title: string;
   notes: string;
+  instructions: string;
   status: string;
   subject: string | null;
   suggestedMinutes: number | null;
   sortOrder: number;
   sourceWeek: number | null;
   taskDay: { date: Date };
+  attachments?: Array<{
+    id: string;
+    fileName: string;
+    mimeType: string;
+    sizeBytes: number;
+    createdAt: Date;
+  }>;
 }): RoadmapTaskDto {
   return {
     id: task.id,
     date: formatDateOnly(task.taskDay.date),
     title: task.title,
     notes: task.notes,
+    instructions: task.instructions,
     status: task.status as TaskStatus,
     subject: task.subject,
     suggestedMinutes: task.suggestedMinutes,
     sortOrder: task.sortOrder,
     sourceWeek: task.sourceWeek,
+    attachments: (task.attachments ?? []).map(toAttachmentDto),
   };
 }
 
@@ -41,7 +53,12 @@ export async function getRoadmap(userId: string, fromIso?: string, toIso?: strin
 
   const daysRaw = await prisma.taskDay.findMany({
     where: { userId, date: { gte: from, lte: to } },
-    include: { tasks: { orderBy: { sortOrder: "asc" } } },
+    include: {
+      tasks: {
+        orderBy: { sortOrder: "asc" },
+        include: { attachments: { orderBy: { createdAt: "asc" } } },
+      },
+    },
     orderBy: { date: "asc" },
   });
 
@@ -96,6 +113,7 @@ export async function updateRoadmapTask(
   input: {
     title?: string;
     notes?: string;
+    instructions?: string;
     subject?: string | null;
     suggestedMinutes?: number | null;
     sortOrder?: number;
@@ -112,12 +130,16 @@ export async function updateRoadmapTask(
     data: {
       title: input.title ?? existing.title,
       notes: input.notes ?? existing.notes,
+      instructions: input.instructions ?? existing.instructions,
       subject: input.subject === undefined ? existing.subject : input.subject,
       suggestedMinutes:
         input.suggestedMinutes === undefined ? existing.suggestedMinutes : input.suggestedMinutes,
       sortOrder: input.sortOrder ?? existing.sortOrder,
     },
-    include: { taskDay: true },
+    include: {
+      taskDay: true,
+      attachments: { orderBy: { createdAt: "asc" } },
+    },
   });
 
   await logActivity({
@@ -153,8 +175,12 @@ export async function createRoadmapTask(
       sortOrder: (maxSort._max.sortOrder ?? -1) + 1,
       status: "pending",
       notes: "",
+      instructions: instructionsForTitle(input.title),
     },
-    include: { taskDay: true },
+    include: {
+      taskDay: true,
+      attachments: { orderBy: { createdAt: "asc" } },
+    },
   });
 
   await logActivity({
@@ -171,6 +197,7 @@ export async function createRoadmapTask(
 export async function deleteRoadmapTask(userId: string, taskId: string) {
   const existing = await prisma.task.findFirst({ where: { id: taskId, userId } });
   if (!existing) return false;
+  await removeAllTaskAttachmentFiles(userId, taskId);
   await prisma.task.delete({ where: { id: taskId } });
   await logActivity({
     userId,

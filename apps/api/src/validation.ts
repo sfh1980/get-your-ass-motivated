@@ -57,6 +57,11 @@ export const ATTACHMENT_ALLOWED_EXT = new Set([
   ".jpeg",
   ".webp",
   ".gif",
+  ".xlsx",
+  ".xls",
+  ".csv",
+  ".svg",
+  ".drawio",
 ]);
 export const ATTACHMENT_MIME_BY_EXT: Record<string, string> = {
   ".pdf": "application/pdf",
@@ -68,6 +73,11 @@ export const ATTACHMENT_MIME_BY_EXT: Record<string, string> = {
   ".jpeg": "image/jpeg",
   ".webp": "image/webp",
   ".gif": "image/gif",
+  ".xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  ".xls": "application/vnd.ms-excel",
+  ".csv": "text/csv",
+  ".svg": "image/svg+xml",
+  ".drawio": "application/vnd.jgraph.mxfile",
 };
 
 export function attachmentExtension(name: string): string {
@@ -144,6 +154,7 @@ export const importPayloadSchema = z
           date: isoDateSchema.nullable(),
           title: z.string().trim().min(1).max(500),
           notes: notesSchema.optional(),
+          instructions: notesSchema.optional(),
           status: z
             .enum(["pending", "in_progress", "paused", "completed", "skipped"])
             .optional(),

@@ -107,6 +107,27 @@ export const api = {
   clearJobAttachment: (id: string) =>
     request<{ job: JobDto }>(`/api/jobs/${id}/attachment`, { method: "DELETE" }),
   jobAttachmentUrl: (id: string) => `/api/jobs/${id}/attachment`,
+  uploadTaskAttachment: async (taskId: string, file: File) => {
+    const body = new FormData();
+    body.append("file", file);
+    const res = await fetch(`/api/tasks/${taskId}/attachments`, {
+      method: "POST",
+      credentials: "include",
+      body,
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      const message = typeof data?.error === "string" ? data.error : data?.message ?? res.statusText;
+      throw new Error(message || "Upload failed");
+    }
+    return data as { attachment: import("@gyam/shared").TaskAttachmentDto };
+  },
+  deleteTaskAttachment: (taskId: string, attachmentId: string) =>
+    request<{ ok: boolean }>(`/api/tasks/${taskId}/attachments/${attachmentId}`, {
+      method: "DELETE",
+    }),
+  taskAttachmentUrl: (taskId: string, attachmentId: string) =>
+    `/api/tasks/${taskId}/attachments/${attachmentId}`,
   weeklyReview: (weekStart?: string) =>
     request<WeeklyReviewDto>(
       weekStart ? `/api/reviews/weekly?weekStart=${encodeURIComponent(weekStart)}` : "/api/reviews/weekly",
@@ -131,6 +152,7 @@ export const api = {
     input: {
       title?: string;
       notes?: string;
+      instructions?: string;
       subject?: string | null;
       suggestedMinutes?: number | null;
     },
