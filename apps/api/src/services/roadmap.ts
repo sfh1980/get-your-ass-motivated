@@ -9,7 +9,6 @@ import type {
 import { prisma } from "../db.js";
 import { addDays, formatDateOnly, parseDateOnly, todayUtc } from "../dates.js";
 import { logActivity } from "../activity.js";
-import { instructionsForTitle } from "../roadmap/coachBriefs.js";
 import { removeAllTaskAttachmentFiles, toAttachmentDto } from "./taskAttachments.js";
 
 function toTaskDto(task: {
@@ -175,7 +174,8 @@ export async function createRoadmapTask(
       sortOrder: (maxSort._max.sortOrder ?? -1) + 1,
       status: "pending",
       notes: "",
-      instructions: instructionsForTitle(input.title),
+      // Manual Roadmap creates start blank; seeded/remap fill coach briefs.
+      instructions: "",
     },
     include: {
       taskDay: true,

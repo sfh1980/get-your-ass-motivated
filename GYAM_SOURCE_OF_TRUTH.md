@@ -46,7 +46,7 @@ GYAM is **one repo that serves several deliberate purposes at once**. Do not col
 6. Is managed as a real software project under `docs/pm/` (charter, RAID, backlog, status).  
 7. Stages portfolio grabs without building the public site inside this repo.  
 8. Uses agent-team supervision as transferable Technical Project Coordinator practice.  
-9. Tracks Python CS study as dual-track roadmap tasks (titles only; no Python runtime in-app).
+9. Tracks Python CS study as dual-track roadmap tasks (titles + coach briefs; no Python runtime in-app).
 
 **Explicit non-goals for this repo:** public portfolio website implementation; SMTP/email as a must-have notify channel; fake demo job data.
 
@@ -65,8 +65,10 @@ GYAM is **one repo that serves several deliberate purposes at once**. Do not col
 | 2026-07-28 | DB roadmap remapped (`db:remap-sample`); 8 portfolio screenshots captured |
 | 2026-08-01 | Homelab docs retargeted: TrueNAS Phase A (LAN Custom App) first; Cloudflare/nginx = Phase B (mirror Yum4Less) |
 | 2026-08-02 | TrueNAS Phase A live; Python CS epic folded into `docs/pm/14-python-cs-epic.md` + seed/remap titles |
+| 2026-08-03 | Coach briefs (`Task.instructions`) + multi-file task attachments; TrueNAS migrations + 1035 brief remap |
+| 2026-08-03 | Sprint 1 closed; Sprint 2 (S6–S9, E3) planned; RACI execution map updated |
 
-**Current state (2026-08-02):** V1 local product ~complete; **TrueNAS Phase A live** (LAN `:4070`); governance pack live; export screenshots staged; Phase B Cloudflare blocked on Yum4Less; Python CS dual-track (P8) in seed/docs; dogfood / multi-week metrics still open; portfolio *site* not started (by design).
+**Current state (2026-08-03):** V1 product ~complete on local + TrueNAS Phase A (`http://192.168.1.246:4070`); coach briefs + task note attachments live; governance pack on Sprint 2; Phase B Cloudflare blocked on Yum4Less; Python CS dual-track (P8) titles + briefs remapped; dogfood / multi-week metrics still open; portfolio *site* not started (by design).
 
 Detailed narrative: `docs/pm/00-multi-purpose-and-progress.md`.
 
@@ -324,12 +326,13 @@ Known upcoming discussions:
 
 - Correspondence archive UX: multiple entries per job + types (Rejection / Interview / Offer / Other) vs single paste fields  
 - Web Push VAPID + HTTPS quirks (optional; after Phase B origin exists)
-- Phase A ship blockers: Dockerfile + GHCR publish + Prisma baseline migrate + TrueNAS pull PAT  
 - hiringcafe feed/API shape for job-watch sidecar  
 - Whether first launch creates the single user interactively or via seed env  
 - Revisit SMTP only if Sean explicitly re-scopes notify-via-email  
 - When to start the separate portfolio website (after `portfolio-export/` is filled)  
 - Optional employer-facing Jira familiarity later (not required for GYAM delivery)  
+- Python CS portfolio names for curriculum weeks 11 / 13 / 17  
+- Phase B Cloudflare Tunnel timing (blocked on Yum4Less first)  
 
 ---
 
@@ -362,3 +365,4 @@ Known upcoming discussions:
 | 2026-08-01 | Homelab: TrueNAS Phase A (LAN Custom App) primary; Cloudflare/nginx Phase B deferred; docs + vault aligned with Yum4Less pattern |
 | 2026-08-02 | Phase A Done on TrueNAS LAN; Phase B Cloudflare deferred behind Yum4Less |
 | 2026-08-02 | P8 Python CS dual-track: `docs/pm/14-python-cs-epic.md` + seed/remap Monday–Saturday titles |
+| 2026-08-03 | Coach briefs + task attachments; TrueNAS migrate + remap 1035 briefs; Sprint 1→2 + RACI |

@@ -14,3 +14,5 @@
 | 2026-08-02 | Python CS dual-track: docs/pm epic + seed/remap Monday–Saturday titles by sourceWeek (no Python in app) | Fold Obsidian curriculum into roadmap planning layer | Sean |
 | 2026-08-03 | Task coach briefs: `instructions` column + Today/Roadmap collapsible + `db:remap-coach-briefs` | Titles alone were unclear; PM practice needs Why/Do/Done | Sean |
 | 2026-08-03 | Task file attachments (multi) + PM allowlist xlsx/csv/svg/drawio; uploads volume documented | PM artifacts under task Notes | Sean |
+| 2026-08-03 | Sprint 1 closed; Sprint 2 planned (S6–S9, Epic E3); carry dogfood + portfolio PII/metrics | Month-2 living cadence | Sean |
+| 2026-08-03 | RACI updated with Sprint 1 execution map + Sprint 2 planned agent assignments | PM practice: who did / will do what | Sean |

@@ -1,7 +1,7 @@
 # GYAM — PM documentation pack
 
 **Project:** GYAM (Get Your Ass Motivated)  
-**Updated:** 2026-08-02  
+**Updated:** 2026-08-03  
 
 ## What this folder is
 
@@ -34,7 +34,7 @@ You are the **sponsor, product owner, and project manager**. Cursor **subagents 
 | 05 | [Communication plan](./05-communication-plan.md) | Cadence for status, RAID, reviews |
 | 06 | [RAID log](./06-raid-log.md) | Risks, assumptions, issues, dependencies |
 | 07 | [WBS / backlog](./07-wbs-backlog.md) | Epic, stories, tasks |
-| 08 | [Sprint plan](./08-sprint-plan.md) | Hybrid Agile + Sprint 0/1 |
+| 08 | [Sprint plan](./08-sprint-plan.md) | Hybrid Agile; Sprint 1 closed; Sprint 2 current |
 | 09 | [Definition of done](./09-definition-of-done.md) | Quality bar |
 | 10 | [Status report](./10-status-report.md) | Latest executive-style status |
 | 11 | [Change log](./11-change-log.md) | Scope / decision changes |
@@ -57,4 +57,4 @@ Live DB language was remapped 2026-07-28 via `npm run db:remap-sample -w @gyam/a
 
 Python CS Monday/Saturday titles: seed via `pythonCsCurriculum.ts`; live remap with `npm run db:remap-python-cs -w @gyam/api` (see [14-python-cs-epic.md](./14-python-cs-epic.md)).
 
-Coach briefs (`Task.instructions`): seed via `coachBriefs.ts`; live fill with `npm run db:remap-coach-briefs -w @gyam/api`.
+Coach briefs (`Task.instructions`): seed via `coachBriefs.ts`; live fill with `npm run db:remap-coach-briefs -w @gyam/api` (TrueNAS remapped **1035** briefs on 2026-08-03).

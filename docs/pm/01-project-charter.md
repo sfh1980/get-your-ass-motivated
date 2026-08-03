@@ -3,13 +3,13 @@
 | Field | Value |
 |-------|--------|
 | Project name | GYAM — Get Your Ass Motivated |
-| Version | 1.2 |
-| Date | 2026-07-28 |
+| Version | 1.3 |
+| Date | 2026-08-03 |
 | Project manager | Sean Holmes |
 | Sponsor | Sean Holmes (self-sponsored career project) |
 | Start | 2026-07-27 (first-use / seed date) |
-| V1 product | Soft-complete locally (2026-07-27) |
-| Current phase | Sprint 1 — governance, dogfood, portfolio staging |
+| V1 product | Soft-complete locally (2026-07-27); TrueNAS Phase A live |
+| Current phase | Sprint 2 — living cadence, dogfood, portfolio evidence (S6–S9) |
 
 ## 1. Business case / why
 

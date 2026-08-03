@@ -46,6 +46,7 @@ Phone / PC (LAN)
 | Local proof compose | `docker compose -f docker-compose.homelab.yml up --build` |
 | GHCR workflow | `.github/workflows/publish-image.yml` → `ghcr.io/sfh1980/gyam-app:<sha7\|latest\|homelab>` |
 | Baseline migration | `apps/api/prisma/migrations/20260802000000_init` |
+| Follow-on (TrueNAS applied 2026-08-03) | `20260803100000_task_instructions`, `20260803120000_task_attachments` |
 
 **Phase A live (2026-08-02):** Custom App `gyam` on TrueNAS; image `ghcr.io/sfh1980/gyam-app:homelab`; LAN smoke green. Optional later: Watchtower.
 

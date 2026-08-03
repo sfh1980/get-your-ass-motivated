@@ -1,9 +1,11 @@
 # 14 — Python CS epic (dual-track roadmap)
 
-**Updated:** 2026-08-02  
+**Updated:** 2026-08-03  
 **Vault mirror:** Obsidian `Projects/GYAM/GYAM Python Integration Roadmap.md`  
 **Curriculum source (external):** `python_cs_foundations_24week_enhanced.md`  
 **Glossary (external):** `python_dictionary_of_terms.md`
+
+**TrueNAS (2026-08-03):** `db:remap-coach-briefs` updated **1035** task instructions on the live LAN DB.
 
 ## Purpose
 

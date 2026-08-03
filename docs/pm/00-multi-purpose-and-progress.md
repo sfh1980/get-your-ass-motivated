@@ -1,6 +1,6 @@
 # 00 — Multi-purpose project + progress (beginning → now)
 
-**Updated:** 2026-08-02  
+**Updated:** 2026-08-03  
 **Audience:** Sean (PM) + future portfolio readers (sanitized)
 
 ## Why this document exists
@@ -73,14 +73,14 @@ Optional SMTP code may remain dormant in Settings — product truth is “not re
 ### Phase D — Now (current)
 | Area | State |
 |------|--------|
-| Product V1 (local) | ~95–100% feature-complete |
-| Governance docs | Initialized + being maintained |
-| Portfolio export | Screenshots in; case-study outline draft; metrics TBD |
-| Dogfood streak | Started — needs sustained daily use |
+| Product V1 (local + TrueNAS) | ~complete; coach briefs + task attachments shipped 2026-08-03 |
+| Governance docs | Sprint 1 closed; Sprint 2 current (S6–S9, E3) |
+| Portfolio export | Screenshots in; case-study outline draft; PII/metrics TBD (S8) |
+| Dogfood streak | Sprint 2 focus — needs sustained daily use on TrueNAS |
 | Portfolio website | Explicitly **out of this repo** until export pack is “grab-ready” |
 | Homelab HTTPS / COOKIE_SECURE | Phase B — **blocked** until Yum4Less Cloudflare is done; then add GYAM |
 | Homelab Phase A (LAN) | **Done** 2026-08-02 — `http://192.168.1.246:4070` |
-| Python CS dual-track (P8) | Epic in `14-python-cs-epic.md`; seed + remap titles (no Python in app) |
+| Python CS dual-track (P8) | Titles + coach briefs remapped on TrueNAS (1035 briefs); fill 11/13/17 names |
 
 ---
 
@@ -89,7 +89,7 @@ Optional SMTP code may remain dormant in Settings — product truth is “not re
 | Purpose | Progress signal |
 |---------|-----------------|
 | OS | Tasks completed in Today; streaks; jobs moved through pipeline |
-| Sample project | Stories S1–S5 Done; Playwright green; change log honest |
+| Sample project | S1–S5 Done; S6–S9 in Sprint 2; Playwright green; change log honest |
 | PM practice | RAID/status updated; sprint goals met or descope’d |
 | Portfolio | Export checklist advancing; no secrets in screenshots |
 
@@ -97,12 +97,13 @@ Optional SMTP code may remain dormant in Settings — product truth is “not re
 
 ## Open work (not failures — next focus)
 
-1. Sustain dogfood (≥2 weeks) so metrics are real.  
-2. Review screenshots for PII; fill case-study metrics.  
-3. Optional: dormant-label SMTP UI (I2).  
-4. Homelab Phase B HTTPS only after Yum4Less Cloudflare (RM4b). Phase A **Done**.  
-5. Start separate portfolio site only after export pack is grab-ready.  
-6. Fill Python portfolio names for curr weeks 11/13/17; run `db:remap-python-cs` on TrueNAS after image bump.
+1. Sprint 2: dogfood ≥5 days on TrueNAS; Sunday status/RAID (S6–S7).  
+2. PII-review screenshots + case-study metrics (S8).  
+3. Accept coach briefs + attachments as usable for PM practice (S9).  
+4. Optional: dormant-label SMTP UI (I2).  
+5. Homelab Phase B HTTPS only after Yum4Less Cloudflare (RM4b). Phase A **Done**.  
+6. Start separate portfolio site only after export pack is grab-ready.  
+7. Fill Python portfolio names for curr weeks 11/13/17; confirm `db:remap-python-cs` on TrueNAS if titles still generic.
 
 ---
 

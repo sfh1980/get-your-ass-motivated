@@ -4,7 +4,7 @@ Project-local Cursor configuration lives under `.cursor/`.
 
 ## Source of truth
 
-1. `GYAM_SOURCE_OF_TRUTH.md` (includes multi-purpose roles P1–P7 + history)
+1. `GYAM_SOURCE_OF_TRUTH.md` (includes multi-purpose roles P1–P8 + history)
 2. Latest explicit user decision in chat
 3. `docs/pm/` (living PM pack — start at `docs/pm/00-multi-purpose-and-progress.md`)
 4. `Project_Management_Daily_Roadmap_Starting_2026-07-27.md`
@@ -13,7 +13,7 @@ Project-local Cursor configuration lives under `.cursor/`.
 
 ## Multi-purpose reminder
 
-GYAM is simultaneously: career OS, roadmap engine, sample software project, PM practice lab (Sean + agent team), portfolio-export staging, and homelab reference. Do not gold-plate a portfolio *website* into this repo.
+GYAM is simultaneously: career OS, roadmap engine, sample software project, PM practice lab (Sean + agent team), portfolio-export staging, homelab reference, and dual-track Python CS planning (P8). Do not gold-plate a portfolio *website* into this repo.
 ## Rules (`.cursor/rules/`)
 
 | Rule | Scope |
@@ -44,7 +44,7 @@ GYAM is simultaneously: career OS, roadmap engine, sample software project, PM p
 
 User-level agents (backend/frontend/database/testing/auditor/verifier) still apply globally.
 
-## MCP (`.cursor/mcp.json`)
+## MCP (user-level)
 
 | Server | Purpose |
 |--------|---------|
@@ -52,5 +52,6 @@ User-level agents (backend/frontend/database/testing/auditor/verifier) still app
 | `github` | PRs, issues, Actions (needs `GITHUB_PERSONAL_ACCESS_TOKEN`) |
 | `playwright` | Browser E2E / UI verification |
 | `postgres` | Restricted Postgres MCP via Docker (needs `GYAM_DATABASE_URI`) |
+| `obsidian` | Vault PARA writes (`user-obsidian`) |
 
-Setup steps: `.cursor/MCP_SETUP.md` (user-level MCP; no project `mcp.json` by design)
+Setup steps: `.cursor/MCP_SETUP.md` (user-level MCP only; no project `mcp.json` by design).

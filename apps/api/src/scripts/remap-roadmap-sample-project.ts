@@ -8,6 +8,7 @@ import fs from "node:fs";
 import dotenv from "dotenv";
 import { prisma } from "../db.js";
 import { inferSubjectFromTitle } from "../roadmap/seed.js";
+import { instructionsForTitle } from "../roadmap/coachBriefs.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootEnv = path.resolve(__dirname, "../../../../.env");
@@ -130,7 +131,7 @@ async function main() {
             sourceWeek: sample.sourceWeek ?? 1,
             status: "pending",
             notes: "",
-            instructions: "",
+            instructions: instructionsForTitle(AGENT_RACI_TITLE),
           },
         });
         raciAdded += 1;

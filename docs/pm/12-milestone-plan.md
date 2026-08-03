@@ -5,7 +5,7 @@ Maps career roadmap months to **GYAM project** outcomes.
 | Month | Roadmap milestone | GYAM project outcome | Evidence |
 |-------|-------------------|----------------------|----------|
 | 1 | PM portfolio foundation | V1 app + `docs/pm` pack + first screenshots | **On track** — screenshots + pack exist |
-| 2 | Hybrid Agile with living docs | 4+ weekly status/RAID cycles; sprints logged | Sprint 0–1 started |
+| 2 | Hybrid Agile with living docs | 4+ weekly status/RAID cycles; sprints logged | Sprint 0–1 done; **Sprint 2 starts cadence** |
 | 3 | Three documented projects | GYAM case study ready to copy into portfolio site; identify 2 other projects | Outline draft in portfolio-export/notes |
 | 4 | Volunteer / real project | Optional; keep GYAM maintenance as baseline | External |
 | 5 | Power BI | Optional dashboard of GYAM export metrics | Export JSON → BI |

@@ -18,7 +18,7 @@ Living log. Update at least weekly. **P**robability / **I**mpact: 1–5.
 
 | ID | Assumption | Validated? | If wrong |
 |----|------------|------------|----------|
-| A1 | Homelab remains available for Postgres | Yes (local) | SQLite fallback later — out of V1 |
+| A1 | Homelab remains available for Postgres | Yes (TrueNAS Phase A LAN + local Compose) | SQLite fallback later — out of V1 |
 | A2 | Agent team available when Sean works | Mostly | Manual coding; slow velocity |
 | A3 | Portfolio site can be built later from exports | Yes (decision 2026-07-28) | Publish markdown-only interim |
 | A4 | Manual correspondence archive is enough without IMAP | Yes (SoT lock) | Re-scope email later |
@@ -38,3 +38,4 @@ Living log. Update at least weekly. **P**robability / **I**mpact: 1–5.
 | D2 | SoT / seed language aligned | Roadmap credibility | Sean / seeder | **Met** 2026-07-28 |
 | D3 | Screenshots for portfolio | Case study publish | Sean | **Met** (capture); review open |
 | D4 | Separate portfolio site repo | Public URL | Sean | Future |
+| D5 | Yum4Less Cloudflare Tunnel first | GYAM Phase B HTTPS + `COOKIE_SECURE` | Sean | **Blocked** — same WAN loop as Yum4Less |
