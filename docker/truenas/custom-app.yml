@@ -1,7 +1,9 @@
 # TrueNAS SCALE Custom App YAML — Phase A (LAN).
 # Copy into Apps → Custom App. Replace REPLACE_* values.
-# Datasets: /mnt/appPool/gyam/postgres-data (chown 999:999, chmod 700),
-#           /mnt/appPool/gyam/uploads (job + task attachments; persist with backups).
+# Live pool casing is GYAM (confirm with `ls /mnt/appPool` before paste).
+# Datasets: /mnt/appPool/GYAM/postgres-data (chown 999:999, chmod 700),
+#           /mnt/appPool/GYAM/uploads (chown 1000:1000 — app USER node).
+# Watchtower replaces the image only. Volume/dataset changes require Save on this YAML.
 # Private GHCR: configure registry credentials with a PAT (read:packages).
 
 services:
@@ -14,7 +16,7 @@ services:
       POSTGRES_PASSWORD: "REPLACE_STRONG"
       POSTGRES_DB: gyam
     volumes:
-      - /mnt/appPool/gyam/postgres-data:/var/lib/postgresql/data
+      - /mnt/appPool/GYAM/postgres-data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U gyam -d gyam"]
       interval: 10s
@@ -40,7 +42,7 @@ services:
       SESSION_DAYS: "30"
       COOKIE_SECURE: "false"
     volumes:
-      - /mnt/appPool/gyam/uploads:/app/data/uploads
+      - /mnt/appPool/GYAM/uploads:/app/data/uploads
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     healthcheck:

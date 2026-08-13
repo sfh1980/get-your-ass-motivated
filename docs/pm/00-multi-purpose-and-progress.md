@@ -1,6 +1,6 @@
 # 00 — Multi-purpose project + progress (beginning → now)
 
-**Updated:** 2026-08-03  
+**Updated:** 2026-08-12  
 **Audience:** Sean (PM) + future portfolio readers (sanitized)
 
 ## Why this document exists
@@ -73,14 +73,14 @@ Optional SMTP code may remain dormant in Settings — product truth is “not re
 ### Phase D — Now (current)
 | Area | State |
 |------|--------|
-| Product V1 (local + TrueNAS) | ~complete; coach briefs + task attachments shipped 2026-08-03 |
-| Governance docs | Sprint 1 closed; Sprint 2 current (S6–S9, E3) |
-| Portfolio export | Screenshots in; case-study outline draft; PII/metrics TBD (S8) |
-| Dogfood streak | Sprint 2 focus — needs sustained daily use on TrueNAS |
-| Portfolio website | Explicitly **out of this repo** until export pack is “grab-ready” |
-| Homelab HTTPS / COOKIE_SECURE | Phase B — **blocked** until Yum4Less Cloudflare is done; then add GYAM |
+| Product V1 (local + TrueNAS) | In daily use on LAN; coach briefs live; file attachments blocked until uploads dataset (I3) |
+| Governance docs | Sprint 2 closed 2026-08-12; Sprint 3 = uploads mount + dump proof |
+| Portfolio export | Screenshots captured; PIN review accepted; metrics N/A |
+| Dogfood | **In use** on TrueNAS (S6) |
+| Portfolio website | Explicitly **out of this repo** |
+| Homelab HTTPS / COOKIE_SECURE | Phase B **parked** (LAN-only; no extra domain). Yum4Less Tunnel no longer blocks. |
 | Homelab Phase A (LAN) | **Done** 2026-08-02 — `http://192.168.1.246:4070` |
-| Python CS dual-track (P8) | Titles + coach briefs remapped on TrueNAS (1035 briefs); fill 11/13/17 names |
+| Python CS dual-track (P8) | Titles + briefs remapped; weeks 11/13/17 names **parked** until CS work starts |
 
 ---
 
@@ -97,13 +97,11 @@ Optional SMTP code may remain dormant in Settings — product truth is “not re
 
 ## Open work (not failures — next focus)
 
-1. Sprint 2: dogfood ≥5 days on TrueNAS; Sunday status/RAID (S6–S7).  
-2. PII-review screenshots + case-study metrics (S8).  
-3. Accept coach briefs + attachments as usable for PM practice (S9).  
-4. Optional: dormant-label SMTP UI (I2).  
-5. Homelab Phase B HTTPS only after Yum4Less Cloudflare (RM4b). Phase A **Done**.  
-6. Start separate portfolio site only after export pack is grab-ready.  
-7. Fill Python portfolio names for curr weeks 11/13/17; confirm `db:remap-python-cs` on TrueNAS if titles still generic.
+1. **I3 / S8:** create `appPool/GYAM/uploads`, mount `/app/data/uploads`, Save Custom App YAML, attach one file.  
+2. Prove a Postgres dump on the pool (R3) — run on TrueNAS Shell.  
+3. Optional T6.3: Sunday Review in-app if not already submitted.  
+4. Phase B parked (LAN-only). Free later: hostname on `yum4less.com`, no new domain.  
+5. Python CS weeks 11/13/17 names parked until curriculum is reached.
 
 ---
 

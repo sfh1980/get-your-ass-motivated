@@ -29,7 +29,7 @@ GYAM: A Multi-Purpose PM Career OS and Sample Software Project
 - Playwright edge suite: **22/22** passed (2026-07-27).
 - PM pack under `docs/pm`; sample-project language remapped in DB.
 - Portfolio screenshots: **8** staged under `portfolio-export/screenshots/`.
-- _(Add: days dogfooded, jobs tracked, streak, etc.)_
+- _(Metrics N/A 2026-08-12 — fill streak / jobs moved / sprint outcomes when numbers are real and worth showing.)_
 
 ## Artifacts to attach on portfolio site
 - Screenshots: login, today, today-mobile, progress, jobs, review, roadmap, settings  

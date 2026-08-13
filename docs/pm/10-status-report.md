@@ -3,48 +3,47 @@
 | Field | Value |
 |-------|--------|
 | Project | GYAM (multi-purpose: OS + sample project + PM lab + portfolio staging) |
-| Report date | 2026-08-03 |
-| Period | Sprint 1 closed; Sprint 2 planned |
-| Overall | **Green** (habit risk R2 still open) |
+| Report date | 2026-08-12 |
+| Period | Sprint 2 close (window was 2026-08-04 → 2026-08-10) |
+| Overall | **Yellow** (app in daily use; attachments volume missing on TrueNAS) |
 | Author | Sean Holmes (PM) |
 
 ## Executive summary
 
-V1 product and Homelab Phase A are live. Sprint 1 delivered the PM pack, sample-project language, portfolio screenshots, Python CS dual-track, coach briefs, and task attachments. Sprint 2 shifts from **building** to **proving**: dogfood on TrueNAS, weekly status/RAID, and sanitized portfolio evidence. Phase B remains blocked on Yum4Less Cloudflare.
+Sean is dogfooding GYAM on TrueNAS LAN (`http://192.168.1.246:4070`, health OK 2026-08-12). Sprint 2 stories: S6 done; S7 PIN/PII accepted (metrics N/A); S8 blocked on uploads dataset (I3); S9 parked until Python CS work starts. I2 SMTP Settings labeled dormant. Phase B parked (LAN-only; no extra domain). Watchtower will pick up the app image after this push; **it will not attach the uploads volume** — that needs a Custom App YAML Save.
 
 ## Progress vs plan
 
 | Area | % | Notes |
 |------|---|--------|
-| V1 ship order (product) | ~100% local/LAN | Phase B HTTPS deferred |
+| V1 ship order (product) | ~100% local/LAN | Phase B parked, not blocked |
 | Sample-project language (DB + seed) | 100% | Remaps current on TrueNAS |
-| PM doc pack | Living | Sprint 2 starts formal weekly cadence |
-| Portfolio export | ~45% | 8 screenshots; PII/metrics = S7 |
-| Dogfood streak | Low → Sprint 2 focus | R2 |
-| Coach briefs / attachments | Shipped + remapped on LAN | Accept in S8 |
+| PM doc pack | Living | RAID/status refreshed 2026-08-12 |
+| Portfolio export | ~50% | Capture done; PIN review accepted; metrics N/A |
+| Dogfood | In use | S6 accepted by Sean |
+| Coach briefs / attachments | Briefs live; files blocked | I3 uploads dataset |
 
-## Accomplishments this period (Sprint 1)
+## Accomplishments this period (Sprint 2)
 
-- `docs/pm` pack; agent RACI; GYAM = sample project.  
-- Phase A TrueNAS LAN live (`:4070`).  
-- Python CS dual-track titles; coach briefs (1035 filled); multi-file task attachments.  
-- Pushed `234a250`; TrueNAS migrate + `db:remap-coach-briefs` green.  
+- Daily use on TrueNAS (S6).  
+- PIN/PII: Sean confirmed screenshots do not expose a saved PIN (S7 partial).  
+- Python CS names parked until curriculum is reached (S9).  
+- Phase B parked; D5 no longer “blocked on Yum4Less.”  
+- I2 dormant SMTP copy (this commit).  
 
-## Plans next period (Sprint 2)
+## Plans next period (Sprint 3)
 
-- S6 dogfood ≥5 days on LAN.  
-- S7 PII + case-study metrics.  
-- S8 accept briefs/attachments on live app.  
-- S9 Python CS hygiene (names or park).  
-- Sunday: refresh this status + RAID.  
+- **I3 / S8:** create `appPool/GYAM/uploads`, mount `/app/data/uploads`, chown 1000:1000, Save Custom App YAML, attach one real file.  
+- Prove a `pg_dump` on the pool (R3) — run on TrueNAS Shell; workstation SSH refused.  
+- Keep weekly status/RAID. Do not start Tunnel or Python CS names.
 
 ## Risks / issues
 
-- **R2** dogfood abandonment — Sprint 2 primary mitigation.  
-- **R4** screenshot secrets — S7.  
-- **R1** scope creep — Phase B and new features out of Sprint 2.  
-- **I2** SMTP UI messaging — still open, low urgency.  
+- **I3** uploads not mounted — primary ops blocker.  
+- **R3** dump not verified from this workstation.  
+- **R1** still standing — no sidecars / no public GYAM site.  
+- **R2** Watching (in use).  
 
 ## Decisions needed
 
-None blocking. Confirm Sprint 2 window **2026-08-04 → 2026-08-10** if Sean wants a different Mon–Sun alignment.
+None blocking product. Sean must Save Custom App YAML after creating the uploads dataset (Watchtower will not do that).

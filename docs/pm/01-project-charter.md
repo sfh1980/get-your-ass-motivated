@@ -4,12 +4,12 @@
 |-------|--------|
 | Project name | GYAM — Get Your Ass Motivated |
 | Version | 1.3 |
-| Date | 2026-08-03 |
+| Date | 2026-08-12 |
 | Project manager | Sean Holmes |
 | Sponsor | Sean Holmes (self-sponsored career project) |
 | Start | 2026-07-27 (first-use / seed date) |
 | V1 product | Soft-complete locally (2026-07-27); TrueNAS Phase A live |
-| Current phase | Sprint 2 — living cadence, dogfood, portfolio evidence (S6–S9) |
+| Current phase | Sprint 3 — uploads dataset + backup proof |
 
 ## 1. Business case / why
 
@@ -26,7 +26,7 @@ Sean is pivoting toward **Technical Project Coordinator** roles (Google Project 
 1. ~~Ship usable V1 OS~~ → **Met** for local use (Today → jobs → roadmap → notify/export/validation/tests).  
 2. Practice hybrid Agile + predictive PM docs on a real codebase → **In progress** (`docs/pm` live).  
 3. Produce portfolio-ready artifacts → **In progress** (8 screenshots captured; case-study metrics TBD).  
-4. Dogfood daily with real data → **Open** (habit formation).  
+4. Dogfood daily with real data → **Met** (Sean using TrueNAS LAN, 2026-08-12).  
 5. Keep purposes distinct — do not build the public portfolio website inside this repo → **Locked**.
 
 ## 3. In-scope deliverables
@@ -48,7 +48,7 @@ SMTP/email as must-have notify channel; LinkedIn automation; PDF OCR as primary;
 | M2 PM pack live | Living docs + sample-project lock | **Done** init 2026-07-28 |
 | M3 Portfolio-ready | Export grab-ready for separate site | **In progress** (screenshots yes) |
 | M4a Homelab LAN | TrueNAS Custom App Phase A (db+app, LAN `:4070`) | **Done** 2026-08-02 |
-| M4b Homelab HTTPS | Cloudflare Tunnel + cookie secure (after Yum4Less CF) | Open (blocked) |
+| M4b Homelab HTTPS | Cloudflare Tunnel + cookie secure | **Parked** 2026-08-12 (LAN-only) |
 
 ## 6. Success criteria
 

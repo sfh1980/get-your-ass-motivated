@@ -1,6 +1,6 @@
 # 14 — Python CS epic (dual-track roadmap)
 
-**Updated:** 2026-08-03  
+**Updated:** 2026-08-12  
 **Vault mirror:** Obsidian `Projects/GYAM/GYAM Python Integration Roadmap.md`  
 **Curriculum source (external):** `python_cs_foundations_24week_enhanced.md`  
 **Glossary (external):** `python_dictionary_of_terms.md`
@@ -75,5 +75,5 @@ Weeks **50–52:** Monday = spaced-repetition review (algorithms + glossary). Sa
 
 ## Open items
 
-1. Fill real portfolio project names for curriculum weeks **11, 13, 17** (placeholders in seed/docs).
+1. Portfolio project names for curriculum weeks **11, 13, 17** — **parked 2026-08-12** (owner: Sean) until CS work is reached. Do not fill placeholders early.
 2. Confirm 2-roadmap-weeks-per-curriculum-week pacing after a few lived weeks; compress/stretch if needed.

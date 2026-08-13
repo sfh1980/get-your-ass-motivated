@@ -48,45 +48,53 @@
 
 ---
 
-## Sprint 2 — Living cadence + evidence (current)
+## Sprint 2 — Living cadence + evidence (closed 2026-08-12)
 
 | Field | Value |
 |-------|--------|
-| Window | **2026-08-04 → 2026-08-10** |
+| Window | **2026-08-04 → 2026-08-10** (docs closed 2026-08-12) |
 | Goal | Prove Month-2 hybrid Agile: daily dogfood on TrueNAS, weekly status/RAID, and portfolio evidence that is safe to show |
 | Stories | **S6, S7, S8, S9** (see `07-wbs-backlog.md`) |
-| Epics | **E2** (governance cadence) + **E3** (dogfood & portfolio evidence) |
-| Sean | Dogfood Today; Sunday Review; status/RAID; PII pass on screenshots |
-| Agents | Docs/status edits as assigned; Scope Guard if any new feature urge appears |
-| Risks watched | **R2** (dogfood abandonment), **R4** (screenshot secrets), **R1** (scope creep) |
-| Explicitly out | Phase B Cloudflare (**T5.5b** — blocked on Yum4Less); new product features unless blocking dogfood |
+| Outcome | **S6 Done** (Sean using LAN app). **S7 Partial** (PIN accepted; metrics N/A). **S8 Blocked** on I3 uploads dataset. **S9 Parked** until CS work. I2 dormant SMTP in this close-out commit. D5 Ready/parked (no GYAM tunnel). |
 
-### Sprint goal (committed)
+### Sprint 2 backlog (final)
 
-> **Goal:** By Sunday 2026-08-10, GYAM has ≥5 dogfood days on the live LAN app, an updated status + RAID, and portfolio screenshots cleared for PII with draft case-study metrics.  
-> **Stories:** S6, S7, S8, S9  
-> **Agent assignments:** Sean = R for dogfood/PII; primary agent = R for doc/status updates when briefed; Scope Guard = C before any new build  
-> **Risks watched:** R2, R4, R1  
-
-### Sprint 2 backlog (pull)
-
-1. [ ] **S6** — Dogfood TrueNAS Today ≥5 calendar days; note friction in GYAM Home or `Inbox/`  
-2. [ ] **S7** — PII-review 8 screenshots; fill case-study metrics draft (`T5.6b`)  
-3. [ ] **S8** — Accept coach briefs + attachments on live LAN (smoke: expand How to do this; attach one PM artifact)  
-4. [ ] **S9** — Python CS dual-track hygiene: fill curr weeks 11/13/17 portfolio names **or** explicitly park with date; live Week 1A/1B without changing pairing yet  
-5. [ ] Update `10-status-report.md` + `06-raid-log.md` (Sunday)  
-6. [ ] Change-log any scope drift  
+1. [x] **S6** — Dogfood TrueNAS Today (Sean accepted 2026-08-12)  
+2. [x] **S7** — PIN/PII accepted; metrics N/A  
+3. [ ] **S8** — **Carry** — blocked on uploads dataset (I3)  
+4. [x] **S9** — Parked until Sean reaches CS work  
+5. [x] Update `10-status-report.md` + `06-raid-log.md` (2026-08-12)  
+6. [x] Change-log scope: Phase B parked; I2 dormant; I3 opened  
 
 ### Exit / Sprint DoD checklist
 
-- [ ] Sprint goal met or descope’d in change log  
-- [ ] Status report dated this sprint  
-- [ ] RAID reviewed  
-- [ ] ≥1 portfolio-export artifact improved (PII notes and/or metrics)  
+- [x] Sprint goal met or descope’d in change log  
+- [x] Status report dated this sprint  
+- [x] RAID reviewed  
+- [x] ≥1 portfolio-export artifact improved (PII notes and/or metrics)  
+
+## Sprint 3 — Uploads volume + backup proof (current)
+
+| Field | Value |
+|-------|--------|
+| Window | **2026-08-12 → 2026-08-18** |
+| Goal | Attachments persist on TrueNAS; one proven Postgres dump; keep using Today |
+| Stories | **S8** (I3), R3 dump check |
+| Sean | Create `GYAM/uploads` dataset; Save Custom App YAML; attach one file; run `pg_dump` on NAS Shell |
+| Agents | Docs/YAML already in repo; no new product features |
+| Risks watched | **I3**, **R3**, **R1** |
+| Explicitly out | Phase B Tunnel; Python CS names; SMTP enablement |
+
+### Sprint 3 backlog (pull)
+
+1. [ ] Create child dataset `appPool/GYAM/uploads`; `chown 1000:1000`  
+2. [ ] Add volume `/mnt/appPool/GYAM/uploads:/app/data/uploads` in live Custom App YAML; **Save** (Watchtower will not do this)  
+3. [ ] Attach one allowed file on LAN; confirm it lands on the dataset  
+4. [ ] `ls -lh /mnt/appPool/GYAM/gyam-*.dump` then dump if missing  
+5. [ ] Sunday status/RAID  
 
 ## Next sprint (draft ideas — not committed)
 
-- Start Month-2 weekly status streak (week 2 of 4+)  
-- Optional I2: dormant-label SMTP in Settings  
-- Phase B only if Yum4Less Cloudflare unblocks  
-- Compress/stretch Python CS pacing after 2+ lived curriculum weeks  
+- Continue Month-2 weekly status streak  
+- Phase B only if Sean wants a free hostname on `yum4less.com`  
+- Python CS names when curriculum is reached  

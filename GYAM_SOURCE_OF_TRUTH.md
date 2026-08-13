@@ -1,7 +1,7 @@
 # GYAM — Source of Truth
 
 **App name:** GYAM (Get Your Ass Motivated)  
-**Last updated:** 2026-07-28  
+**Last updated:** 2026-08-12  
 **Status:** Multi-purpose project in active use — V1 app shipped locally; sample software project + PM practice + portfolio staging live  
 **Owner:** Sean Holmes (single-user first; template-ready)
 
@@ -67,8 +67,9 @@ GYAM is **one repo that serves several deliberate purposes at once**. Do not col
 | 2026-08-02 | TrueNAS Phase A live; Python CS epic folded into `docs/pm/14-python-cs-epic.md` + seed/remap titles |
 | 2026-08-03 | Coach briefs (`Task.instructions`) + multi-file task attachments; TrueNAS migrations + 1035 brief remap |
 | 2026-08-03 | Sprint 1 closed; Sprint 2 (S6–S9, E3) planned; RACI execution map updated |
+| 2026-08-12 | Sprint 2 closed: dogfood in use; I2 dormant SMTP; I3 uploads mount; S9 parked; Phase B parked (LAN-only) |
 
-**Current state (2026-08-03):** V1 product ~complete on local + TrueNAS Phase A (`http://192.168.1.246:4070`); coach briefs + task note attachments live; governance pack on Sprint 2; Phase B Cloudflare blocked on Yum4Less; Python CS dual-track (P8) titles + briefs remapped; dogfood / multi-week metrics still open; portfolio *site* not started (by design).
+**Current state (2026-08-12):** V1 on TrueNAS Phase A (`http://192.168.1.246:4070`) in daily use; Sprint 2 closed; attachments blocked until `GYAM/uploads` is mounted (I3); Phase B parked (no public GYAM site / no extra domain); Python CS names parked until curriculum is reached.
 
 Detailed narrative: `docs/pm/00-multi-purpose-and-progress.md`.
 
@@ -95,7 +96,7 @@ PIN is stored hashed (never plaintext). Session after successful PIN unlock.
 | Sync | Homelab server is source of truth; devices sync to it |
 | “100% local” | Data stays on Sean’s infrastructure (not public SaaS) |
 | **Phase A** | TrueNAS SCALE **Custom App**: Postgres + single app container; **LAN live** (`http://192.168.1.246:4070`, 2026-08-02) |
-| **Phase B (later)** | Cloudflare Tunnel → HTTPS; `COOKIE_SECURE=true` — **blocked until Yum4Less Cloudflare is done**, then add GYAM |
+| **Phase B (later)** | Cloudflare Tunnel → HTTPS; `COOKIE_SECURE=true` — **parked** (LAN-only; Yum4Less Tunnel no longer blocks; no extra domain) |
 | Runtime | Docker / Docker Compose locally; TrueNAS Apps YAML for production-like host |
 | Database | PostgreSQL (unpublished on TrueNAS host) |
 | Backups | `pg_dump` / dumps on `appPool` datasets |
@@ -332,7 +333,7 @@ Known upcoming discussions:
 - When to start the separate portfolio website (after `portfolio-export/` is filled)  
 - Optional employer-facing Jira familiarity later (not required for GYAM delivery)  
 - Python CS portfolio names for curriculum weeks 11 / 13 / 17  
-- Phase B Cloudflare Tunnel timing (blocked on Yum4Less first)  
+- Phase B Cloudflare Tunnel timing (parked 2026-08-12 — LAN-only; free later option is a hostname on `yum4less.com`)  
 
 ---
 
@@ -366,3 +367,4 @@ Known upcoming discussions:
 | 2026-08-02 | Phase A Done on TrueNAS LAN; Phase B Cloudflare deferred behind Yum4Less |
 | 2026-08-02 | P8 Python CS dual-track: `docs/pm/14-python-cs-epic.md` + seed/remap Monday–Saturday titles |
 | 2026-08-03 | Coach briefs + task attachments; TrueNAS migrate + remap 1035 briefs; Sprint 1→2 + RACI |
+| 2026-08-12 | Sprint 2 close: dogfood in use; I2 dormant SMTP UI; I3 uploads dataset; S9 parked; Phase B parked |

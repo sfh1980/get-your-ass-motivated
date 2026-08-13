@@ -140,11 +140,15 @@ export function SettingsPage({
       </section>
 
       <section className="card stack">
-        <strong>Email notifications (SMTP)</strong>
+        <strong>Email notifications (optional / dormant)</strong>
+        <p className="muted" style={{ margin: 0 }}>
+          Not part of V1. Nudges use OS notifications above. SMTP stays off unless you
+          explicitly re-scope email later.
+        </p>
         <p className="muted" style={{ margin: 0 }}>
           {smtp?.smtpConfigured
             ? `Configured via env → ${smtp.smtpTo} (host ${smtp.smtpHost})`
-            : "Not configured. Set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_TO in .env (Yahoo app password works)."}
+            : "Not configured — leave it that way."}
         </p>
         <div className="row">
           <button type="button" disabled={busy || !smtp?.smtpConfigured} onClick={testEmail}>
@@ -156,7 +160,7 @@ export function SettingsPage({
         </div>
         {due.length > 0 ? (
           <div className="stack">
-            <span className="muted">{due.length} follow-up(s) due:</span>
+            <span className="muted">{due.length} follow-up(s) due (in-app; email send is dormant):</span>
             {due.map((j) => (
               <span key={j.id} className="pill">
                 {j.followUpDate} · {j.company} — {j.title}

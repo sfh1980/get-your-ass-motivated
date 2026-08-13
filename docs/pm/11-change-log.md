@@ -16,3 +16,6 @@
 | 2026-08-03 | Task file attachments (multi) + PM allowlist xlsx/csv/svg/drawio; uploads volume documented | PM artifacts under task Notes | Sean |
 | 2026-08-03 | Sprint 1 closed; Sprint 2 planned (S6–S9, Epic E3); carry dogfood + portfolio PII/metrics | Month-2 living cadence | Sean |
 | 2026-08-03 | RACI updated with Sprint 1 execution map + Sprint 2 planned agent assignments | PM practice: who did / will do what | Sean |
+| 2026-08-12 | Sprint 2 closed: S6 done; S7 PIN accepted / metrics N/A; S9 parked; D5 Ready/parked (no GYAM tunnel) | Sean decisions | Sean |
+| 2026-08-12 | I2: Settings SMTP labeled optional/dormant | Product message vs SoT | Sean |
+| 2026-08-12 | I3 opened: TrueNAS uploads dataset not mounted; YAML/docs use live `GYAM` casing | Attachments fail on LAN | Sean |

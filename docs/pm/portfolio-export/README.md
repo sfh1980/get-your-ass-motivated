@@ -15,8 +15,8 @@ GYAM itself is also the career OS, sample software project, and PM practice lab 
 ## Grab checklist (before site import)
 
 - [x] Screenshots captured via Playwright (`e2e/portfolio-screenshots.spec.ts`, 2026-07-28): login, today, today-mobile, progress, jobs, review, roadmap, settings  
-- [ ] Review screenshots for PII (blur companies / email paste if needed)  
-- [ ] Case study outline (`notes/case-study-outline.md`) — draft exists; fill metrics  
+- [x] Review screenshots for PIN / critical secrets — Sean accepted 2026-08-12 (no saved PIN in shots). PNGs are not in the working tree; re-capture before a public case study if companies/emails appear.  
+- [x] Case study metrics — **N/A** until usage numbers are worth publishing (`notes/case-study-outline.md`)  
 - [ ] Charter + one status report + RAID excerpt (sanitized)  
 - [ ] Backlog screenshot or markdown excerpt showing Epic/5 Stories/10 Tasks  
 - [ ] Metrics: streaks, applications count, sprint outcomes (real numbers only)  

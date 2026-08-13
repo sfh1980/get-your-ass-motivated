@@ -50,7 +50,7 @@ Tasks:
 - [x] T5.3 Input validation hardening  
 - [x] T5.4 Playwright edge suite (22/22)  
 - [x] T5.5a TrueNAS Phase A LAN Custom App (Dockerfile/GHCR/migrate + Install) — **Done** 2026-08-02
-- [ ] T5.5b Homelab HTTPS / COOKIE_SECURE (Phase B / Tunnel) — blocked on Yum4Less Cloudflare  
+- [ ] T5.5b Homelab HTTPS / COOKIE_SECURE (Phase B / Tunnel) — **parked** 2026-08-12 (LAN-only)  
 - [x] T5.6a Portfolio screenshots (8 captured 2026-07-28)  
 - [ ] T5.6b Case-study metrics + PII review — **pulled into Sprint 2 as S7**  
 
@@ -62,33 +62,33 @@ As Sean (PM), I need GYAM to count as the sample software project and PM practic
 - [x] `docs/pm` pack + progress history  
 - [x] Agent-team RACI  
 - [x] DB remap sample-project language  
-- [ ] Sustained weekly status/RAID for Month 2 milestone — **S6/S7 support; formal cadence in Sprint 2**
+- [x] Sustained weekly status/RAID for Month 2 milestone — Sprint 2 reviewed 2026-08-12; continue weekly
 
 ### Story S6 — Sustained dogfood week
 As Sean, I need to run GYAM on TrueNAS for real workdays so the sample project has usage evidence, not theater.  
-**Status:** Sprint 2  
+**Status:** **Done** 2026-08-12 (Sean: using live TrueNAS app)  
 **Epic:** E3  
 **Acceptance:** ≥5 calendar days with meaningful Today use; friction notes captured; R2 mitigated this week.
 
 Tasks:
-- [ ] T6.1 Complete Today tasks (or honest rollover) on LAN app ≥5 days  
-- [ ] T6.2 Log blockers/friction in GYAM Home or vault Inbox  
-- [ ] T6.3 Sunday Review submitted in-app  
+- [x] T6.1 Complete Today tasks (or honest rollover) on LAN app ≥5 days  
+- [x] T6.2 Log blockers/friction in GYAM Home or vault Inbox — friction = attachments not mounting (I3)  
+- [ ] T6.3 Sunday Review submitted in-app — confirm if not already done  
 
 ### Story S7 — Portfolio evidence safe to show
 As Sean, I need screenshots and metrics I can put in a case study without leaking secrets.  
-**Status:** Sprint 2 (was T5.6b)  
+**Status:** **Partial** 2026-08-12  
 **Epic:** E3  
 **Acceptance:** All 8 screenshots PII-reviewed; case-study metrics draft filled or N/A with reason.
 
 Tasks:
-- [ ] T7.1 Walk `docs/pm/portfolio-export/` sanitize checklist against screenshots  
-- [ ] T7.2 Draft metrics (streak, jobs moved, sprint outcomes) in `portfolio-export/notes/`  
-- [ ] T7.3 Tick D3 “review” in RAID when clear  
+- [x] T7.1 Walk sanitize checklist for PIN / critical secrets — Sean: no saved PIN in shots  
+- [x] T7.2 Draft metrics — **N/A** until usage numbers are worth publishing  
+- [x] T7.3 Tick D3 “review” in RAID — PIN accepted; metrics N/A  
 
 ### Story S8 — Accept coach briefs & task attachments (ops)
 As Sean, I need the shipped coach-brief and attachment features verified on the live LAN build I actually use.  
-**Status:** Sprint 2  
+**Status:** **Blocked** on I3 (uploads dataset not attached)  
 **Epic:** E3  
 **Acceptance:** Seeded task shows filled “How to do this”; one real PM file attached under Notes on TrueNAS; no secrets in attach path.
 
@@ -99,22 +99,22 @@ Tasks:
 
 ### Story S9 — Python CS dual-track hygiene
 As Sean, I need the dual-track curriculum titles honest and maintainable without gold-plating the app.  
-**Status:** Sprint 2  
+**Status:** **Parked** 2026-08-12 until Sean reaches CS work  
 **Epic:** E2 (P8)  
 **Acceptance:** Curr weeks 11/13/17 portfolio names filled **or** parked with owner+date; lived Mon software hour uses Wk1A/B briefs as-is (no pairing change unless evidence demands it).
 
 Tasks:
-- [ ] T9.1 Pull names from enhanced curriculum doc into `14-python-cs-epic.md` + seed **or** park  
-- [ ] T9.2 Complete Mon software hour(s) this sprint using coach briefs  
-- [ ] T9.3 Note pacing feedback after Week 1A/1B pair for later decision  
+- [x] T9.1 Park weeks 11/13/17 names — owner Sean, until curriculum is reached  
+- [ ] T9.2 Complete Mon software hour(s) this sprint using coach briefs — parked  
+- [ ] T9.3 Note pacing feedback after Week 1A/1B pair for later decision — parked  
 
 ### Epic E3 — Dogfood & portfolio evidence (opened 2026-08-03)
 As Sean (PM/PO), I need real usage and sanitized evidence so Month 1–2 milestones are credible.  
-**Status:** Sprint 2  
+**Status:** Sprint 2 closed 2026-08-12 — S6 done; S7 partial; S8 blocked on I3  
 
-- S6 Dogfood week  
-- S7 Portfolio PII + metrics  
-- S8 Accept briefs/attachments on LAN  
+- S6 Dogfood week — **Done**  
+- S7 Portfolio PII + metrics — **Partial** (PIN accepted; metrics N/A)  
+- S8 Accept briefs/attachments on LAN — **Blocked** (uploads dataset)  
 
 ## Mapping to “5 Stories / 10 Tasks”
 

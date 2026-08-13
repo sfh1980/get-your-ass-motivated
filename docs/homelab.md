@@ -5,7 +5,7 @@
 | Phase | Goal | Status |
 |-------|------|--------|
 | **A — LAN** | TrueNAS Custom App: Postgres + single app container; household LAN | **Done** 2026-08-02 (`http://192.168.1.246:4070`) |
-| **B — WAN** | Cloudflare Tunnel → HTTPS; `COOKIE_SECURE=true` | **Deferred** — blocked until Yum4Less Cloudflare is done; then add GYAM |
+| **B — WAN** | Cloudflare Tunnel → HTTPS; `COOKIE_SECURE=true` | **Parked** — Yum4Less Tunnel is live; no GYAM hostname until Sean wants LAN-only or a free subdomain of an existing domain |
 
 Data stays on Sean’s infrastructure. No Tailscale/Nextcloud required. No public SaaS as system of record.
 
@@ -27,7 +27,7 @@ Phone / PC (LAN)
 | Piece | Choice |
 |-------|--------|
 | Host | TrueNAS SCALE Apps → **Custom App** YAML |
-| Datasets | `/mnt/appPool/gyam/{repo,postgres-data,uploads}` |
+| Datasets | `/mnt/appPool/GYAM/{repo,postgres-data,uploads}` (live casing **GYAM**) |
 | `db` | `postgres:16-alpine`, **no host ports**, volume → `postgres-data` |
 | `app` | `ghcr.io/sfh1980/gyam-app:homelab` (or `:<sha7>` pin) on **`4070:4070`** |
 | Ingest / cron sidecar | **None** (unlike Yum4Less) |
@@ -48,18 +48,20 @@ Phone / PC (LAN)
 | Baseline migration | `apps/api/prisma/migrations/20260802000000_init` |
 | Follow-on (TrueNAS applied 2026-08-03) | `20260803100000_task_instructions`, `20260803120000_task_attachments` |
 
-**Phase A live (2026-08-02):** Custom App `gyam` on TrueNAS; image `ghcr.io/sfh1980/gyam-app:homelab`; LAN smoke green. Optional later: Watchtower.
+**Phase A live (2026-08-02):** Custom App `gyam` on TrueNAS; image `ghcr.io/sfh1980/gyam-app:homelab`; LAN smoke green. Watchtower may update the **app image** (`watchtower.enable=true` on `app` only, never `db`). It does **not** add volumes — dataset mounts require a Custom App YAML Save.
 
-**Uploads volume (required for job + task file attachments):** mount `/mnt/appPool/gyam/uploads` → `/app/data/uploads` (see `docker/truenas/custom-app.yml`). JSON export stores attachment **metadata only**; binaries live on this volume — keep it on backups with Postgres.
+**Uploads volume (required for job + task file attachments):** create child dataset `appPool/GYAM/uploads`, `chown 1000:1000`, mount `/mnt/appPool/GYAM/uploads` → `/app/data/uploads` (see `docker/truenas/custom-app.yml`). App runs as `USER node` (uid 1000), not Postgres 999. JSON export stores attachment **metadata only**; binaries live on this volume — keep it on backups with Postgres. Without this bind mount, Watchtower recreates wipe files in the container overlay.
 
 Local Windows Compose (Postgres-only + host Node) remains the **dev** path.
 
 ### Datasets & permissions (Sean on TrueNAS)
 
 ```bash
-# Create datasets in UI or CLI, then:
-sudo chown -R 999:999 /mnt/appPool/gyam/postgres-data
-sudo chmod 700 /mnt/appPool/gyam/postgres-data
+# Create datasets in UI or CLI (parent casing is GYAM on the live pool), then:
+sudo chown -R 999:999 /mnt/appPool/GYAM/postgres-data
+sudo chmod 700 /mnt/appPool/GYAM/postgres-data
+sudo chown -R 1000:1000 /mnt/appPool/GYAM/uploads
+sudo chmod 775 /mnt/appPool/GYAM/uploads
 ```
 
 Ops habits from Yum4Less that transfer:
@@ -68,7 +70,7 @@ Ops habits from Yum4Less that transfer:
 - App healthcheck: Node `fetch` to `/api/health` — **not** wget/curl (often missing in slim images)
 - Rotate Postgres password away from local-dev `gyam`/`gyam` for always-on
 
-Optional: clone private repo under `/mnt/appPool/gyam/repo` for ops/docs. Schema comes from Prisma in the image, not a `db/init` mount (Yum4Less difference).
+Optional: clone private repo under `/mnt/appPool/GYAM/repo` for ops/docs. Schema comes from Prisma in the image, not a `db/init` mount (Yum4Less difference).
 
 ### Custom App YAML sketch
 
@@ -86,7 +88,7 @@ services:
       POSTGRES_PASSWORD: "REPLACE_STRONG"
       POSTGRES_DB: gyam
     volumes:
-      - /mnt/appPool/gyam/postgres-data:/var/lib/postgresql/data
+      - /mnt/appPool/GYAM/postgres-data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U gyam -d gyam"]
       interval: 10s
@@ -109,6 +111,8 @@ services:
       WEB_ORIGIN: "http://REPLACE_TRUENAS_LAN_IP:4070"
       SESSION_DAYS: "30"
       COOKIE_SECURE: "false"   # LAN HTTP only
+    volumes:
+      - /mnt/appPool/GYAM/uploads:/app/data/uploads
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     healthcheck:
@@ -152,7 +156,7 @@ curl -sS "http://<truenas-lan-ip>:4070/api/health"
 | Ingest sidecar | Yes (cron + Playwright) | No |
 | DB bootstrap | `db/init` SQL mount | Prisma `migrate deploy` in image |
 | GHCR visibility | Public packages (no PAT) | **Private** — needs pull auth |
-| WAN | Tunnel planned, not live | Same — Phase B |
+| WAN | Tunnel live (`yum4less.com`) | GYAM Phase B **parked** (LAN-only) |
 
 ---
 
@@ -192,11 +196,11 @@ SESSION_DAYS=30
 
 ---
 
-## Phase B — nginx + Cloudflare (deferred)
+## Phase B — nginx + Cloudflare (parked)
 
-SoT long-term path: **Cloudflare → (optional nginx) → app**. Do **not** start Phase B until Phase A LAN smoke is green.
+SoT long-term path: **Cloudflare → (optional nginx) → app**. Phase A LAN is green. **Parked 2026-08-12:** GYAM is LAN-only; no public site. Yum4Less Tunnel no longer blocks this. Free option later (no new domain): add a hostname on the existing `yum4less.com` zone (e.g. `gyam.yum4less.com`) to the same Cloudflare Tunnel. Do not register a second domain for this.
 
-Preferred: **Cloudflare Tunnel** (no open inbound ports) pointing at the single app origin (or nginx on `:80` if you keep a shared front door). Do not tunnel Vite `:5173` or Postgres.
+Preferred when un-parked: **Cloudflare Tunnel** (no open inbound ports) pointing at the single app origin. Do not tunnel Vite `:5173` or Postgres.
 
 When HTTPS is real:
 
