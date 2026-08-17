@@ -27,7 +27,7 @@ Phone / PC (LAN)
 | Piece | Choice |
 |-------|--------|
 | Host | TrueNAS SCALE Apps → **Custom App** YAML |
-| Datasets | `/mnt/appPool/GYAM/{repo,postgres-data,uploads}` (live casing **GYAM**) |
+| Datasets | **Live:** `/mnt/appPool/gyam/{postgres-data,uploads}`. **Dumps:** `/mnt/appPool/GYAM/` (separate; do not delete until inspected) |
 | `db` | `postgres:16-alpine`, **no host ports**, volume → `postgres-data` |
 | `app` | `ghcr.io/sfh1980/gyam-app:homelab` (or `:<sha7>` pin) on **`4070:4070`** |
 | Ingest / cron sidecar | **None** (unlike Yum4Less) |
@@ -50,18 +50,38 @@ Phone / PC (LAN)
 
 **Phase A live (2026-08-02):** Custom App `gyam` on TrueNAS; image `ghcr.io/sfh1980/gyam-app:homelab`; LAN smoke green. Watchtower may update the **app image** (`watchtower.enable=true` on `app` only, never `db`). It does **not** add volumes — dataset mounts require a Custom App YAML Save.
 
-**Uploads volume (required for job + task file attachments):** create child dataset `appPool/GYAM/uploads`, `chown 1000:1000`, mount `/mnt/appPool/GYAM/uploads` → `/app/data/uploads` (see `docker/truenas/custom-app.yml`). App runs as `USER node` (uid 1000), not Postgres 999. JSON export stores attachment **metadata only**; binaries live on this volume — keep it on backups with Postgres. Without this bind mount, Watchtower recreates wipe files in the container overlay.
+**Uploads volume (required for job + task file attachments):** live Custom App already bind-mounts `/mnt/appPool/gyam/uploads` → `/app/data/uploads`. App runs as `USER node` (uid 1000), not Postgres 999. If attaches fail, fix permissions on that lowercase path — do not retarget YAML at `/mnt/appPool/GYAM`. JSON export stores attachment **metadata only**; binaries live on this volume. Without this bind mount, Watchtower recreates wipe files in the container overlay.
+
+### YAML volume changes vs Watchtower (R8)
+
+Watchtower and Custom App **Save** do different jobs. Mixing them up is how attachments disappear.
+
+| Action | Watchtower | Custom App YAML **Save** |
+|--------|------------|---------------------------|
+| Pull a new `gyam-app` image | Yes (app label only) | Not required |
+| Recreate the app container | Yes — **reuses existing mounts** | Yes |
+| Add / remove / change a bind mount | **No** | **Yes — this is the only way** |
+| Create a ZFS dataset | No | No — create the dataset in the UI/shell first |
+| Change host path (`GYAM` vs `gyam`) | No | Yes, then confirm with `docker inspect` |
+
+A **volume change** is any of: adding a mount, removing a mount, changing the host path, or changing the container path. Repo `docker/truenas/custom-app.yml` is a paste template — TrueNAS does not read the git file. After you edit the live YAML, click **Save**. Then:
+
+```bash
+sudo docker inspect gyam-app --format '{{range .Mounts}}{{.Source}} -> {{.Destination}}{{println}}{{end}}'
+```
+
+Expect `/mnt/appPool/gyam/uploads -> /app/data/uploads`. T8.3 (2026-08-17): app restart kept the PM PDF because this mount was already on the live YAML.
 
 Local Windows Compose (Postgres-only + host Node) remains the **dev** path.
 
 ### Datasets & permissions (Sean on TrueNAS)
 
 ```bash
-# Create datasets in UI or CLI (parent casing is GYAM on the live pool), then:
-sudo chown -R 999:999 /mnt/appPool/GYAM/postgres-data
-sudo chmod 700 /mnt/appPool/GYAM/postgres-data
-sudo chown -R 1000:1000 /mnt/appPool/GYAM/uploads
-sudo chmod 775 /mnt/appPool/GYAM/uploads
+# Live app datasets (must match Custom App YAML):
+sudo chown -R 999:999 /mnt/appPool/gyam/postgres-data
+sudo chmod 700 /mnt/appPool/gyam/postgres-data
+sudo chown -R 1000:1000 /mnt/appPool/gyam/uploads
+sudo chmod 775 /mnt/appPool/gyam/uploads
 ```
 
 Ops habits from Yum4Less that transfer:
@@ -70,7 +90,7 @@ Ops habits from Yum4Less that transfer:
 - App healthcheck: Node `fetch` to `/api/health` — **not** wget/curl (often missing in slim images)
 - Rotate Postgres password away from local-dev `gyam`/`gyam` for always-on
 
-Optional: clone private repo under `/mnt/appPool/GYAM/repo` for ops/docs. Schema comes from Prisma in the image, not a `db/init` mount (Yum4Less difference).
+Optional: clone private repo under `/mnt/appPool/gyam/repo` for ops/docs. Schema comes from Prisma in the image, not a `db/init` mount (Yum4Less difference).
 
 ### Custom App YAML sketch
 
@@ -88,7 +108,7 @@ services:
       POSTGRES_PASSWORD: "REPLACE_STRONG"
       POSTGRES_DB: gyam
     volumes:
-      - /mnt/appPool/GYAM/postgres-data:/var/lib/postgresql/data
+      - /mnt/appPool/gyam/postgres-data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U gyam -d gyam"]
       interval: 10s
@@ -112,7 +132,7 @@ services:
       SESSION_DAYS: "30"
       COOKIE_SECURE: "false"   # LAN HTTP only
     volumes:
-      - /mnt/appPool/GYAM/uploads:/app/data/uploads
+      - /mnt/appPool/gyam/uploads:/app/data/uploads
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     healthcheck:
@@ -237,17 +257,69 @@ server {
 
 ---
 
-## Postgres backup
+## `gyam` vs `GYAM` on the pool (do not delete blindly)
 
-**TrueNAS Phase A** (SCALE `docker` may not support `exec -T` — omit it):
+ZFS is case-sensitive. Both can exist at once. **Live Custom App YAML (2026-08-14) uses lowercase `gyam`.** Uppercase `GYAM` is where the 2026-08-02 dump file sits.
+
+| Path | Role | Safe to delete? |
+|------|------|-----------------|
+| `/mnt/appPool/gyam/postgres-data` | Live database (YAML `db` volume) | **No** — this is the running app |
+| `/mnt/appPool/gyam/uploads` | Live attachments (YAML `app` volume) | **No** — keep; fix perms if attaches fail |
+| `/mnt/appPool/GYAM/gyam-*.dump` | Backup file(s) | Keep Aug 2 (52K) and Aug 17 (120K, TOC listed). Do not delete until a newer listed dump exists |
+
+Verify on TrueNAS Shell before touching either:
 
 ```bash
-# Remove any prior 0-byte failed dump first, then:
-rm -f /mnt/appPool/GYAM/gyam-*.dump   # only if empty/failed; keep good dumps
-sudo docker exec gyam-postgres pg_dump -U gyam -d gyam -Fc > /mnt/appPool/GYAM/gyam-$(date +%Y%m%d).dump
-ls -lh /mnt/appPool/GYAM/gyam-*.dump   # must be non-zero size
-# restore:
-# sudo docker exec -i gyam-postgres pg_restore -U gyam -d gyam --clean < /mnt/appPool/GYAM/gyam-YYYYMMDD.dump
+# 1. What the running containers actually mount (this is truth)
+sudo docker inspect gyam-postgres --format '{{range .Mounts}}{{.Source}} -> {{.Destination}}{{println}}{{end}}'
+sudo docker inspect gyam-app --format '{{range .Mounts}}{{.Source}} -> {{.Destination}}{{println}}{{end}}'
+
+# 2. Datasets vs plain folders
+sudo zfs list -o name,used,mountpoint -r appPool | grep -i gyam
+ls -lah /mnt/appPool/gyam
+ls -lah /mnt/appPool/GYAM
+
+# 3. Live DB looks like Postgres (PG_VERSION present)
+ls -lah /mnt/appPool/gyam/postgres-data | head
+
+# 4. Dump is non-zero and listable (pg_restore is **inside** the Postgres container)
+# Do not pipe to `pg_restore -l -` — this image errors: could not open input file "-"
+ls -lh /mnt/appPool/GYAM/gyam-*.dump
+sudo docker cp /mnt/appPool/GYAM/gyam-20260817.dump gyam-postgres:/tmp/gyam.dump
+sudo docker exec gyam-postgres pg_restore -l /tmp/gyam.dump | head
+sudo docker exec gyam-postgres rm /tmp/gyam.dump
+
+# 5. Uploads writable by app user (uid 1000)
+sudo docker exec gyam-app id
+ls -lah /mnt/appPool/gyam/uploads
+sudo docker exec gyam-app ls -la /app/data/uploads
+```
+
+Expect inspect to show `/mnt/appPool/gyam/postgres-data` and `/mnt/appPool/gyam/uploads`. If it does, **keep `gyam`**. Keep `GYAM` at least as the dump shelf (or copy the dump into `gyam` first). Only destroy a dataset after inspect shows nothing mounted from it and you have a second good dump.
+
+If attaches still fail after chown 1000:1000 on `/mnt/appPool/gyam/uploads`, paste the five command outputs — do not retarget YAML at `GYAM`.
+
+---
+
+## Postgres backup
+
+**TrueNAS Phase A:** `pg_dump` / `pg_restore` live **inside** `gyam-postgres`, not on the TrueNAS host (`zsh: command not found: pg_restore`). Do **not** redirect `docker exec` binary output on SCALE — it often writes a ~12-byte junk file.
+
+```bash
+# Fresh dump: write inside the container, then copy out
+sudo docker exec gyam-postgres pg_dump -U gyam -d gyam -Fc -f /tmp/gyam.dump
+sudo docker cp gyam-postgres:/tmp/gyam.dump /mnt/appPool/GYAM/gyam-$(date +%Y%m%d).dump
+sudo docker exec gyam-postgres rm /tmp/gyam.dump
+ls -lh /mnt/appPool/GYAM/gyam-*.dump   # tens of KB+ (120K proven 2026-08-17), not ~12 bytes
+
+# List a dump (copy in; do not use `pg_restore -l -` — stdin "-" fails on this image)
+sudo docker cp /mnt/appPool/GYAM/gyam-20260817.dump gyam-postgres:/tmp/gyam.dump
+sudo docker exec gyam-postgres pg_restore -l /tmp/gyam.dump | head
+sudo docker exec gyam-postgres rm /tmp/gyam.dump
+
+# restore (only when you mean it — copy in, then restore from a path inside the container):
+# sudo docker cp /mnt/appPool/GYAM/gyam-YYYYMMDD.dump gyam-postgres:/tmp/gyam.dump
+# sudo docker exec gyam-postgres pg_restore -U gyam -d gyam --clean /tmp/gyam.dump
 ```
 
 **Local Compose:**

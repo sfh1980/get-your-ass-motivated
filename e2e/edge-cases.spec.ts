@@ -267,6 +267,12 @@ test.describe("tasks / notes / roadmap / import edges", () => {
     expect(res.status()).toBe(400);
   });
 
+  test("tomorrow defer rejects invalid task id", async ({ request }) => {
+    await apiLogin(request);
+    const res = await request.post(`${API}/api/tasks/not-a-valid-id!!!/tomorrow`, { data: {} });
+    expect(res.status()).toBe(400);
+  });
+
   test("roadmap rejects invalid query dates", async ({ request }) => {
     await apiLogin(request);
     const res = await request.get(`${API}/api/roadmap?from=not-a-date&to=2026-08-01`);

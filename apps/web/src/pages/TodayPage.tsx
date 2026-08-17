@@ -320,6 +320,14 @@ function TaskCard({
         >
           Done
         </button>
+        <button
+          type="button"
+          disabled={busyId === task.id || task.status === "completed"}
+          title="Move to tomorrow’s list. Does not mark Done. Clears this item from backlog so it cannot skip-to-clear."
+          onClick={() => run(task.id, () => api.deferTomorrow(task.id))}
+        >
+          Tomorrow
+        </button>
       </div>
     </article>
   );

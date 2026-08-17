@@ -19,3 +19,12 @@
 | 2026-08-12 | Sprint 2 closed: S6 done; S7 PIN accepted / metrics N/A; S9 parked; D5 Ready/parked (no GYAM tunnel) | Sean decisions | Sean |
 | 2026-08-12 | I2: Settings SMTP labeled optional/dormant | Product message vs SoT | Sean |
 | 2026-08-12 | I3 opened: TrueNAS uploads dataset not mounted; YAML/docs use live `GYAM` casing | Attachments fail on LAN | Sean |
+| 2026-08-16 | I3 resolved: live `gyam/uploads` writable (uid 1000); `agile project mgmt.pdf` attached on LAN | Dataset perms, not a missing mount | Sean |
+| 2026-08-16 | I4 accepted: Roadmap date range is enough; no completed-task catalog | Sean: no extra UX | Sean |
+| 2026-08-17 | T8.3 closed: PDF survived TrueNAS app restart (UI + volume) | Uploads bind-mount is the source of truth | Sean |
+| 2026-08-17 | T6.3 closed: Sunday Review submitted for week ending 2026-08-16 | Dogfood evidence | Sean |
+| 2026-08-17 | Harbor named as P8 through-line; remains out of GYAM runtime | Two-repo rule; GYAM only schedules sittings | Sean |
+| 2026-08-17 | Portfolio screenshots recaptured against live LAN (user Sean) | Sprint 3 leftover; real Jobs board | Sean |
+| 2026-08-17 | Live usage PNGs / dumps gitignored — GitHub is app code only | Keep database-derived data on TrueNAS | Sean |
+| 2026-08-17 | Tomorrow button: move incomplete task to next day without Done | Unblock Today without fake-complete | Sean |
+| 2026-08-17 | R3 dump proven: `gyam-20260817.dump` listed (CUSTOM, 57 TOC, PG 16.14); Sprint 3 closed | `docker cp` + `pg_restore -l` inside container | Sean |

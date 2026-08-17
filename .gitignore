@@ -34,5 +34,13 @@ logs/activity/*.log
 # Local uploads (job email attachments)
 data/uploads/
 
+# Live usage / DB-derived — never GitHub (Jobs board, dumps, exports)
+docs/pm/portfolio-export/screenshots/*.png
+docs/pm/portfolio-export/screenshots/*.webp
+docs/pm/portfolio-export/screenshots/*.jpg
+*.dump
+**/gyam-*.dump
+exports/*.json
+
 *.tsbuildinfo
 

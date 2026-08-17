@@ -73,28 +73,31 @@
 - [x] RAID reviewed  
 - [x] ≥1 portfolio-export artifact improved (PII notes and/or metrics)  
 
-## Sprint 3 — Uploads volume + backup proof (current)
+## Sprint 3 — Uploads volume + backup proof (closed 2026-08-17)
 
 | Field | Value |
 |-------|--------|
-| Window | **2026-08-12 → 2026-08-18** |
+| Window | **2026-08-12 → 2026-08-18** (closed 2026-08-17) |
 | Goal | Attachments persist on TrueNAS; one proven Postgres dump; keep using Today |
-| Stories | **S8** (I3), R3 dump check |
-| Sean | Create `GYAM/uploads` dataset; Save Custom App YAML; attach one file; run `pg_dump` on NAS Shell |
-| Agents | Docs/YAML already in repo; no new product features |
-| Risks watched | **I3**, **R3**, **R1** |
-| Explicitly out | Phase B Tunnel; Python CS names; SMTP enablement |
+| Stories | **S8 Done**; S7 recapture done; R3 dump **proven** |
+| Outcome | I3/T8.3 closed; Sunday Review in; LAN screenshots recaptured; `gyam-20260817.dump` listed (57 TOC entries). Phase B and Harbor remap stayed parked. |
+| Risks watched | **R1** (standing); **R3** watching (dump proven) |
+| Explicitly out | Phase B Tunnel; Harbor sitting-name remap; SMTP enablement |
 
-### Sprint 3 backlog (pull)
+### Sprint 3 backlog (final)
 
-1. [ ] Create child dataset `appPool/GYAM/uploads`; `chown 1000:1000`  
-2. [ ] Add volume `/mnt/appPool/GYAM/uploads:/app/data/uploads` in live Custom App YAML; **Save** (Watchtower will not do this)  
-3. [ ] Attach one allowed file on LAN; confirm it lands on the dataset  
-4. [ ] `ls -lh /mnt/appPool/GYAM/gyam-*.dump` then dump if missing  
-5. [ ] Sunday status/RAID  
+1. [x] `chown 1000:1000` on `/mnt/appPool/gyam/uploads`; confirm inspect mount; attach one allowed file — PDF on LAN 2026-08-16 (I3 resolved)  
+2. [x] Keep both pool paths until inspect: live = `gyam`, dumps = `GYAM`  
+3. [x] List TOC of `gyam-20260817.dump` — CUSTOM gzip, 57 TOC entries, PG 16.14, created 2026-08-17 16:49:23 UTC  
+4. [x] Sunday Review in-app — submitted for week ending 2026-08-16 (T6.3)  
+5. [x] Recapture portfolio screenshots against live LAN — 2026-08-17; User ID **Sean**; real Jobs (61 Applied / 3 Interview / 27 Rejected)  
+6. [x] I4 choice: keep Roadmap (set From date back); no catalog page  
+7. [x] T8.3 — app restarted 2026-08-17; PDF still in UI and on the volume  
 
 ## Next sprint (draft ideas — not committed)
 
+- Clear 2026-08-13 Excel/Power BI so Today unblocks  
+- Review Jobs PNG before public git  
 - Continue Month-2 weekly status streak  
 - Phase B only if Sean wants a free hostname on `yum4less.com`  
-- Python CS names when curriculum is reached  
+- Harbor sitting titles when sitting 1 starts (S9) — do not fold Harbor into GYAM  

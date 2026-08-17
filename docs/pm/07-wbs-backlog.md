@@ -73,11 +73,11 @@ As Sean, I need to run GYAM on TrueNAS for real workdays so the sample project h
 Tasks:
 - [x] T6.1 Complete Today tasks (or honest rollover) on LAN app ≥5 days  
 - [x] T6.2 Log blockers/friction in GYAM Home or vault Inbox — friction = attachments not mounting (I3)  
-- [ ] T6.3 Sunday Review submitted in-app — confirm if not already done  
+- [x] T6.3 Sunday Review submitted in-app — week ending 2026-08-16  
 
 ### Story S7 — Portfolio evidence safe to show
 As Sean, I need screenshots and metrics I can put in a case study without leaking secrets.  
-**Status:** **Partial** 2026-08-12  
+**Status:** **Partial** 2026-08-17 — LAN shots recaptured; PIN field empty; metrics N/A; Jobs PNG has real company names  
 **Epic:** E3  
 **Acceptance:** All 8 screenshots PII-reviewed; case-study metrics draft filled or N/A with reason.
 
@@ -88,18 +88,18 @@ Tasks:
 
 ### Story S8 — Accept coach briefs & task attachments (ops)
 As Sean, I need the shipped coach-brief and attachment features verified on the live LAN build I actually use.  
-**Status:** **Blocked** on I3 (uploads dataset not attached)  
+**Status:** **Done** 2026-08-17 — I3 resolved; PDF still visible in UI and on the volume after app container restart (T8.3)  
 **Epic:** E3  
 **Acceptance:** Seeded task shows filled “How to do this”; one real PM file attached under Notes on TrueNAS; no secrets in attach path.
 
 Tasks:
-- [ ] T8.1 Smoke coach brief on a Week 1 / routine task  
-- [ ] T8.2 Attach one spreadsheet or diagram to a PM task; download/delete works  
-- [ ] T8.3 Confirm uploads volume persists across container recreate (spot-check)  
+- [x] T8.1 Smoke coach brief on a Week 1 / routine task — Sean: yes on live LAN  
+- [x] T8.2 Attach one real PM file — `agile project mgmt.pdf` (293 KB) on “GYAM backlog / agent-team check-in”. Reopen/download via Roadmap (set **From** back); no extra catalog (I4 accepted)  
+- [x] T8.3 Confirm uploads volume persists across container recreate (spot-check) — Sean 2026-08-17: app restarted on TrueNAS; attachment still in web UI and on the volume via terminal  
 
 ### Story S9 — Python CS dual-track hygiene
 As Sean, I need the dual-track curriculum titles honest and maintainable without gold-plating the app.  
-**Status:** **Parked** 2026-08-12 until Sean reaches CS work  
+**Status:** **Parked** until sitting 1 — Harbor sitting names live in `14-python-cs-epic.md`; seed/live DB still `Python CS Wk…` (do not remap yet)  
 **Epic:** E2 (P8)  
 **Acceptance:** Curr weeks 11/13/17 portfolio names filled **or** parked with owner+date; lived Mon software hour uses Wk1A/B briefs as-is (no pairing change unless evidence demands it).
 
@@ -110,11 +110,11 @@ Tasks:
 
 ### Epic E3 — Dogfood & portfolio evidence (opened 2026-08-03)
 As Sean (PM/PO), I need real usage and sanitized evidence so Month 1–2 milestones are credible.  
-**Status:** Sprint 2 closed 2026-08-12 — S6 done; S7 partial; S8 blocked on I3  
+**Status:** Sprint 3 (2026-08-17) — S6 done; S7 partial (recapture pending real Jobs); S8 done; S9 parked  
 
 - S6 Dogfood week — **Done**  
-- S7 Portfolio PII + metrics — **Partial** (PIN accepted; metrics N/A)  
-- S8 Accept briefs/attachments on LAN — **Blocked** (uploads dataset)  
+- S7 Portfolio PII + metrics — **Partial** (LAN recapture 2026-08-17; company names in Jobs PNG; metrics N/A)  
+- S8 Accept briefs/attachments on LAN — **Done** (upload + persist-across-recreate)  
 
 ## Mapping to “5 Stories / 10 Tasks”
 

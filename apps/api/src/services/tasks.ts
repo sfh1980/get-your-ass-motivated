@@ -1,6 +1,6 @@
 import { CATCH_UP_PROMPT, type TodayResponse, type TodayTaskDto } from "@gyam/shared";
 import { prisma } from "../db.js";
-import { formatDateOnly, todayUtc } from "../dates.js";
+import { addDays, formatDateOnly, todayUtc } from "../dates.js";
 import { logActivity } from "../activity.js";
 import { toAttachmentDto } from "./taskAttachments.js";
 
@@ -284,5 +284,69 @@ export async function updateTaskNotes(userId: string, taskId: string, notes: str
     where: { id: task.id },
     data: { notes },
   });
+  return { task: updated } as const;
+}
+
+/** Move an incomplete task onto tomorrow’s TaskDay without marking it Done. */
+export async function deferTaskToTomorrow(userId: string, taskId: string) {
+  const task = await assertTaskOwned(userId, taskId);
+  if (!task) return { error: "not_found" } as const;
+  if (task.status === "completed") {
+    return { error: "already_complete", message: "Completed tasks stay on the day they finished." } as const;
+  }
+
+  const tomorrow = addDays(todayUtc(), 1);
+  if (formatDateOnly(task.taskDay.date) >= formatDateOnly(tomorrow)) {
+    return { error: "already_future", message: "Task is already on tomorrow or later." } as const;
+  }
+
+  let elapsedMs = task.elapsedMs;
+  let status = task.status;
+  if (task.status === "in_progress" && task.activeStartedAt) {
+    elapsedMs += Math.max(0, Date.now() - task.activeStartedAt.getTime());
+    status = "paused";
+  }
+
+  const dest = await prisma.taskDay.upsert({
+    where: { userId_date: { userId, date: tomorrow } },
+    create: { userId, date: tomorrow, blocked: false },
+    update: {},
+  });
+
+  const maxSort = await prisma.task.aggregate({
+    where: { taskDayId: dest.id },
+    _max: { sortOrder: true },
+  });
+
+  const oldDayId = task.taskDayId;
+  const updated = await prisma.task.update({
+    where: { id: task.id },
+    data: {
+      taskDayId: dest.id,
+      status,
+      elapsedMs,
+      activeStartedAt: null,
+      sortOrder: (maxSort._max.sortOrder ?? -1) + 1,
+    },
+  });
+
+  const remaining = await prisma.task.count({
+    where: { taskDayId: oldDayId, status: { not: "completed" } },
+  });
+  if (remaining === 0) {
+    await prisma.taskDay.update({
+      where: { id: oldDayId },
+      data: { completedAt: new Date(), blocked: false },
+    });
+  }
+
+  await logActivity({
+    userId,
+    eventType: "task_deferred_tomorrow",
+    entityType: "task",
+    entityId: task.id,
+    payload: { toDate: formatDateOnly(tomorrow) },
+  });
+
   return { task: updated } as const;
 }

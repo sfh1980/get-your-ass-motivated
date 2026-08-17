@@ -71,6 +71,7 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ notes }),
     }),
+  deferTomorrow: (id: string) => request(`/api/tasks/${id}/tomorrow`, { method: "POST", body: "{}" }),
   notes: (id: string, notes: string) =>
     request(`/api/tasks/${id}/notes`, {
       method: "PATCH",

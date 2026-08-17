@@ -4,6 +4,7 @@ import { z } from "zod";
 import { requireAuth, type AuthedRequest } from "../auth.js";
 import {
   completeTask,
+  deferTaskToTomorrow,
   getTodayForUser,
   pauseTask,
   startTask,
@@ -83,6 +84,18 @@ tasksRouter.post("/:id/complete", async (req: AuthedRequest, res) => {
   const result = await completeTask(req.user!.id, id, body.data.notes);
   if ("error" in result) {
     res.status(404).json(result);
+    return;
+  }
+  res.json(result);
+});
+
+tasksRouter.post("/:id/tomorrow", async (req: AuthedRequest, res) => {
+  const id = parseEntityId(req.params.id, res);
+  if (!id) return;
+  const result = await deferTaskToTomorrow(req.user!.id, id);
+  if ("error" in result) {
+    const status = result.error === "not_found" ? 404 : 400;
+    res.status(status).json(result);
     return;
   }
   res.json(result);

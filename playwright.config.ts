@@ -10,7 +10,7 @@ export default defineConfig({
   expect: { timeout: 10_000 },
   reporter: [["list"], ["html", { open: "never", outputFolder: "playwright-report" }]],
   use: {
-    baseURL: "http://localhost:5173",
+    baseURL: process.env.GYAM_E2E_ORIGIN ?? "http://localhost:5173",
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
     video: "off",

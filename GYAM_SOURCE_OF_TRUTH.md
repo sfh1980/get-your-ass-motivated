@@ -1,7 +1,7 @@
 # GYAM — Source of Truth
 
 **App name:** GYAM (Get Your Ass Motivated)  
-**Last updated:** 2026-08-12  
+**Last updated:** 2026-08-17  
 **Status:** Multi-purpose project in active use — V1 app shipped locally; sample software project + PM practice + portfolio staging live  
 **Owner:** Sean Holmes (single-user first; template-ready)
 
@@ -31,7 +31,7 @@ GYAM is **one repo that serves several deliberate purposes at once**. Do not col
 | **P5** | Portfolio evidence source | Real usage + screenshots/notes in `docs/pm/portfolio-export/` for a **separate** future portfolio website |
 | **P6** | Homelab reference | TrueNAS SCALE Custom App (LAN Phase A) + Cloudflare Tunnel later (Phase B) — demonstrates ops fluency |
 | **P7** | Template seed (later) | Schema/UX allows other users eventually; V1 remains Sean-first |
-| **P8** | Dual-track Python CS | 24-week curriculum paced onto Monday software + alternating Saturday deep-work slots via seed/remap titles — **planning layer only**; app stays TypeScript (`docs/pm/14-python-cs-epic.md`) |
+| **P8** | Dual-track Python CS | GYAM **schedules** Harbor (Obsidian sittings + `C:\Users\sfh19\Projects\Harbor`) on Monday software + alternating Saturday slots via titles/coach briefs — **planning layer only**. GYAM does not run Harbor or Python. (`docs/pm/14-python-cs-epic.md`) |
 
 ### Product behaviors (P1–P2)
 
@@ -46,7 +46,7 @@ GYAM is **one repo that serves several deliberate purposes at once**. Do not col
 6. Is managed as a real software project under `docs/pm/` (charter, RAID, backlog, status).  
 7. Stages portfolio grabs without building the public site inside this repo.  
 8. Uses agent-team supervision as transferable Technical Project Coordinator practice.  
-9. Tracks Python CS study as dual-track roadmap tasks (titles + coach briefs; no Python runtime in-app).
+9. Tracks Harbor / Python CS study as dual-track roadmap tasks (titles + coach briefs). Harbor is a separate Python app; GYAM does not run it.
 
 **Explicit non-goals for this repo:** public portfolio website implementation; SMTP/email as a must-have notify channel; fake demo job data.
 
@@ -68,8 +68,10 @@ GYAM is **one repo that serves several deliberate purposes at once**. Do not col
 | 2026-08-03 | Coach briefs (`Task.instructions`) + multi-file task attachments; TrueNAS migrations + 1035 brief remap |
 | 2026-08-03 | Sprint 1 closed; Sprint 2 (S6–S9, E3) planned; RACI execution map updated |
 | 2026-08-12 | Sprint 2 closed: dogfood in use; I2 dormant SMTP; I3 uploads mount; S9 parked; Phase B parked (LAN-only) |
+| 2026-08-16 | I3 closed: attachments work on live `gyam/uploads` after uid-1000 perms; I4 accepted (Roadmap workaround, no catalog) |
+| 2026-08-17 | T8.3 + T6.3 closed (PDF survived app restart; Sunday Review week ending 2026-08-16). Harbor named as P8 through-line, not a GYAM runtime. |
 
-**Current state (2026-08-12):** V1 on TrueNAS Phase A (`http://192.168.1.246:4070`) in daily use; Sprint 2 closed; attachments blocked until `GYAM/uploads` is mounted (I3); Phase B parked (no public GYAM site / no extra domain); Python CS names parked until curriculum is reached.
+**Current state (2026-08-17):** V1 on TrueNAS Phase A (`http://192.168.1.246:4070`) in daily use; **Sprint 3 closed** — attachments persist (T8.3), Sunday Review in, LAN screenshots recaptured, dump proven (`gyam-20260817.dump`, 57 TOC entries). Phase B parked. Harbor is taught from GYAM (planning layer), not run inside GYAM.
 
 Detailed narrative: `docs/pm/00-multi-purpose-and-progress.md`.
 
@@ -132,13 +134,13 @@ Detail: `docs/homelab.md`. Pattern sibling: Yum4Less TrueNAS Custom App (LAN liv
 ### 5.1 Today & tasks
 
 - Primary screen: **today’s tasks + progress**.
-- Task actions: check off complete; **notes** (learned / questions); **Start** timer; **Pause** / resume; Done closes timer and checks off.
+- Task actions: check off complete; **notes**; **Start** timer; **Pause** / resume; **Done** closes timer and checks off; **Tomorrow** moves the task to the next calendar day’s list without marking it complete (elapsed time kept; timer pauses). That clears it from backlog so you are not forced to fake Done to unblock Today.
 - Elapsed time **excludes** paused gaps.
 - Hourly keep-alive prompt; **no response in 60 seconds → auto-pause**.
 - Implementation preference: desktop/PWA + service worker (or native shell) for reliable background behavior.
 - Suggested study duration via editable **subject → minutes** lookup table.
-- Incomplete tasks **roll over**; **next day stays paused** until prior day is cleared.
-- Unlimited rollover pressure: keep pushing until finished.
+- Incomplete tasks **roll over**; **next day stays paused** until prior day is cleared **or** remaining incomplete items are moved with **Tomorrow**.
+- Unlimited rollover pressure: keep pushing until finished. Tomorrow is a reschedule, not a skip.
 - Blunt catch-up prompt (approved):
 
 > Yesterday isn’t done. Today stays paused. Finish the backlog or increase today’s load and catch up — you’re not getting any younger.
@@ -232,10 +234,10 @@ Manual capture of employer communications (rejection, interview, acceptance, etc
 
 ## 7. Data, privacy, export
 
-- Homelab-local persistence (Postgres).
-- Export/import required (JSON/Markdown/CSV as practical).
+- Homelab-local persistence (Postgres). Live job/task rows, dumps, and usage screenshots stay on TrueNAS / this machine — **not** GitHub.
+- Export/import required (JSON/Markdown/CSV as practical). Export files are local; do not commit them.
 - Roadmap markdown remains a **seed input**, not the only source of truth.
-- No public fake demo mode; portfolio shows real architecture + screenshots of real usage (sanitize secrets if sharing publicly).
+- No public fake demo mode; portfolio site (separate repo) may use sanitized architecture shots, not live Jobs data.
 
 ---
 
@@ -252,7 +254,7 @@ GYAM should log user/system activity in a durable, readable form so Cursor can:
 - Location: e.g. `logs/activity/` (and/or DB `activity_events` table mirrored to files for agents).
 - Format: JSON Lines (one event per line) and/or daily Markdown summaries.
 - Minimum fields: `timestamp`, `userId`, `eventType`, `entityType`, `entityId`, `payload`, `client` (web/pwa/desktop).
-- Example event types: `task_started`, `task_paused`, `task_auto_paused`, `task_completed`, `day_blocked`, `job_status_changed`, `quota_missed`, `review_submitted`, `export_ran`, `notification_sent`, `notification_acked`.
+- Example event types: `task_started`, `task_paused`, `task_auto_paused`, `task_completed`, `task_deferred_tomorrow`, `day_blocked`, `job_status_changed`, `quota_missed`, `review_submitted`, `export_ran`, `notification_sent`, `notification_acked`.
 
 ---
 
@@ -280,6 +282,7 @@ GYAM should log user/system activity in a durable, readable form so Cursor can:
 - hiringcafe watcher sidecar (design OK; ship after core)  
 - Full Google Calendar depth  
 - Tauri/desktop wrapper polish  
+- Python runtime / Harbor code inside this repo (Harbor stays a separate project; GYAM only schedules sittings)  
 
 ---
 
@@ -368,3 +371,7 @@ Known upcoming discussions:
 | 2026-08-02 | P8 Python CS dual-track: `docs/pm/14-python-cs-epic.md` + seed/remap Monday–Saturday titles |
 | 2026-08-03 | Coach briefs + task attachments; TrueNAS migrate + remap 1035 briefs; Sprint 1→2 + RACI |
 | 2026-08-12 | Sprint 2 close: dogfood in use; I2 dormant SMTP UI; I3 uploads dataset; S9 parked; Phase B parked |
+| 2026-08-16 | I3 resolved (live `gyam/uploads` perms); I4 accepted — Roadmap is enough, no catalog page |
+| 2026-08-17 | Harbor is the P8 through-line Python app (Obsidian + separate folder); GYAM teaches it via Today/roadmap only |
+| 2026-08-17 | Live screenshots/dumps stay off GitHub; portfolio PNGs gitignored |
+| 2026-08-17 | Tomorrow button: reschedule incomplete task to next calendar day without Done |

@@ -8,14 +8,14 @@ GYAM itself is also the career OS, sample software project, and PM practice lab 
 
 | Path | Put here |
 |------|----------|
-| `screenshots/` | PNG/WebP of Today, Jobs, Progress, Review, Roadmap, Settings (no PIN, no real emails, blur companies if needed) |
+| `screenshots/` | **Local only** (gitignored). Capture on LAN for your own case-study staging. Do not commit — Jobs/Today shots are live database data. |
 | `notes/` | Case-study drafts, STAR stories, sprint demo scripts, interview talking points |
 | `sanitized-docs/` | Copies of PM docs with secrets removed (optional; or link to redacted exports) |
 
 ## Grab checklist (before site import)
 
 - [x] Screenshots captured via Playwright (`e2e/portfolio-screenshots.spec.ts`, 2026-07-28): login, today, today-mobile, progress, jobs, review, roadmap, settings  
-- [x] Review screenshots for PIN / critical secrets — Sean accepted 2026-08-12 (no saved PIN in shots). PNGs are not in the working tree; re-capture before a public case study if companies/emails appear.  
+- [x] Recapture against live LAN 2026-08-17 (local files only; **not** in git). User **Sean**. Jobs are real. Login PIN field empty.  
 - [x] Case study metrics — **N/A** until usage numbers are worth publishing (`notes/case-study-outline.md`)  
 - [ ] Charter + one status report + RAID excerpt (sanitized)  
 - [ ] Backlog screenshot or markdown excerpt showing Epic/5 Stories/10 Tasks  
@@ -32,8 +32,10 @@ GYAM itself is also the career OS, sample software project, and PM practice lab 
 5. Outcomes — V1 shipped locally; Playwright; living docs  
 6. Artifacts — link/embed from this pack  
 
-## Do not export
+## Do not export / do not commit to GitHub
 
 - `.env`, PIN, session cookies, SMTP passwords  
+- Live screenshots of Jobs/Today/Progress (real applications, notes, dump-derived UI)  
+- Postgres dumps (`*.dump`) and JSON exports  
 - Raw employer email bodies with PII unless redacted  
 - Internal agent transcripts with secrets

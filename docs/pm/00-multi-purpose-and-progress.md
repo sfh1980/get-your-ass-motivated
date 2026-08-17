@@ -1,6 +1,6 @@
 # 00 — Multi-purpose project + progress (beginning → now)
 
-**Updated:** 2026-08-12  
+**Updated:** 2026-08-17  
 **Audience:** Sean (PM) + future portfolio readers (sanitized)
 
 ## Why this document exists
@@ -73,14 +73,14 @@ Optional SMTP code may remain dormant in Settings — product truth is “not re
 ### Phase D — Now (current)
 | Area | State |
 |------|--------|
-| Product V1 (local + TrueNAS) | In daily use on LAN; coach briefs live; file attachments blocked until uploads dataset (I3) |
-| Governance docs | Sprint 2 closed 2026-08-12; Sprint 3 = uploads mount + dump proof |
-| Portfolio export | Screenshots captured; PIN review accepted; metrics N/A |
-| Dogfood | **In use** on TrueNAS (S6) |
+| Product V1 (local + TrueNAS) | In daily use on LAN; coach briefs live; attachments persist on `gyam/uploads` after app restart (T8.3) |
+| Governance docs | Sprint 3 **closed** 2026-08-17: S8 done; dump proven (57 TOC); LAN shots recaptured |
+| Portfolio export | 8 shots exist (2026-07-28); PIN review accepted; recapture blocked until live Jobs are real (not seed Acme Health) |
+| Dogfood | **In use** ≥1 week through 2026-08-16; Sunday Review submitted |
 | Portfolio website | Explicitly **out of this repo** |
 | Homelab HTTPS / COOKIE_SECURE | Phase B **parked** (LAN-only; no extra domain). Yum4Less Tunnel no longer blocks. |
 | Homelab Phase A (LAN) | **Done** 2026-08-02 — `http://192.168.1.246:4070` |
-| Python CS dual-track (P8) | Titles + briefs remapped; weeks 11/13/17 names **parked** until CS work starts |
+| Dual-track Python CS (P8) | Titles + briefs remapped (old week labels still in DB); Harbor is the through-line app GYAM *schedules*, not a GYAM runtime |
 
 ---
 
@@ -97,11 +97,10 @@ Optional SMTP code may remain dormant in Settings — product truth is “not re
 
 ## Open work (not failures — next focus)
 
-1. **I3 / S8:** create `appPool/GYAM/uploads`, mount `/app/data/uploads`, Save Custom App YAML, attach one file.  
-2. Prove a Postgres dump on the pool (R3) — run on TrueNAS Shell.  
-3. Optional T6.3: Sunday Review in-app if not already submitted.  
-4. Phase B parked (LAN-only). Free later: hostname on `yum4less.com`, no new domain.  
-5. Python CS weeks 11/13/17 names parked until curriculum is reached.
+1. Review whether to **commit** (gitignore now excludes live PNGs/dumps; next commit should drop tracked screenshots from GitHub).  
+2. Clear 2026-08-13 Excel/Power BI **or** use Tomorrow once the new build is on LAN.  
+3. Phase B parked (LAN-only).  
+4. Harbor sitting-name remap parked until sitting 1 (S9).
 
 ---
 

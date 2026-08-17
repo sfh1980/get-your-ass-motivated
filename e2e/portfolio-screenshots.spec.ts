@@ -2,7 +2,11 @@ import { test, expect } from "@playwright/test";
 import path from "node:path";
 import fs from "node:fs";
 
-const USER = { username: "sean", pin: "1234" };
+/** Live LAN: set GYAM_E2E_ORIGIN, GYAM_E2E_USER, GYAM_E2E_PIN. Do not commit the PIN. */
+const USER = {
+  username: process.env.GYAM_E2E_USER ?? "sean",
+  pin: process.env.GYAM_E2E_PIN ?? "1234",
+};
 const OUT = path.resolve("docs/pm/portfolio-export/screenshots");
 
 async function login(page: import("@playwright/test").Page) {

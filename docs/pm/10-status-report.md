@@ -3,47 +3,49 @@
 | Field | Value |
 |-------|--------|
 | Project | GYAM (multi-purpose: OS + sample project + PM lab + portfolio staging) |
-| Report date | 2026-08-12 |
-| Period | Sprint 2 close (window was 2026-08-04 → 2026-08-10) |
-| Overall | **Yellow** (app in daily use; attachments volume missing on TrueNAS) |
+| Report date | 2026-08-17 |
+| Period | Sprint 3 close (window 2026-08-12 → 2026-08-18) |
+| Overall | **Green** (sprint goal met; Today still blocked on 2026-08-13 Excel/Power BI) |
 | Author | Sean Holmes (PM) |
 
 ## Executive summary
 
-Sean is dogfooding GYAM on TrueNAS LAN (`http://192.168.1.246:4070`, health OK 2026-08-12). Sprint 2 stories: S6 done; S7 PIN/PII accepted (metrics N/A); S8 blocked on uploads dataset (I3); S9 parked until Python CS work starts. I2 SMTP Settings labeled dormant. Phase B parked (LAN-only; no extra domain). Watchtower will pick up the app image after this push; **it will not attach the uploads volume** — that needs a Custom App YAML Save.
+**Sprint 3 is closed.** Attachments persist after app restart (S8/T8.3). Sunday Review submitted for week ending 2026-08-16. Live Jobs are real; eight portfolio screenshots recaptured. Postgres dump proven: `/mnt/appPool/GYAM/gyam-20260817.dump` (120K, CUSTOM gzip, **57 TOC entries**, PG 16.14). Harbor stays a separate Python project GYAM only schedules. Phase B parked. Remaining habits: clear 8/13 Excel/Power BI; review Jobs PNG before public git.
 
 ## Progress vs plan
 
 | Area | % | Notes |
 |------|---|--------|
 | V1 ship order (product) | ~100% local/LAN | Phase B parked, not blocked |
-| Sample-project language (DB + seed) | 100% | Remaps current on TrueNAS |
-| PM doc pack | Living | RAID/status refreshed 2026-08-12 |
-| Portfolio export | ~50% | Capture done; PIN review accepted; metrics N/A |
-| Dogfood | In use | S6 accepted by Sean |
-| Coach briefs / attachments | Briefs live; files blocked | I3 uploads dataset |
+| Sample-project language (DB + seed) | 100% | Harbor sitting titles not remapped yet |
+| PM doc pack | Living | Sprint 3 closed 2026-08-17 |
+| Portfolio export | ~70% | LAN recapture done; company names in Jobs PNG; metrics N/A |
+| Dogfood | In use | Streak 4d / best 11d; blocked on 8/13 |
+| Coach briefs / attachments | Done on LAN | I3 + T8.3 closed |
+| Backup proof (R3) | Proven | Keep Aug 2 52K + Aug 17 120K dumps |
 
-## Accomplishments this period (Sprint 2)
+## Accomplishments this period (Sprint 3)
 
-- Daily use on TrueNAS (S6).  
-- PIN/PII: Sean confirmed screenshots do not expose a saved PIN (S7 partial).  
-- Python CS names parked until curriculum is reached (S9).  
-- Phase B parked; D5 no longer “blocked on Yum4Less.”  
-- I2 dormant SMTP copy (this commit).  
+- Uploads persist after app restart (T8.3).  
+- Sunday Review submitted (T6.3).  
+- Live Jobs board is real; 8 screenshots recaptured.  
+- Harbor boundary locked: taught from GYAM, not run from GYAM.  
+- Dump TOC listed inside `gyam-postgres` (57 entries).  
 
-## Plans next period (Sprint 3)
+## Plans next period
 
-- **I3 / S8:** create `appPool/GYAM/uploads`, mount `/app/data/uploads`, chown 1000:1000, Save Custom App YAML, attach one real file.  
-- Prove a `pg_dump` on the pool (R3) — run on TrueNAS Shell; workstation SSH refused.  
-- Keep weekly status/RAID. Do not start Tunnel or Python CS names.
+- Clear 2026-08-13 Excel/Power BI so Today unblocks.  
+- Review Jobs PNG before committing to the public repo.  
+- Keep weekly status/RAID. Do not start Tunnel, SMTP, or Harbor-in-GYAM.
 
 ## Risks / issues
 
-- **I3** uploads not mounted — primary ops blocker.  
-- **R3** dump not verified from this workstation.  
-- **R1** still standing — no sidecars / no public GYAM site.  
-- **R2** Watching (in use).  
+- **R3** Watching — dump proven; downtime risk remains.  
+- **R4** Watching — real company names in `gyam-jobs.png`.  
+- **R1** Open — Sunday Review is change-control; two-repo rule.  
+- **R2** Watching — lived week + heatmap; still blocked on 8/13.  
+- **R8** Watching — Watchtower ≠ YAML volume Save.
 
 ## Decisions needed
 
-None blocking product. Sean must Save Custom App YAML after creating the uploads dataset (Watchtower will not do that).
+None. Sprint 3 goal met.
