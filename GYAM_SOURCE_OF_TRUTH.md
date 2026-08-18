@@ -26,8 +26,8 @@ GYAM is **one repo that serves several deliberate purposes at once**. Do not col
 |---|---------|---------------------------|
 | **P1** | Personal career OS | Daily Today view, timers, rollover, jobs, correspondence archive, Sunday review — Sean’s execution system |
 | **P2** | Roadmap engine | Seeds/edits the 12-month PM daily plan from first-use date; quotas and milestones |
-| **P3** | Sample software project | Replaces throwaway Jira sandbox; Epic/Stories/Tasks + sprints live in `docs/pm` and the product itself |
-| **P4** | PM practice lab | Hybrid Agile + predictive artifacts; Sean supervises Cursor agents as the delivery team (RACI) |
+| **P3** | Sample software project | Replaces throwaway Jira sandbox; Epic/Stories/Tasks + sprints live in `docs/pm` **and** on the in-app **PM** screen (`/pm`) |
+| **P4** | PM practice lab | Hybrid Agile + predictive artifacts; Sean supervises Cursor agents (RACI); `/pm` is the teaching dashboard (live metrics + **How this works** lessons) |
 | **P5** | Portfolio evidence source | Real usage + screenshots/notes in `docs/pm/portfolio-export/` for a **separate** future portfolio website |
 | **P6** | Homelab reference | TrueNAS SCALE Custom App (LAN Phase A) + Cloudflare Tunnel later (Phase B) — demonstrates ops fluency |
 | **P7** | Template seed (later) | Schema/UX allows other users eventually; V1 remains Sean-first |
@@ -43,7 +43,7 @@ GYAM is **one repo that serves several deliberate purposes at once**. Do not col
 
 ### Project / career behaviors (P3–P8)
 
-6. Is managed as a real software project under `docs/pm/` (charter, RAID, backlog, status).  
+6. Is managed as a real software project under `docs/pm/` (charter, RAID, backlog, status) with an in-app **PM** dashboard (`/pm`) for execution metrics + governance snapshot + lesson modals.  
 7. Stages portfolio grabs without building the public site inside this repo.  
 8. Uses agent-team supervision as transferable Technical Project Coordinator practice.  
 9. Tracks Harbor / Python CS study as dual-track roadmap tasks (titles + coach briefs). Harbor is a separate Python app; GYAM does not run it.
@@ -70,8 +70,10 @@ GYAM is **one repo that serves several deliberate purposes at once**. Do not col
 | 2026-08-12 | Sprint 2 closed: dogfood in use; I2 dormant SMTP; I3 uploads mount; S9 parked; Phase B parked (LAN-only) |
 | 2026-08-16 | I3 closed: attachments work on live `gyam/uploads` after uid-1000 perms; I4 accepted (Roadmap workaround, no catalog) |
 | 2026-08-17 | T8.3 + T6.3 closed (PDF survived app restart; Sunday Review week ending 2026-08-16). Harbor named as P8 through-line, not a GYAM runtime. |
+| 2026-08-17 | In-app **PM** dashboard (`/pm`, S10): live DB charts + RAID/WBS snapshot; job counts only; no employer names. |
+| 2026-08-17 | **How this works** lesson modals on every `/pm` block (what / purpose / how PMs use it / GYAM caveats). |
 
-**Current state (2026-08-17):** V1 on TrueNAS Phase A (`http://192.168.1.246:4070`) in daily use; **Sprint 3 closed** — attachments persist (T8.3), Sunday Review in, LAN screenshots recaptured, dump proven (`gyam-20260817.dump`, 57 TOC entries). Phase B parked. Harbor is taught from GYAM (planning layer), not run inside GYAM.
+**Current state (2026-08-17):** V1 on TrueNAS Phase A (`http://192.168.1.246:4070`) in daily use; **Sprint 3 closed**. **S10 PM dashboard** is in the repo (`/pm` tab + lesson modals) — TrueNAS gets it after this work is committed and Watchtower pulls `:homelab` (no YAML Save). Attachments persist (T8.3), Sunday Review in, dump proven. Phase B parked. Harbor is taught from GYAM (planning layer), not run inside GYAM.
 
 Detailed narrative: `docs/pm/00-multi-purpose-and-progress.md`.
 
@@ -134,6 +136,7 @@ Detail: `docs/homelab.md`. Pattern sibling: Yum4Less TrueNAS Custom App (LAN liv
 ### 5.1 Today & tasks
 
 - Primary screen: **today’s tasks + progress**.
+- Other nav (logged-in): Progress, **PM** (practice-lab dashboard — see §5.3.2), Jobs, Review, Roadmap, Settings.
 - Task actions: check off complete; **notes**; **Start** timer; **Pause** / resume; **Done** closes timer and checks off; **Tomorrow** moves the task to the next calendar day’s list without marking it complete (elapsed time kept; timer pauses). That clears it from backlog so you are not forced to fake Done to unblock Today.
 - Elapsed time **excludes** paused gaps.
 - Hourly keep-alive prompt; **no response in 60 seconds → auto-pause**.
@@ -171,6 +174,10 @@ Must exist in V1 placement:
 - Multi-device sync (via homelab)
 - Export / import (CSV/JSON/Markdown)
 
+Accepted after V1 (not ship-order):
+
+- **PM dashboard** (`/pm`) — practice-lab charts + **How this works** lessons (`docs/pm/15-in-app-pm-dashboard.md`)
+
 ### 5.3.1 Locked: notifications + employer archive (no email integration required)
 
 **Decision (2026-07-27):** GYAM delivers the *outcomes* of “email notify + keep employer mail” **without** integrating email protocols as a V1 must-have.
@@ -181,6 +188,15 @@ Must exist in V1 placement:
 | Archive rejection / interview / offer mail | **Job correspondence archive** — manual paste of subject/body + optional file attach (`.eml`, PDF, screenshot); typed entries on the job | IMAP ingest, auto-filing inbox, OCR-as-primary |
 
 SMTP/email-send hooks that already exist in code are **optional / dormant**, not a must-ship product requirement. Do not block V1 or V1.1 on configuring Yahoo or any mail provider.
+
+### 5.3.2 In-app PM dashboard (`/pm`) — accepted 2026-08-17
+
+Practice lab (P3–P4), not a V1 must-ship item. Canonical write-up: `docs/pm/15-in-app-pm-dashboard.md`.
+
+- **Live from Postgres (no git):** streaks, burnup, heatmap, hours by subject, job **status counts**, weekly applies, quota, rollover, Sunday Review cadence, milestone ticks.  
+- **Snapshot in API** (`apps/api/src/pm/governanceSnapshot.ts`): RAID P×I, WBS, RACI, sprint pill, catalog. Editing `docs/pm` markdown does not move those widgets until the snapshot is deployed.  
+- **How this works** on every block: what it is, purpose, how PMs use it, need-to-know, GYAM caveats.  
+- **Integrity:** no fake Gantt/EVM/PERT; no employer names on this screen.
 
 ### 5.4 Sunday review
 
@@ -375,3 +391,5 @@ Known upcoming discussions:
 | 2026-08-17 | Harbor is the P8 through-line Python app (Obsidian + separate folder); GYAM teaches it via Today/roadmap only |
 | 2026-08-17 | Live screenshots/dumps stay off GitHub; portfolio PNGs gitignored |
 | 2026-08-17 | Tomorrow button: reschedule incomplete task to next calendar day without Done |
+| 2026-08-17 | S10 in-app PM dashboard (`/pm`): live DB + governance snapshot; job counts only |
+| 2026-08-17 | `/pm` How this works lesson modals — teach each artifact for professional PM practice |

@@ -11,13 +11,15 @@ A homelab-local **multi-purpose** system: Sean’s PM-career OS, the roadmap’s
 - Activity logging for Cursor-assisted planning.  
 - Homelab Postgres + documented deploy path (`docs/homelab.md`: TrueNAS Phase A LAN; Cloudflare Phase B later).  
 - `docs/pm` governance pack and `portfolio-export/` staging.  
-- Explicit multi-purpose documentation (SoT §1; `docs/pm/00-…`).
+- Explicit multi-purpose documentation (SoT §1; `docs/pm/00-…`).  
+- In-app **PM** dashboard (`/pm`): live execution charts from Postgres, governance snapshot from `docs/pm`, **How this works** lesson modals (`15-in-app-pm-dashboard.md`). Accepted after V1 (S10), not a ship-order reshuffle.
 
 ## Out of scope
 
 - Public portfolio website implementation (separate future project).  
 - Multi-tenant SaaS; paid email as required path.  
-- Full PMO tool replacement (Jira/Confluence) inside the app.  
+- Full PMO tool replacement (Jira/Confluence) inside the app. The `/pm` screen is a **practice dashboard**, not Jira.  
+- Fake Gantt / EVM / PERT charts (no dependency graph, no cost baseline).  
 - Post-V1 integrations in SoT until explicitly pulled in.
 
 ## Constraints

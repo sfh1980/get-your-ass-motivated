@@ -12,7 +12,7 @@ alwaysApply: true
 - Auth V1: `users` table with userID (name) + hashed PIN. No email required yet.
 - Notify + archive: **local notifications** + **job correspondence archive (manual)** — email/SMTP is not a V1 must-have.
 - GYAM is multi-purpose: career OS + sample software project + PM practice lab + portfolio-export staging (see SoT §1). Portfolio *website* is separate.
-- GYAM is the roadmap **sample software project**; PM artifacts live in `docs/pm/`; Cursor subagents are the supervised delivery team (Jira not required for solo).
+- GYAM is the roadmap **sample software project**; PM artifacts live in `docs/pm/`; the in-app **PM** tab (`/pm`) is the practice-lab dashboard (live DB + RAID/WBS snapshot + How this works lessons). Cursor subagents are the supervised delivery team (Jira not required for solo).
 - Portfolio website is separate; stage grabs in `docs/pm/portfolio-export/`.
 - Data stays on homelab (TrueNAS SCALE + Docker/Postgres; LAN Phase A; Cloudflare Tunnel Phase B). No public SaaS as system of record.
 - No fake demo/job data. Portfolio uses real architecture and real usage.

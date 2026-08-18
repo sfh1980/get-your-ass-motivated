@@ -1,7 +1,7 @@
 # GYAM — PM documentation pack
 
 **Project:** GYAM (Get Your Ass Motivated)  
-**Updated:** 2026-08-03  
+**Updated:** 2026-08-17  
 
 ## What this folder is
 
@@ -11,7 +11,7 @@ Living project-management artifacts for a **multi-purpose** project:
 |------|-----|
 | Career OS + roadmap product | Running app + SoT |
 | Sample software project | `07-wbs-backlog.md`, sprints |
-| PM practice (you + agent team) | RACI, RAID, status, DoD |
+| PM practice (you + agent team) | RACI, RAID, status, DoD; in-app [`/pm` dashboard](./15-in-app-pm-dashboard.md) + **How this works** lessons |
 | Portfolio staging (site later) | [`portfolio-export/`](./portfolio-export/) |
 
 **Start here for the story of progress:** [`00-multi-purpose-and-progress.md`](./00-multi-purpose-and-progress.md)
@@ -34,13 +34,14 @@ You are the **sponsor, product owner, and project manager**. Cursor **subagents 
 | 05 | [Communication plan](./05-communication-plan.md) | Cadence for status, RAID, reviews |
 | 06 | [RAID log](./06-raid-log.md) | Risks, assumptions, issues, dependencies |
 | 07 | [WBS / backlog](./07-wbs-backlog.md) | Epic, stories, tasks |
-| 08 | [Sprint plan](./08-sprint-plan.md) | Hybrid Agile; Sprint 1 closed; Sprint 2 current |
+| 08 | [Sprint plan](./08-sprint-plan.md) | Hybrid Agile; Sprint 3 closed; S10 accepted after close |
 | 09 | [Definition of done](./09-definition-of-done.md) | Quality bar |
 | 10 | [Status report](./10-status-report.md) | Latest executive-style status |
 | 11 | [Change log](./11-change-log.md) | Scope / decision changes |
 | 12 | [Milestone plan](./12-milestone-plan.md) | Roadmap months ↔ GYAM outcomes |
 | 13 | [Lessons learned](./13-lessons-learned.md) | Continuous capture |
 | 14 | [Python CS epic](./14-python-cs-epic.md) | Dual-track Monday/Saturday curriculum ↔ roadmap |
+| 15 | [In-app PM dashboard](./15-in-app-pm-dashboard.md) | `/pm` what/why; live vs snapshot; lesson modals |
 | — | [Portfolio export](./portfolio-export/README.md) | Screenshots, notes, grab checklist |
 
 ## Weekly operating loop
@@ -48,7 +49,7 @@ You are the **sponsor, product owner, and project manager**. Cursor **subagents 
 1. **Monday** — Confirm sprint goal; pull stories into Today via GYAM.  
 2. **Daily** — Use GYAM Today/timer; supervise agent work; log RAID issues.  
 3. **Tuesday** — Agent-team check-in; update one PM artifact.  
-4. **Sunday** — GYAM Review + refresh status + RAID + lessons.  
+4. **Sunday** — GYAM Review + refresh status + RAID + lessons. Glance at in-app **PM** (`/pm`); if RAID/WBS changed, update `governanceSnapshot.ts` in the same docs commit when you want the screen to match.  
 5. **Sprint end** — Demo checklist; move stories Done; plan next sprint.
 
 ## Remap note

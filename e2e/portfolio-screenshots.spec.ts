@@ -34,6 +34,7 @@ test("capture portfolio screenshots", async ({ page }) => {
   const shots: Array<{ name: string; link?: string; wait?: RegExp }> = [
     { name: "gyam-today.png", wait: /Today|progress|Backlog/i },
     { name: "gyam-progress.png", link: "Progress", wait: /streak|heatmap|Progress/i },
+    { name: "gyam-pm.png", link: "PM", wait: /PM dashboard|Risk matrix|Burnup/i },
     { name: "gyam-jobs.png", link: "Jobs", wait: /quota|Wishlist|Save job/i },
     { name: "gyam-review.png", link: "Review", wait: /wins|blockers|focus|plan/i },
     { name: "gyam-roadmap.png", link: "Roadmap", wait: /Roadmap|milestone|subject/i },
@@ -42,7 +43,7 @@ test("capture portfolio screenshots", async ({ page }) => {
 
   for (const shot of shots) {
     if (shot.link) {
-      await page.getByRole("link", { name: shot.link }).click();
+      await page.getByRole("link", { name: shot.link, exact: true }).click();
     }
     if (shot.wait) {
       await expect(page.getByText(shot.wait).first()).toBeVisible({ timeout: 15_000 });

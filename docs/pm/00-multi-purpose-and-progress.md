@@ -23,7 +23,7 @@ This file is the narrative bridge between those roles and the factual progress f
 | Career OS (use it) | Running app: Today, Jobs, Review… | Daily dogfood; real job/correspondence data |
 | Roadmap engine | Seed + editable roadmap in DB | Remapped Week 1+ language; milestones current |
 | Sample software project | Epic/Stories/Tasks in `07-wbs-backlog.md` | V1 stories Done; sprints logged |
-| PM practice lab | Charter, RAID, RACI, status, DoD | Weekly RAID/status; agent assignments |
+| PM practice lab | Charter, RAID, RACI, status, DoD; in-app `/pm` + How this works | Weekly RAID/status; dashboard used; agent assignments |
 | Portfolio evidence | `portfolio-export/` | Screenshots + case study ready to copy |
 | Homelab reference | `docs/homelab.md`, TrueNAS Phase A | LAN Custom App runbook; WAN Phase B deferred |
 | Dual-track Python CS (P8) | `14-python-cs-epic.md`, seed + `db:remap-python-cs` | Specific Monday/Saturday titles by `sourceWeek` |
@@ -74,7 +74,8 @@ Optional SMTP code may remain dormant in Settings — product truth is “not re
 | Area | State |
 |------|--------|
 | Product V1 (local + TrueNAS) | In daily use on LAN; coach briefs live; attachments persist on `gyam/uploads` after app restart (T8.3) |
-| Governance docs | Sprint 3 **closed** 2026-08-17: S8 done; dump proven (57 TOC); LAN shots recaptured |
+| Governance docs | Sprint 3 **closed** 2026-08-17; **S10** in-app PM dashboard + lesson modals (repo; TrueNAS after next image pull) |
+| In-app PM (`/pm`) | Live DB charts + RAID/WBS snapshot + How this works. Canonical: `15-in-app-pm-dashboard.md` |
 | Portfolio export | 8 shots exist (2026-07-28); PIN review accepted; recapture blocked until live Jobs are real (not seed Acme Health) |
 | Dogfood | **In use** ≥1 week through 2026-08-16; Sunday Review submitted |
 | Portfolio website | Explicitly **out of this repo** |
@@ -89,8 +90,8 @@ Optional SMTP code may remain dormant in Settings — product truth is “not re
 | Purpose | Progress signal |
 |---------|-----------------|
 | OS | Tasks completed in Today; streaks; jobs moved through pipeline |
-| Sample project | S1–S5 Done; S6–S9 in Sprint 2; Playwright green; change log honest |
-| PM practice | RAID/status updated; sprint goals met or descope’d |
+| Sample project | S1–S5 Done; S6–S8 Done; S7 Partial; S9 Parked; S10 Done (PM dashboard) |
+| PM practice | RAID/status updated; `/pm` dashboard + lesson modals; sprint goals met or descope’d |
 | Portfolio | Export checklist advancing; no secrets in screenshots |
 
 ---
@@ -100,7 +101,9 @@ Optional SMTP code may remain dormant in Settings — product truth is “not re
 1. Review whether to **commit** (gitignore now excludes live PNGs/dumps; next commit should drop tracked screenshots from GitHub).  
 2. Clear 2026-08-13 Excel/Power BI **or** use Tomorrow once the new build is on LAN.  
 3. Phase B parked (LAN-only).  
-4. Harbor sitting-name remap parked until sitting 1 (S9).
+4. Harbor sitting-name remap parked until sitting 1 (S9).  
+5. Commit/push PM dashboard + lessons so Watchtower can pull `/pm` onto TrueNAS (no YAML Save).  
+6. After Sunday RAID edits, update `apps/api/src/pm/governanceSnapshot.ts` when `/pm` should match the markdown.
 
 ---
 
@@ -111,4 +114,5 @@ Optional SMTP code may remain dormant in Settings — product truth is “not re
 - Current sprint: `08-sprint-plan.md`  
 - Status: `10-status-report.md`  
 - Python CS epic: `14-python-cs-epic.md`  
+- In-app PM dashboard: `15-in-app-pm-dashboard.md`  
 - SoT multi-purpose table: `GYAM_SOURCE_OF_TRUTH.md` §1

@@ -166,3 +166,85 @@ export interface RoadmapResponse {
   milestones: MilestoneDto[];
   subjects: SubjectDurationDto[];
 }
+
+export interface RaidRiskDto {
+  id: string;
+  title: string;
+  probability: number;
+  impact: number;
+  score: number;
+  status: string;
+}
+
+export interface WbsStoryDto {
+  id: string;
+  title: string;
+  status: string;
+}
+
+export interface RaciRowDto {
+  work: string;
+  sean: string;
+  primary: string;
+}
+
+export interface CatalogItemDto {
+  name: string;
+  used: boolean;
+  why: string;
+}
+
+export interface SeriesPoint {
+  date: string;
+  value: number;
+}
+
+export interface NamedCount {
+  name: string;
+  count: number;
+  minutes?: number;
+}
+
+export interface PmDashboardDto {
+  generatedAt: string;
+  catalog: CatalogItemDto[];
+  kpis: {
+    currentStreak: number;
+    bestStreak: number;
+    last30Percent: number;
+    tasksCompleted: number;
+    tasksOpen: number;
+    jobsTotal: number;
+    jobsApplied: number;
+    jobsInterview: number;
+    reviewsSubmitted: number;
+    milestonesDone: number;
+    milestonesTotal: number;
+    incompletePriorDays: number;
+    todayBlocked: boolean;
+  };
+  burnup: SeriesPoint[];
+  dailyCompletion: Array<{ date: string; percent: number; total: number }>;
+  hoursBySubject: NamedCount[];
+  taskStatus: NamedCount[];
+  jobsByStatus: Record<JobStatus, number>;
+  jobsByWeek: SeriesPoint[];
+  quota: {
+    target: number;
+    applied: number;
+    remaining: number;
+    onTrack: boolean;
+    weekStart: string;
+    weekEnd: string;
+  };
+  milestones: MilestoneDto[];
+  reviews: Array<{ weekStart: string; submitted: boolean }>;
+  raid: {
+    asOf: string;
+    risks: RaidRiskDto[];
+    issues: Array<{ id: string; title: string; status: string }>;
+  };
+  wbs: WbsStoryDto[];
+  raci: RaciRowDto[];
+  sprint: { name: string; status: string; window: string };
+}

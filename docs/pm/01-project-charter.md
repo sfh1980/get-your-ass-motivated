@@ -3,13 +3,13 @@
 | Field | Value |
 |-------|--------|
 | Project name | GYAM — Get Your Ass Motivated |
-| Version | 1.3 |
-| Date | 2026-08-12 |
+| Version | 1.4 |
+| Date | 2026-08-17 |
 | Project manager | Sean Holmes |
 | Sponsor | Sean Holmes (self-sponsored career project) |
 | Start | 2026-07-27 (first-use / seed date) |
 | V1 product | Soft-complete locally (2026-07-27); TrueNAS Phase A live |
-| Current phase | Sprint 3 — uploads dataset + backup proof |
+| Current phase | Sprint 3 closed; S10 in-app PM dashboard accepted |
 
 ## 1. Business case / why
 
@@ -17,14 +17,14 @@ Sean is pivoting toward **Technical Project Coordinator** roles (Google Project 
 
 1. Personal career OS (execute the 12-month roadmap with accountability).  
 2. The **sample software project** (real codebase + Epic/Stories/Tasks — not a Jira sandbox).  
-3. A PM practice lab (Sean supervises Cursor agents as the delivery team).  
+3. A PM practice lab (Sean supervises Cursor agents as the delivery team; in-app `/pm` dashboard + How this works lessons).  
 4. Portfolio evidence staging (`docs/pm/portfolio-export/`) for a separate future site.  
 5. Homelab / full-stack reference for interviews.
 
 ## 2. Objectives
 
 1. ~~Ship usable V1 OS~~ → **Met** for local use (Today → jobs → roadmap → notify/export/validation/tests).  
-2. Practice hybrid Agile + predictive PM docs on a real codebase → **In progress** (`docs/pm` live).  
+2. Practice hybrid Agile + predictive PM docs on a real codebase → **In progress** (`docs/pm` live; `/pm` in-app as of S10).  
 3. Produce portfolio-ready artifacts → **In progress** (8 screenshots captured; case-study metrics TBD).  
 4. Dogfood daily with real data → **Met** (Sean using TrueNAS LAN, 2026-08-12).  
 5. Keep purposes distinct — do not build the public portfolio website inside this repo → **Locked**.
@@ -32,7 +32,7 @@ Sean is pivoting toward **Technical Project Coordinator** roles (Google Project 
 ## 3. In-scope deliverables
 
 **Product (V1):** SoT §9 — largely delivered.  
-**Governance:** This pack (`docs/pm`).  
+**Governance:** This pack (`docs/pm`) plus the in-app **PM** screen (`/pm` — live execution metrics, RAID/WBS snapshot, lesson modals). See `15-in-app-pm-dashboard.md`.  
 **Portfolio staging:** Screenshots/notes/sanitized copies under `portfolio-export/`.
 
 ## 4. Out of scope (unless re-scoped)
@@ -54,6 +54,7 @@ SMTP/email as must-have notify channel; LinkedIn automation; PDF OCR as primary;
 
 - [x] Playwright edge suite green (22/22, 2026-07-27).  
 - [x] Living PM pack initialized; roadmap DB remapped to GYAM sample-project language.  
+- [x] In-app PM dashboard (`/pm`, S10) with How this works lessons — 2026-08-17 (repo; LAN after image pull).  
 - [x] Portfolio screenshots staged (8 files, 2026-07-28).  
 - [ ] Daily use of GYAM Today for ≥2 consecutive weeks.  
 - [ ] Job pipeline + correspondence reflect real applications.  
@@ -77,4 +78,4 @@ SMTP/email as must-have notify channel; LinkedIn automation; PDF OCR as primary;
 
 Sean Holmes authorizes GYAM as the multi-purpose career OS + sample software project and accepts PM accountability for scope, quality, and timeline trade-offs.
 
-**Sign-off:** Sean Holmes — 2026-07-28 (v1.2)
+**Sign-off:** Sean Holmes — 2026-07-28 (v1.2); v1.4 dashboard/lessons 2026-08-17

@@ -9,6 +9,7 @@ import { JobsPage } from "./pages/JobsPage";
 import { ReviewPage } from "./pages/ReviewPage";
 import { RoadmapPage } from "./pages/RoadmapPage";
 import { SettingsPage } from "./pages/SettingsPage";
+import { PmPage } from "./pages/PmPage";
 
 export function App() {
   const [ready, setReady] = useState(false);
@@ -89,6 +90,7 @@ export function App() {
       />
       <Route path="/" element={page((u) => <TodayPage user={u} onLogout={onLogout} />)} />
       <Route path="/progress" element={page((u) => <ProgressPage user={u} onLogout={onLogout} />)} />
+      <Route path="/pm" element={page((u) => <PmPage user={u} onLogout={onLogout} />)} />
       <Route path="/jobs" element={page((u) => <JobsPage user={u} onLogout={onLogout} />)} />
       <Route path="/review" element={page((u) => <ReviewPage user={u} onLogout={onLogout} />)} />
       <Route path="/roadmap" element={page((u) => <RoadmapPage user={u} onLogout={onLogout} />)} />

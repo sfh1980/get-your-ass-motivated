@@ -28,3 +28,6 @@
 | 2026-08-17 | Live usage PNGs / dumps gitignored — GitHub is app code only | Keep database-derived data on TrueNAS | Sean |
 | 2026-08-17 | Tomorrow button: move incomplete task to next day without Done | Unblock Today without fake-complete | Sean |
 | 2026-08-17 | R3 dump proven: `gyam-20260817.dump` listed (CUSTOM, 57 TOC, PG 16.14); Sprint 3 closed | `docker cp` + `pg_restore -l` inside container | Sean |
+| 2026-08-17 | In-app PM dashboard (`/pm`): live DB charts + RAID/WBS snapshot; no job PII | PM practice lab visible in the product (S10) | Sean |
+| 2026-08-17 | PM “How this works” lesson modals on every dashboard block | Teach what each artifact is, why, and how PMs use it | Sean |
+| 2026-08-17 | Documented S10 live-vs-snapshot + file map in `docs/pm/15-in-app-pm-dashboard.md` + SoT §5.3.2 | GitHub/readers need the why, not only the UI | Sean |

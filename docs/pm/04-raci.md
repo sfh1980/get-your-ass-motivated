@@ -15,6 +15,7 @@ Standing matrix (ongoing work packages):
 | Security / quality review | **A** | I | I | I | I | I | **R** |
 | Test / Playwright gate | **A** | **R** | I | I | I | I | C |
 | PM docs (`docs/pm`) maintenance | **A/R** | C | C | I | I | C | I |
+| In-app PM dashboard (`/pm`) | **A** | **R** | C | I | I | I | C |
 | Portfolio-export captures | **A/R** | C | I | I | I | I | I |
 | Release accept / Lock production | **A/R** | I | C | I | C | I | I |
 

@@ -62,7 +62,8 @@ As Sean (PM), I need GYAM to count as the sample software project and PM practic
 - [x] `docs/pm` pack + progress history  
 - [x] Agent-team RACI  
 - [x] DB remap sample-project language  
-- [x] Sustained weekly status/RAID for Month 2 milestone — Sprint 2 reviewed 2026-08-12; continue weekly
+- [x] Sustained weekly status/RAID for Month 2 milestone — Sprint 2 reviewed 2026-08-12; continue weekly  
+- [x] In-app PM dashboard (`/pm`, S10) + How this works lessons — 2026-08-17
 
 ### Story S6 — Sustained dogfood week
 As Sean, I need to run GYAM on TrueNAS for real workdays so the sample project has usage evidence, not theater.  
@@ -108,6 +109,20 @@ Tasks:
 - [ ] T9.2 Complete Mon software hour(s) this sprint using coach briefs — parked  
 - [ ] T9.3 Note pacing feedback after Week 1A/1B pair for later decision — parked  
 
+### Story S10 — In-app PM dashboard
+As Sean (PM), I need RAID/WBS/execution charts in the product so the practice lab is visible without opening markdown.  
+**Status:** **Done** 2026-08-17 — `/pm` nav tab; live DB aggregates + governance snapshot; **How this works** lesson modals; no employer names on this screen  
+**Epic:** E2  
+**Acceptance:** Nav item next to Progress; burnup/funnel/heatmap/quota from Postgres; RAID matrix and WBS from docs snapshot; catalog of skipped textbook charts; every block teaches what/why/how PMs use it.  
+**Write-up:** `15-in-app-pm-dashboard.md`
+
+Tasks:
+- [x] T10.1 Research PM visual types; pick only those with honest GYAM data  
+- [x] T10.2 `GET /api/pm/dashboard` + PM page (CSS/SVG, no chart library)  
+- [x] T10.3 Keep job PII off the dashboard; companies stay on Jobs  
+- [x] T10.4 How this works modals on every block (layman + professional PM use + GYAM caveats)  
+- [x] T10.5 Document live vs snapshot + file map in `docs/pm/15-…` and SoT §5.3.2  
+
 ### Epic E3 — Dogfood & portfolio evidence (opened 2026-08-03)
 As Sean (PM/PO), I need real usage and sanitized evidence so Month 1–2 milestones are credible.  
 **Status:** Sprint 3 (2026-08-17) — S6 done; S7 partial (recapture pending real Jobs); S8 done; S9 parked  
@@ -118,4 +133,4 @@ As Sean (PM/PO), I need real usage and sanitized evidence so Month 1–2 milesto
 
 ## Mapping to “5 Stories / 10 Tasks”
 
-S1–S5 are the five product stories. T1.1–T4.2 plus T5.1–T5.4 cover the original ten + quality gates (complete). E2 is the governance epic layered on after V1. **S6–S9** are Sprint 2+ stories for habit, evidence, and dual-track hygiene — not a reset of the original five.
+S1–S5 are the five product stories. T1.1–T4.2 plus T5.1–T5.4 cover the original ten + quality gates (complete). E2 is the governance epic layered on after V1. **S6–S9** are Sprint 2+ stories for habit, evidence, and dual-track hygiene — not a reset of the original five. **S10** is an accepted E2 screen (PM dashboard) after Sprint 3 close.

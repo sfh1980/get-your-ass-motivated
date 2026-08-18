@@ -2,7 +2,9 @@
 
 Living log. Update at least weekly. **P**robability / **I**mpact: 1–5.
 
-**Reviewed:** 2026-08-17 (Sprint 3 closed: T8.3, Sunday Review, LAN shots, dump TOC).
+**Reviewed:** 2026-08-17 (Sprint 3 closed; S10 `/pm` dashboard).  
+
+The in-app **PM** risk matrix (`/pm`) is a **code snapshot** (`apps/api/src/pm/governanceSnapshot.ts`), not a live parse of this file. After you edit RAID here, update that snapshot in the same change if you want the dots to match, then deploy (Watchtower image pull). See `15-in-app-pm-dashboard.md`.
 
 ## Risks
 

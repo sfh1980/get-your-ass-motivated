@@ -9,6 +9,7 @@ import type {
   SubjectDurationDto,
   TodayResponse,
   WeeklyReviewDto,
+  PmDashboardDto,
 } from "@gyam/shared";
 
 async function request<T>(url: string, init?: RequestInit): Promise<T> {
@@ -78,6 +79,7 @@ export const api = {
       body: JSON.stringify({ notes }),
     }),
   progress: () => request<ProgressStats>("/api/progress"),
+  pmDashboard: () => request<PmDashboardDto>("/api/pm/dashboard"),
   jobs: () => request<JobsBoardResponse>("/api/jobs"),
   createJob: (input: JobInput) =>
     request<{ job: JobDto }>("/api/jobs", {

@@ -101,3 +101,7 @@
 - Continue Month-2 weekly status streak  
 - Phase B only if Sean wants a free hostname on `yum4less.com`  
 - Harbor sitting titles when sitting 1 starts (S9) — do not fold Harbor into GYAM  
+
+## After Sprint 3 (accepted, not a new sprint yet)
+
+- [x] **S10** In-app PM dashboard (`/pm`) — live DB + RAID/WBS snapshot; job counts only; **How this works** lessons; documented in `15-in-app-pm-dashboard.md`  

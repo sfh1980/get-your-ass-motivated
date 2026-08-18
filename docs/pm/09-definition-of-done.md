@@ -11,6 +11,7 @@ A **story** is Done only when all applicable boxes are checked.
 - [ ] Activity event logged for meaningful user actions (when applicable)  
 - [ ] Sean (PO) manually accepted in the running app  
 - [ ] Related `docs/pm` change log entry if scope shifted  
+- [ ] `/pm` changes: no employer names on the dashboard; no fake Gantt/EVM/PERT  
 
 ## Bugfix DoD
 

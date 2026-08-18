@@ -5,6 +5,7 @@ import type { UserDto } from "../api";
 const links = [
   { to: "/", label: "Today" },
   { to: "/progress", label: "Progress" },
+  { to: "/pm", label: "PM" },
   { to: "/jobs", label: "Jobs" },
   { to: "/review", label: "Review" },
   { to: "/roadmap", label: "Roadmap" },
@@ -15,15 +16,18 @@ export function AppShell({
   user,
   onLogout,
   children,
+  wide = false,
 }: {
   user: UserDto;
   onLogout: () => Promise<void>;
   children: ReactNode;
+  wide?: boolean;
 }) {
   const loc = useLocation();
 
   return (
-    <div className="app-shell stack">
+    <div className={`app-shell stack${wide ? " app-shell-wide" : ""}`}>
+
       <header className="row" style={{ justifyContent: "space-between" }}>
         <div>
           <h1 className="brand">GYAM</h1>

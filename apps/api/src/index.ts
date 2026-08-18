@@ -12,6 +12,7 @@ import { jobsRouter } from "./routes/jobs.js";
 import { reviewsRouter } from "./routes/reviews.js";
 import { roadmapRouter } from "./routes/roadmap.js";
 import { systemRouter } from "./routes/system.js";
+import { pmRouter } from "./routes/pm.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootEnv = path.resolve(__dirname, "../../../.env");
@@ -48,6 +49,7 @@ app.use("/api/jobs", jobsRouter);
 app.use("/api/reviews", reviewsRouter);
 app.use("/api/roadmap", roadmapRouter);
 app.use("/api/system", systemRouter);
+app.use("/api/pm", pmRouter);
 
 if (serveWeb && fs.existsSync(webDist)) {
   app.use(express.static(webDist, { index: false }));

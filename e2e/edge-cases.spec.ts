@@ -55,6 +55,7 @@ test.describe("health + auth edge cases", () => {
       "/api/tasks/today",
       "/api/jobs",
       "/api/progress",
+      "/api/pm/dashboard",
       "/api/reviews/weekly",
       "/api/system/export",
       "/api/roadmap?from=2026-07-27&to=2026-08-02",
@@ -69,6 +70,8 @@ test.describe("health + auth edge cases", () => {
     await page.goto("/");
     await expect(page).toHaveURL(/login/);
     await page.goto("/jobs");
+    await expect(page).toHaveURL(/login/);
+    await page.goto("/pm");
     await expect(page).toHaveURL(/login/);
     await page.goto("/settings");
     await expect(page).toHaveURL(/login/);
@@ -85,11 +88,22 @@ test.describe("health + auth edge cases", () => {
 test.describe("UI happy path + navigation", () => {
   test("login and visit all nav destinations", async ({ page }) => {
     await uiLogin(page);
-    for (const name of ["Today", "Progress", "Jobs", "Review", "Roadmap", "Settings"]) {
-      await page.getByRole("link", { name }).click();
-      await expect(page.getByRole("link", { name })).toBeVisible();
+    for (const name of ["Today", "Progress", "PM", "Jobs", "Review", "Roadmap", "Settings"]) {
+      await page.getByRole("link", { name, exact: true }).click();
+      await expect(page.getByRole("link", { name, exact: true })).toBeVisible();
     }
     await expect(page.getByText(/OS notifications|Export \/ import/i).first()).toBeVisible();
+  });
+
+  test("PM how this works opens a lesson modal", async ({ page }) => {
+    await uiLogin(page);
+    await page.getByRole("link", { name: "PM", exact: true }).click();
+    await expect(page.getByText("PM dashboard").first()).toBeVisible();
+    await page.getByRole("button", { name: "How this works" }).first().click();
+    await expect(page.getByRole("dialog", { name: /PM dashboard/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "What it is" })).toBeVisible();
+    await page.getByRole("button", { name: "Close" }).click();
+    await expect(page.getByRole("dialog")).toHaveCount(0);
   });
 
   test("Lock returns to login and blocks Today", async ({ page }) => {

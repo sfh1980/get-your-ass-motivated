@@ -6,14 +6,14 @@ Project-local Cursor configuration lives under `.cursor/`.
 
 1. `GYAM_SOURCE_OF_TRUTH.md` (includes multi-purpose roles P1–P8 + history)
 2. Latest explicit user decision in chat
-3. `docs/pm/` (living PM pack — start at `docs/pm/00-multi-purpose-and-progress.md`)
+3. `docs/pm/` (living PM pack — start at `docs/pm/00-multi-purpose-and-progress.md`; in-app dashboard: `docs/pm/15-in-app-pm-dashboard.md`)
 4. `Project_Management_Daily_Roadmap_Starting_2026-07-27.md`
 5. `sean_holmes_resume_updated.docx`
 6. Runtime `logs/activity/`
 
 ## Multi-purpose reminder
 
-GYAM is simultaneously: career OS, roadmap engine, sample software project, PM practice lab (Sean + agent team), portfolio-export staging, homelab reference, and dual-track Python CS planning (P8). Do not gold-plate a portfolio *website* into this repo.
+GYAM is simultaneously: career OS, roadmap engine, sample software project, PM practice lab (Sean + agent team, in-app `/pm`), portfolio-export staging, homelab reference, and dual-track Python CS planning (P8). Do not gold-plate a portfolio *website* into this repo.
 ## Rules (`.cursor/rules/`)
 
 | Rule | Scope |
